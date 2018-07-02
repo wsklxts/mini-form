@@ -3,8 +3,10 @@
   <div class="tabs">
     <!--命名路由-->
     <ul>
-      <router-link :to="{name:'personTask'}" tag="li">
-        <div class="tabImg"  :class="{ active1: $route.path== '/personTask'}">
+      <router-link  to="/personTask/taskWait"  tag="li">
+        <!--<div class="tabImg"  :class="{ active1: $route.path== '/personTask/taskWait'}">-->
+          <!--{{$route.path.indexOf('personTask') !== -1}}-->
+        <div class="tabImg"  :class="{ active1: $route.path.indexOf('personTask') !== -1}" >
         </div>
         <div>个人任务</div>
       </router-link>
@@ -79,20 +81,20 @@
 
 
       & .active1{
-         background: url(../../static/tabImg/个人任务.png) no-repeat center center !important;
-         background-size:0.60rem !important;
+         background: url(../../../static/tabImg/个人任务.png) no-repeat center center !important;
+         background-size:0.50rem !important;
        }
       & .active2{
-          background: url(../../static/tabImg/应用中心.png) no-repeat center center !important;
-          background-size:0.60rem !important;
+          background: url(../../../static/tabImg/应用中心.png) no-repeat center center !important;
+          background-size:0.50rem !important;
         }
       & .active3{
-          background: url(../../static/tabImg/管理中心.png) no-repeat center center !important;
-          background-size:0.60rem !important;
+          background: url(../../../static/tabImg/管理中心.png) no-repeat center center !important;
+          background-size:0.50rem !important;
         }
       & .active4{
-          background: url(../../static/tabImg/打卡.png) no-repeat center center !important;
-          background-size:0.60rem !important;
+          background: url(../../../static/tabImg/打卡.png) no-repeat center center !important;
+          background-size:0.50rem !important;
         }
 
 
@@ -104,20 +106,20 @@
 
 
         &:nth-of-type(1) .tabImg{
-          background: url(../../static/tabImg/个人任务1.png) no-repeat center center;
-          background-size:0.60rem;
+          background: url(../../../static/tabImg/个人任务1.png) no-repeat center center;
+          background-size:0.50rem;
         }
         &:nth-of-type(2) .tabImg{
-           background: url(../../static/tabImg/应用中心1.png) no-repeat center center;
-           background-size:0.60rem;
+           background: url(../../../static/tabImg/应用中心1.png) no-repeat center center;
+           background-size:0.50rem;
          }
         &:nth-of-type(3) .tabImg{
-           background: url(../../static/tabImg/管理中心1.png) no-repeat center center;
-           background-size:0.60rem;
+           background: url(../../../static/tabImg/管理中心1.png) no-repeat center center;
+           background-size:0.50rem;
          }
         &:nth-of-type(4) .tabImg{
-           background: url(../../static/tabImg/打卡1.png) no-repeat center center;
-           background-size:0.60rem;
+           background: url(../../../static/tabImg/打卡1.png) no-repeat center center;
+           background-size:0.50rem;
          }
 
 

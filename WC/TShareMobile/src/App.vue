@@ -7,7 +7,7 @@
 
 <script>
 
-import tabs from "./components/tabs.vue"
+import tabs from "./components/common/tabs.vue"
 
 export default {
   name: 'App',

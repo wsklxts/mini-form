@@ -15,7 +15,8 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vux": "^2.9.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -54,10 +55,12 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
+    "vux-loader": "^1.2.9",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "yaml-loader": "^0.5.0"
   },
   "engines": {
     "node": ">= 6.0.0",

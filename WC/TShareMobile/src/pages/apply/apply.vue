@@ -18,9 +18,6 @@
     },
     methods:{
       a(){
-        for(var i in this){
-          console.log(i,this[i]);
-        }
         console.log(this);
       }
     }

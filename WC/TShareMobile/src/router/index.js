@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import personTask from '@/components/personTask'
-import apply from '@/components/apply'
-import manage from '@/components/manage'
-import daka from '@/components/daka'
+import HelloWorld from '@/pages/HelloWorld/HelloWorld'
+import personTask from '@/pages/personTask/personTask'
+import apply from '@/pages/apply/apply'
+import manage from '@/pages/manage/manage'
+import daka from '@/pages/daka/daka'
+
+import taskFinished from '@/pages/personTask/taskFinished'
+import taskLaunch from '@/pages/personTask/taskLaunch'
+import taskWait from '@/pages/personTask/taskWait'
+
+
 
 
 Vue.use(Router)
@@ -21,7 +27,18 @@ export default new Router({
     {
       path: '/personTask',
       name: 'personTask',
-      component: personTask
+      component: personTask,
+      children: [{
+        path: 'taskWait', //食品详情页
+        component: taskWait,
+      }, {
+        path: 'taskFinished', //商铺详情页
+        component: taskFinished,
+      },
+        {
+          path: 'taskLaunch', //商铺安全认证页
+          component: taskLaunch,
+        }]
     },
     {
       path: '/apply',
