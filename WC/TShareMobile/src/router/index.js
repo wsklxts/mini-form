@@ -6,6 +6,8 @@ import apply from '@/pages/apply/apply'
 import manage from '@/pages/manage/manage'
 import daka from '@/pages/daka/daka'
 
+console.log(Vue);
+
 import taskFinished from '@/pages/personTask/taskFinished'
 import taskLaunch from '@/pages/personTask/taskLaunch'
 import taskWait from '@/pages/personTask/taskWait'
