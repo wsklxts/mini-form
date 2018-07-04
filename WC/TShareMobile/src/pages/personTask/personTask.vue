@@ -20,7 +20,7 @@
 
 
 
-      <tab>
+      <tab bar-active-color="#3096fd" active-color="#3096fd">
         <tab-item @on-item-click="handler" :selected="$route.path== '/personTask/taskWait'" >
 
           <router-link to="/personTask/taskWait" tag="div">代办</router-link>
@@ -86,11 +86,7 @@
 
 
 <style lang="less" type="text/less">
+  @tab-bar-active-color:red;
 
-  .p{
-    background: red;
-    width:3.2rem;
-    height:3.2rem;
-  }
 
 </style>

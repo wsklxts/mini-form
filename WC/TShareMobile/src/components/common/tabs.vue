@@ -12,7 +12,6 @@
       </router-link>
       <router-link :to="{name:'apply'}" tag="li">
         <div class="tabImg"  :class="{ active2: $route.path== '/apply'}">
-
         </div>
         <div>应用中心</div>
       </router-link>
@@ -83,24 +82,28 @@
       & .active1{
          background: url(../../../static/tabImg/个人任务.png) no-repeat center center !important;
          background-size:0.50rem !important;
+          color:#3096fd;
        }
       & .active2{
           background: url(../../../static/tabImg/应用中心.png) no-repeat center center !important;
           background-size:0.50rem !important;
+          color:#3096fd;
         }
       & .active3{
           background: url(../../../static/tabImg/管理中心.png) no-repeat center center !important;
           background-size:0.50rem !important;
+          color:#3096fd;
         }
       & .active4{
           background: url(../../../static/tabImg/打卡.png) no-repeat center center !important;
           background-size:0.50rem !important;
+          color:#3096fd;
         }
 
 
 
       &.router-link-active div:nth-of-type(2){
-        color:blue;
+        color:#3096fd;
        }
 
 
