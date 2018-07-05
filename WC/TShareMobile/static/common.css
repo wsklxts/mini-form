@@ -12,3 +12,22 @@ ul,li{
 img{
   width:100%
 }
+#app{
+  padding-bottom:1.30rem;
+}
+.vux-header{
+  position:fixed !important;
+  width:100%;
+  height: 0.95rem;
+  padding:0 !important;
+  z-index: 999;
+  background: #3096fd !important;
+}
+.vux-header .vux-header-title{
+  height:100% !important;
+  line-height:0.95rem !important;
+  font-size:0.38rem !important;
+}
+.apply,.manage,.personTask{
+  padding-top:1rem !important;
+}

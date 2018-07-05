@@ -1,4 +1,7 @@
 <template>
+  <div>
+
+
     <div class="template">
       <div>代办数据</div>
       <div>代办数据</div>
@@ -19,13 +22,13 @@
       <div>代办数据</div>
       <div>代办数据</div>
       <div>代办数据</div>
-
+</div>
     </div>
 </template>
 
 
 <script type="text/ecmascript-6">
-
+  import { XHeader } from 'vux'
 
 //  function callback() {
 //    console.log('Done');
@@ -47,7 +50,9 @@
 //})
 
     export default {
-        components: {},
+        components: {
+          XHeader
+        },
         methods: {
             handler(){
             }

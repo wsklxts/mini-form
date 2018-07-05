@@ -8,13 +8,19 @@
 <script>
 
 import tabs from "./components/common/tabs.vue"
+import TXhead from "./components/common/TXhead.vue"
 
 export default {
   name: 'App',
   components:{
-    tabs
+    tabs,
+    TXhead
+  },
+  methods:{
+
   }
 }
+
 
 </script>
 

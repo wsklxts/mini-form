@@ -1,5 +1,8 @@
 
 <template>
+  <div>
+<XHeader title="个人中心"  :left-options="{showBack: false}"></XHeader>
+
   <div class="personTask">
     <!--<ul>-->
       <!--<router-link :to="{name:'personTask'}" tag="li">-->
@@ -22,9 +25,7 @@
 
       <tab bar-active-color="#3096fd" active-color="#3096fd">
         <tab-item @on-item-click="handler" :selected="$route.path== '/personTask/taskWait'" >
-
           <router-link to="/personTask/taskWait" tag="div">代办</router-link>
-
         </tab-item >
         <tab-item :selected="$route.path== '/personTask/taskFinished'" >
            <router-link to="/personTask/taskFinished" tag="div">已办</router-link>
@@ -58,7 +59,7 @@
        <!--</Swiper>-->
 
 
-
+</div>
   </div>
 </template>
 
@@ -66,14 +67,16 @@
 
 <script type="text/ecmascript-6">
 
-  import { Tab, TabItem,Swiper,SwiperItem  } from 'vux'
+  import { Tab, TabItem,Swiper,SwiperItem,XHeader  } from 'vux'
 
   export default {
     components: {
       Tab,
       TabItem,
       Swiper,
-      SwiperItem
+      SwiperItem,
+      XHeader
+
     },
     methods:{
       handler(){
