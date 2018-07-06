@@ -2,13 +2,19 @@
 <template>
   <div class="daka">
     {{$route.path}}
+    <tabs></tabs>
   </div>
 </template>
 
 
 
 <script type="text/ecmascript-6">
-  export default {}
+  import tabs from "../../components/common/tabs.vue"
+  export default {
+    components:{
+      tabs
+    }
+  }
 </script>
 
 

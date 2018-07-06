@@ -5,8 +5,8 @@ import personTask from '@/pages/personTask/personTask'
 import apply from '@/pages/apply/apply'
 import manage from '@/pages/manage/manage'
 import daka from '@/pages/daka/daka'
+import login from '@/pages/login/login'
 
-console.log(Vue);
 
 import taskFinished from '@/pages/personTask/taskFinished'
 import taskLaunch from '@/pages/personTask/taskLaunch'
@@ -17,9 +17,7 @@ import taskWait from '@/pages/personTask/taskWait'
 
 Vue.use(Router)
 
-
-
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -27,20 +25,26 @@ export default new Router({
       component: HelloWorld
     },
     {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
       path: '/personTask',
       name: 'personTask',
       component: personTask,
       children: [{
-        path: 'taskWait', //食品详情页
+        path: 'taskWait',
         component: taskWait,
       }, {
-        path: 'taskFinished', //商铺详情页
+        path: 'taskFinished',
         component: taskFinished,
       },
         {
-          path: 'taskLaunch', //商铺安全认证页
+          path: 'taskLaunch',
           component: taskLaunch,
-        }]
+        }
+      ]
     },
     {
       path: '/apply',
@@ -61,3 +65,11 @@ export default new Router({
 
   ]
 })
+router.afterEach((to, from) => {
+  // ...
+})
+
+
+
+
+export default router

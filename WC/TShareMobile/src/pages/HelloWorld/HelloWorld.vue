@@ -1,6 +1,7 @@
 <template>
   <div class="HelloWorld">
     {{$route.path}}
+    {{msg}}
   </div>
 </template>
 

@@ -23,12 +23,15 @@
       <div>代办数据</div>
       <div>代办数据</div>
 </div>
+
+    <tabs></tabs>
     </div>
 </template>
 
 
 <script type="text/ecmascript-6">
   import { XHeader } from 'vux'
+  import tabs from "../../components/common/tabs.vue"
 
 //  function callback() {
 //    console.log('Done');
@@ -51,7 +54,8 @@
 
     export default {
         components: {
-          XHeader
+          XHeader,
+          tabs
         },
         methods: {
             handler(){
@@ -62,6 +66,6 @@
 </script>
 
 
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" scoped>
 
 </style>

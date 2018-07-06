@@ -59,6 +59,7 @@
        <!--</Swiper>-->
 
 
+    <tabs></tabs>
 </div>
   </div>
 </template>
@@ -66,7 +67,7 @@
 
 
 <script type="text/ecmascript-6">
-
+  import tabs from "../../components/common/tabs.vue"
   import { Tab, TabItem,Swiper,SwiperItem,XHeader  } from 'vux'
 
   export default {
@@ -75,7 +76,8 @@
       TabItem,
       Swiper,
       SwiperItem,
-      XHeader
+      XHeader,
+      tabs
 
     },
     methods:{
@@ -88,7 +90,7 @@
 </script>
 
 
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" scoped>
   @tab-bar-active-color:red;
 
 

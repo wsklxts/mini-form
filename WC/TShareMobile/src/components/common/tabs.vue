@@ -56,7 +56,7 @@
 </script>
 
 
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" >
   .tabs {
     position: fixed;
     bottom: 0;

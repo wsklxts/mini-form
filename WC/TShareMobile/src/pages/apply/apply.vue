@@ -68,6 +68,7 @@
 
       </section>
     </div>
+    <tabs></tabs>
   </div>
     </div>
 </template>
@@ -77,7 +78,7 @@
 <script type="text/ecmascript-6">
 
   import { Grid, GridItem,XHeader } from 'vux'
-
+  import tabs from "../../components/common/tabs.vue"
   export default {
     name:"apply",
     data(){
@@ -113,7 +114,8 @@
     components: {
       Grid,
       GridItem,
-      XHeader
+      XHeader,
+      tabs
     },
     methods:{
 
@@ -124,7 +126,7 @@
 </script>
 
 
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" scoped>
   .apply{
     padding:0.10rem;
     .banner{
