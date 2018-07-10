@@ -11,13 +11,16 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in meTeam" >
+            <grid-item v-for="(i,index) in meTeam" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
           </grid>
         </div>
       </section>
+      <div>
+
+      </div>
 
       <section class="info">
         <h3>
@@ -26,7 +29,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in department" >
+            <grid-item v-for="(i,index) in department" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
@@ -41,7 +44,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in dataAnalysis" >
+            <grid-item v-for="(i,index) in dataAnalysis" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
@@ -67,6 +70,9 @@
       GridItem,
       XHeader,
       tabs
+    },
+    mounted(){
+      console.log(this);
     },
    data(){
       return {

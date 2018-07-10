@@ -14,7 +14,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in info" >
+            <grid-item v-for="(i,index) in info" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
@@ -28,7 +28,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in applyFor" >
+            <grid-item v-for="(i,index) in applyFor" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
@@ -43,7 +43,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in query" >
+            <grid-item v-for="(i,index) in query" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
@@ -59,7 +59,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="i in work" >
+            <grid-item v-for="(i,index) in work" :key="index">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
