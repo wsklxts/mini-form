@@ -2,7 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/pages/HelloWorld/HelloWorld'
 import personTask from '@/pages/personTask/personTask'
+
+
 import apply from '@/pages/apply/apply'
+import vacation from '@/pages/apply/vacation/vacation'
+
+
 import manage from '@/pages/manage/manage'
 import daka from '@/pages/daka/daka'
 import login from '@/pages/login/login'
@@ -46,10 +51,16 @@ const router = new Router({
         }
       ]
     },
+
     {
       path: '/apply',
       name: 'apply',
-      component: apply
+      component: apply,
+    },
+    {
+      path:"/apply/vacation",
+      name:"vacation",
+      component: vacation
     },
     {
       path: '/manage',
@@ -65,9 +76,9 @@ const router = new Router({
 
   ]
 })
-router.afterEach((to, from) => {
-  // ...
-})
+//router.afterEach((to, from) => {
+//  // ...
+//})
 
 
 

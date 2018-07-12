@@ -1,7 +1,7 @@
 <template>
   <div class="HelloWorld">
     {{$route.path}}
-    {{msg}}
+    HelloWorld
   </div>
 </template>
 

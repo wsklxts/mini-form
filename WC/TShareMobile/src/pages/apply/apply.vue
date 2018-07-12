@@ -1,76 +1,73 @@
-
 <template>
   <div>
      <XHeader  title="应用中心" :left-options="{showBack: false}"></XHeader>
-  <div class="apply">
-    <div class="banner">
-      <img src="../../../static/apply/感谢.png" alt="">
+      <div class="apply">
+        <div class="banner">
+          <img src="../../../static/apply/感谢.png" alt="">
+        </div>
+        <div class="container">
+          <section class="info">
+            <h3>
+              <strong>信息中心</strong>
+              <span>更多</span>
+            </h3>
+            <div class="listItem">
+              <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
+                <grid-item v-for="(i,index) in info" :key="index">
+                  <span class="listItemImg"><img :src="i.img" alt=""></span>
+                  <span class="grid-center">{{i.title}}</span>
+                </grid-item>
+              </grid>
+            </div>
+          </section>
+          <section class="applyFor">
+            <h3>
+              <strong>我的申请</strong>
+              <span>更多</span>
+            </h3>
+            <div class="listItem" >
+              <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
+                <grid-item v-for="(i,index) in applyFor" :key="index"  @on-item-click="gotoItem(i.title,index)">
+                  <span class="listItemImg"><img :src="i.img" alt=""></span>
+                  <span class="grid-center">{{i.title}}</span>
+                </grid-item>
+              </grid>
+            </div>
+
+          </section>
+          <section class="query">
+            <h3>
+              <strong>常用查询</strong>
+              <span>更多</span>
+            </h3>
+            <div class="listItem">
+              <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
+                <grid-item v-for="(i,index) in query" :key="index">
+                  <span class="listItemImg"><img :src="i.img" alt=""></span>
+                  <span class="grid-center">{{i.title}}</span>
+                </grid-item>
+              </grid>
+            </div>
+          </section>
+          <section class="work">
+            <h3>
+              <strong>我的工作</strong>
+              <span>更多</span>
+            </h3>
+            <div class="listItem">
+              <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false" >
+                <grid-item v-for="(i,index) in work" :key="index" >
+                  <span class="listItemImg"><img :src="i.img" alt=""></span>
+                  <span class="grid-center">{{i.title}}</span>
+                </grid-item>
+              </grid>
+            </div>
+          </section>
+        </div>
+        <tabs></tabs>
+      </div>
     </div>
-    <div class="container">
-      <section class="info">
-        <h3>
-          <strong>信息中心</strong>
-          <span>更多</span>
-        </h3>
-        <div class="listItem">
-          <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="(i,index) in info" :key="index">
-              <span class="listItemImg"><img :src="i.img" alt=""></span>
-              <span class="grid-center">{{i.title}}</span>
-            </grid-item>
-          </grid>
-        </div>
-      </section>
-      <section class="applyFor">
-        <h3>
-          <strong>我的申请</strong>
-          <span>更多</span>
-        </h3>
-        <div class="listItem">
-          <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="(i,index) in applyFor" :key="index">
-              <span class="listItemImg"><img :src="i.img" alt=""></span>
-              <span class="grid-center">{{i.title}}</span>
-            </grid-item>
-          </grid>
-        </div>
 
-      </section>
-      <section class="query">
-        <h3>
-          <strong>常用查询</strong>
-          <span>更多</span>
-        </h3>
-        <div class="listItem">
-          <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="(i,index) in query" :key="index">
-              <span class="listItemImg"><img :src="i.img" alt=""></span>
-              <span class="grid-center">{{i.title}}</span>
-            </grid-item>
-          </grid>
-        </div>
-
-      </section>
-      <section class="work">
-
-        <h3>
-          <strong>我的工作</strong>
-          <span>更多</span>
-        </h3>
-        <div class="listItem">
-          <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="(i,index) in work" :key="index">
-              <span class="listItemImg"><img :src="i.img" alt=""></span>
-              <span class="grid-center">{{i.title}}</span>
-            </grid-item>
-          </grid>
-        </div>
-
-      </section>
-    </div>
-    <tabs></tabs>
-  </div>
-    </div>
 </template>
 
 
@@ -81,6 +78,29 @@
   import tabs from "../../components/common/tabs.vue"
   export default {
     name:"apply",
+    methods:{
+      gotoItem(item,index){
+        if(item.includes("请/销假")){
+          console.log("请/销假");
+  //          this.$router.push("/apply/racation")
+          this.$router.push({ path: "/apply/vacation" })
+        }else if(item.includes("签卡申请")){
+          this.$router.push({ path: "/apply/regCard" })
+        }
+  //        switch(item){
+  //          case "请/销假":
+  //            console.log("请/销假");
+  //            break;
+  //          case "签卡申请":
+  //            console.log("签卡申请");
+  //            break;
+  //          case "加班申请":
+  //            console.log("加班申请");
+  //            break;
+  //
+  //        }
+      }
+    },
     data(){
       return{
         msg:"msg",
@@ -116,9 +136,6 @@
       GridItem,
       XHeader,
       tabs
-    },
-    methods:{
-
     }
 
 
@@ -127,6 +144,7 @@
 
 
 <style lang="less" type="text/less" scoped>
+
   .apply{
     padding:0.10rem;
     .banner{

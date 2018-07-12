@@ -28,6 +28,16 @@ img{
   line-height:0.95rem !important;
   font-size:0.38rem !important;
 }
-.apply,.manage,.personTask{
+.apply,.manage,.personTask,.template{
   padding-top:1rem !important;
+}
+.weui-grid:after{
+  display:none !important;
+}
+
+.weui-cells{
+  margin:0 !important;
+}
+.title:before{
+  display:none;
 }

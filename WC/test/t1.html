@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
 <body>
 
+<div id="app">
+  <div class="d" @click="dd">
+    dddd
+  </div>
+</div>
+
+<script>
+  new Vue({
+    el:"#app",
+    data(){
+      return{
+        msg:"msg111111111111"
+      }
+    },
+    methods:{
+      dd:function(e){
+        console.log(e);
+      }
+    }
+  })
+</script>
 </body>
 </html>
