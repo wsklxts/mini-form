@@ -4,29 +4,144 @@
     <meta charset="UTF-8">
     <title>Title</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+  <style>
+    li{
+      background: red;
+      width:30px;
+      height:30px;
+      margin:10px;
+    }
+  </style>
+
+  <script>
+    $(function(){
+      $( "#ul1" ).click(function() {
+        $( "#ul1" ).animate({
+          opacity: 0.25,
+          left: "+=50",
+          height: "toggle"
+        }, 5000, function() {
+          // Animation complete.
+        });
+      });
+    })
+  </script>
 </head>
 <body>
 
 <div id="app">
-  <div class="d" @click="dd">
-    dddd
-  </div>
+  <input type="button" name="" id="btn" value="添加" />
+  <ul id="ul1">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
 </div>
 
 <script>
-  new Vue({
-    el:"#app",
-    data(){
-      return{
-        msg:"msg111111111111"
-      }
-    },
-    methods:{
-      dd:function(e){
-        console.log(e);
-      }
+
+  var oBtn = document.getElementById("btn");
+  var oUl = document.getElementById("ul1");
+  var aLi = oUl.getElementsByTagName('li');
+  var num = 4;
+
+  //鼠标移入变红，移出变白
+
+//  oUl.onmouseover=function(e){
+//    var e = e || event;
+//    console.log(e);
+//    e.srcElement.style.background="red";
+//  }
+//
+//  oUl.onmouseout=function(e){
+//    var e = e || event;
+//    console.log(e);
+//    e.srcElement.style.background="";
+//  }
+
+//  for(var i=0; i<aLi.length;i++){
+//    (function(i){
+//      aLi[i].onmouseover = function(){
+//        console.log(i);
+//        this.style.background = 'red';
+//      };
+//      aLi[i].onmouseout = function(){
+//        this.style.background = '#fff';
+//      }
+//    })(i)
+//
+//  }
+//  for(var i=0; i<aLi.length;i++){
+//    ou(i,"onmouseover");
+//    ou(i,"onmouseout");
+//  }
+
+  var timer=null;
+  ou(oUl);
+  var s=1;
+  function move(el){
+    s+=50;
+    el.index=1
+    console.log(el);
+    if(el.tagName=="UL"){
+      return;
     }
-  })
+    clearInterval(timer)
+    console.log(typeof el);
+    timer = setInterval(function(){
+      el.style.position="absolute";
+      el.style.left=s+20+"px"
+      el.style.top=0
+      el.innerHTML=s
+      el.aa=123;
+//      el.setAttribute("aa","bb")
+    },30)
+  }
+
+  function ou(i,direction){
+
+    i['onmouseover'] = function(e) {
+      i = e.srcElement;
+      i.style.background = 'red';
+//      setTimeout(function () {
+        move(i);
+//      })
+    }
+    i['onmouseout'] = function(e) {
+      i = e.srcElement;
+      i.style.background = '';
+      clearInterval(timer)
+    }
+
+      console.log(i);
+
+  }
+
+
+  //添加新节点
+  oBtn.onclick = function(){
+    num++;
+    var oLi = document.createElement('li');
+    oLi.innerHTML = 111*num;
+    oUl.appendChild(oLi);
+  };
+
+//  new Vue({
+//    el:"#app",
+//    data(){
+//      return{
+//        msg:"msg111111111111"
+//      }
+//    },
+//    methods:{
+//      dd:function(e){
+//        console.log(e);
+//      }
+//    }
+//  })
 </script>
 </body>
 </html>

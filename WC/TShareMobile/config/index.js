@@ -7,7 +7,7 @@ const path = require('path')
 
 //let h= window.location.hostname;
 
-let h = "192.168.0.47"
+let h = "192.168.0.17"
 
 module.exports = {
   dev: {

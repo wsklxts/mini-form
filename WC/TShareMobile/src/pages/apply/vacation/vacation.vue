@@ -19,6 +19,7 @@
           format="YYYY-MM-DD HH:mm"
           v-model="beginDate"
           @on-change="change"
+          placeholder="请选择日期"
           ></datetime>
 
         <datetime
@@ -26,16 +27,36 @@
           format="YYYY-MM-DD HH:mm"
           v-model="overDate"
           @on-change="change"
+          placeholder="请选择日期"
         ></datetime>
         <group>
           <CellBox class="title">时长</CellBox>
         </group>
       </group>
 
-      {{beginDate}}
-      {{overDate}}
 
+      <!--<group  title="请假原因">-->
+        <!--<x-input title="" placeholder="请输入请假原因" focus>-->
 
+        <!--</x-input>-->
+      <!--</group>-->
+
+      <group title=" ">
+        <x-textarea title="请假原因" placeholder="请输入请假原因"></x-textarea>
+      </group>
+
+      <group title=" ">
+        <CellBox class="title">
+          <div>附件</div>
+          <div class="icon">
+             <input type="file" name="fileUpload" />
+          </div>
+        </CellBox>
+      </group>
+
+      <div class="btnWrap">
+        <x-button type="default" text="提交"></x-button>
+      </div>
       <actionsheet
         v-model="show"
         :menus="menu"
@@ -51,7 +72,7 @@
 <script type="text/ecmascript-6">
 
 
-  import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime  } from 'vux'
+  import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton     } from 'vux'
 
   export default {
     components: {
@@ -61,8 +82,11 @@
       Cell,
       XHeader,
       CellBox,
-      Datetime
-    },
+      Datetime,
+      XInput,
+      XTextarea,
+      XButton
+  },
     methods:{
       select(){
         this.show=true;
@@ -97,6 +121,7 @@
 
 
 <style lang="less" type="text/less" scoped>
+
   .weui-cells{
     margin:0 !important;
   }
@@ -106,6 +131,15 @@
   .title:before{
     display:none;
   }
-
-
+  .icon{
+    padding-left:0.28rem;
+  }
+  .btnWrap{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    button.weui-btn{
+      border-radius:0 !important;
+    }
+  }
 </style>

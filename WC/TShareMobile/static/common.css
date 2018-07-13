@@ -3,7 +3,7 @@
   padding:0;
   text-decoration: none;
 }
-body{
+body,h3{
   font-size:0.16rem;
 }
 ul,li{
