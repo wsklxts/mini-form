@@ -85,7 +85,7 @@
   //          this.$router.push("/apply/racation")
           this.$router.push({ path: "/apply/vacation" })
         }else if(item.includes("签卡申请")){
-          this.$router.push({ path: "/apply/regCard" })
+          this.$router.push({ path: "/apply/qianKa" })
         }
   //        switch(item){
   //          case "请/销假":

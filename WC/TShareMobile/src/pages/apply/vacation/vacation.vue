@@ -41,22 +41,35 @@
         <!--</x-input>-->
       <!--</group>-->
 
-      <group title=" ">
-        <x-textarea title="请假原因" placeholder="请输入请假原因"></x-textarea>
+      <group title=" 请假原因" class="tit">
+        <x-textarea title="" placeholder="请输入请假原因"></x-textarea>
       </group>
 
       <group title=" ">
         <CellBox class="title">
-          <div>附件</div>
+          <div class="subTitle">附件</div>
+          <a href="javascript:void(0)">
           <div class="icon">
-             <input type="file" name="fileUpload" />
+             <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
+            <span>选择文件</span>
+            <div>
+            <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
+            </div>
+
           </div>
+          </a>
         </CellBox>
       </group>
+
+      <div class="uploadNameWrap">
+        <div v-for="f in uploadName">{{f}}</div>
+      </div>
 
       <div class="btnWrap">
         <x-button type="default" text="提交"></x-button>
       </div>
+
+
       <actionsheet
         v-model="show"
         :menus="menu"
@@ -97,6 +110,19 @@
       },
       change(){
         console.log(this.beginDate);
+      },
+      upload(e){
+        this.uploadName=[]
+        console.log(e.target.files);
+        for(var f in e.target.files){
+//        for(var i=0; i<e.target.files.length;i++){
+//          console.log(e.target.files[f].name);
+//          console.log(e.target.files[f]);
+          if(typeof e.target.files[f] == "object"){
+            this.uploadName.push(e.target.files[f].name)
+          }
+
+        }
       }
     },
     data(){
@@ -107,6 +133,7 @@
         value:['2017-01-15', '03', '05'],
         beginDate:"",
         overDate:"",
+        uploadName:[],
         menu: {
           menu1: '年假',
           menu2: '事假',
@@ -121,18 +148,41 @@
 
 
 <style lang="less" type="text/less" scoped>
-
-  .weui-cells{
-    margin:0 !important;
+  .uploadNameWrap{
+    text-align: center;
   }
   .title{
     font-size:0.36rem;
+    &>div{
+        padding-right:0.36rem;
+      }
   }
   .title:before{
     display:none;
   }
   .icon{
-    padding-left:0.28rem;
+    height:50px;
+    background:#fff;
+    border-radius: 5px;
+    text-align: center;
+    position:relative;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    span{
+      color:#999;
+    }
+    div svg{
+      vertical-align: -20%;
+      fill:#3096fd;
+    }
+   input{
+      width:100%;
+      height:50px;
+      opacity:0;
+      cursor:pointer;
+      position:absolute;
+      left: 0;
+    }
   }
   .btnWrap{
     position: fixed;
