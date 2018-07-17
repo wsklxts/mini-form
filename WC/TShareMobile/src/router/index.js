@@ -7,6 +7,8 @@ import personTask from '@/pages/personTask/personTask'
 import apply from '@/pages/apply/apply'
 import vacation from '@/pages/apply/vacation/vacation'
 import qianKa from '@/pages/apply/qianKa/qianKa'
+import jiaBan from '@/pages/apply/jiaBan/jiaBan'
+import peiXun from '@/pages/apply/peiXun/peiXun'
 
 
 import manage from '@/pages/manage/manage'
@@ -67,6 +69,16 @@ const router = new Router({
       path:"/apply/qianKa",
       name:"qianKa",
       component: qianKa
+    },
+    {
+      path:"/apply/jiaBan",
+      name:"jiaBan",
+      component: jiaBan
+    },
+    {
+      path:"/apply/peiXun",
+      name:"peiXun",
+      component: peiXun
     },
     {
       path: '/manage',

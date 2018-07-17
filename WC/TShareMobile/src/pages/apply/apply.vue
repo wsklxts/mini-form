@@ -86,6 +86,10 @@
           this.$router.push({ path: "/apply/vacation" })
         }else if(item.includes("签卡申请")){
           this.$router.push({ path: "/apply/qianKa" })
+        }else if(item.includes("加班申请")){
+          this.$router.push({ path: "/apply/jiaBan" })
+        }else if(item.includes("培训申请")){
+          this.$router.push({ path: "/apply/peiXun" })
         }
   //        switch(item){
   //          case "请/销假":

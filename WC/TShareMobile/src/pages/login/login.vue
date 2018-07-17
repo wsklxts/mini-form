@@ -6,13 +6,13 @@
         </section>
 
         <section class="userInput">
-          <group>
+          <group class="inputItem">
             <x-input title="" placeholder="请输入用户名" focus>
               <img slot="label" src="../../../static/login/1.png" alt="">
             </x-input>
           </group>
 
-          <group>
+          <group class="inputItem">
             <x-input title="" type="password" placeholder="请输入密码">
               <img slot="label" src="../../../static/login/2.png" alt="">
             </x-input>
@@ -47,6 +47,9 @@
 
 <style lang="less" type="text/less" scoped>
 
+  .inputItem{
+    margin-top:0.26rem;
+  }
   .logo{
     padding: 1.2rem 2rem;
   }
