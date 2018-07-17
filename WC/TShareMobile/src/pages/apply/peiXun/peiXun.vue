@@ -17,7 +17,7 @@
           v-model="beginDate"
           @on-change="change"
           placeholder="请选择日期"
-        ></datetime>
+        ></datetime
 
         <datetime
           title="结束时间"
@@ -48,7 +48,9 @@
       <!--</group>-->
 
       <group title=" 培训原因" class="tit">
-        <x-textarea title="" placeholder="请输入培训原因"></x-textarea>
+        <x-textarea title="" placeholder="请输入培训原因" :show-counter=true  :max=50  name="nnn">
+
+        </x-textarea>
       </group>
 
       <!--<group title=" ">-->
@@ -175,11 +177,14 @@
     display: -webkit-box;
     -webkit-box-align: center;
   span{
-    color:#999;
+    color: #fff;
+    background: @content-color;
+    padding: 0.10rem;
+    border-radius: 0.1rem;
   }
   div svg{
     vertical-align: -20%;
-    fill:#3096fd;
+    fill:@content-color;
   }
   input{
     width:100%;

@@ -135,21 +135,28 @@
     position: relative;
     display: -webkit-box;
     -webkit-box-align: center;
-    span {
-      color: #999;
-    }
+
+  span {
+    color: #fff;
+    background: @content-color;
+    padding: 0.10rem;
+    border-radius: 0.1rem;
   }
-  div svg{
+
+  div svg {
     vertical-align: -20%;
-    fill:#3096fd;
+    fill: @content-color;
   }
-  input{
-    width:100%;
-    height:50px;
-    opacity:0;
-    cursor:pointer;
-    position:absolute;
+
+  input {
+    width: 100%;
+    height: 50px;
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
     left: 0;
+  }
+
   }
   .btnWrap{
     position: fixed;

@@ -169,11 +169,14 @@
     display: -webkit-box;
     -webkit-box-align: center;
     span{
-      color:#999;
+      color: #fff;
+      background: @content-color;
+      padding: 0.10rem;
+      border-radius: 0.1rem;
     }
     div svg{
       vertical-align: -20%;
-      fill:#3096fd;
+      fill:@content-color;
     }
    input{
       width:100%;
