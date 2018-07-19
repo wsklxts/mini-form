@@ -64,7 +64,6 @@
     background-color: #fff;
     box-shadow: 0 2px 4px #000;
     width: 100%;
-    height: 1.24rem;
     & > ul, & > ul > li {
       margin: 0;
       padding: 0;

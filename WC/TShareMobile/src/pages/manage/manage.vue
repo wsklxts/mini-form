@@ -117,7 +117,7 @@
     display: block;
   }
   .weui-grid{
-    padding:0.12rem 0.24rem !important;
+    padding:0.12rem 0.12rem !important;
   }
   .container section{
     h3{

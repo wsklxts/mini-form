@@ -2,9 +2,14 @@
   margin:0;
   padding:0;
   text-decoration: none;
+  border:none;
+  outline:none;
 }
-body,h3{
-  font-size:0.16rem;
+body{
+  font-size:0.28rem;
+}
+section> h3{
+  font-size: 0.30rem !important;
 }
 ul,li{
   list-style:none;
@@ -40,4 +45,10 @@ img{
 }
 .title:before{
   display:none;
+}
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
 }
