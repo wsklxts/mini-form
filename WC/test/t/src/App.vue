@@ -2,10 +2,28 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
+    <base-checkbox v-model="lovingVue"></base-checkbox>
   </div>
 </template>
 
 <script>
+  Vue.component('base-checkbox', {
+    model: {
+      prop: 'checked',
+      event: 'change'
+    },
+    props: {
+      checked: Boolean
+    },
+    template: `
+    <input
+      type="checkbox"
+      v-bind:checked="checked"
+      v-on:change="$emit('change', $event.target.checked)"
+    >
+  `
+  })
+
 export default {
   name: 'App'
 }
