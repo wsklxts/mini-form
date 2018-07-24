@@ -9,6 +9,14 @@ import vacation from '@/pages/apply/vacation/vacation'
 import qianKa from '@/pages/apply/qianKa/qianKa'
 import jiaBan from '@/pages/apply/jiaBan/jiaBan'
 import peiXun from '@/pages/apply/peiXun/peiXun'
+import jiaqi from '@/pages/apply/jiaqi/jiaqi'
+import salary from '@/pages/apply/salary/salary'
+import dakaData from '@/pages/apply/dakaData/dakaData'
+import kaoQinErr from '@/pages/apply/kaoQinErr/kaoQinErr'
+import mePlan from '@/pages/apply/mePlan/mePlan'
+import meLog from '@/pages/apply/meLog/meLog'
+import workSum from '@/pages/apply/workSum/workSum'
+import suggest from '@/pages/apply/suggest/suggest'
 
 
 import manage from '@/pages/manage/manage'
@@ -79,6 +87,46 @@ const router = new Router({
       path:"/apply/peiXun",
       name:"peiXun",
       component: peiXun
+    },
+    {
+      path:"/apply/jiaqi",
+      name:"jiaqi",
+      component: jiaqi
+    },
+    {
+      path:"/apply/salary",
+      name:"salary",
+      component: salary
+    },
+    {
+      path:"/apply/dakaData",
+      name:"dakaData",
+      component: dakaData
+    },
+    {
+      path:"/apply/kaoQinErr",
+      name:"kaoQinErr",
+      component: kaoQinErr
+    },
+    {
+      path:"/apply/mePlan",
+      name:"mePlan",
+      component: mePlan
+    },
+    {
+      path:"/apply/meLog",
+      name:"meLog",
+      component: meLog
+    },
+    {
+      path:"/apply/workSum",
+      name:"workSum",
+      component: workSum
+    },
+    {
+      path:"/apply/suggest",
+      name:"suggest",
+      component: suggest
     },
     {
       path: '/manage',

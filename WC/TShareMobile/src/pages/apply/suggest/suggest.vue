@@ -1,62 +1,59 @@
 <template>
   <div>
-    <XHeader  title="请假" :left-options="{showBack: true}"></XHeader>
+    <XHeader  title="投诉建议" :left-options="{showBack: true}"></XHeader>
     <div class="template">
 
-      <group>
-        <Cell  title="请假类型" :value="selectValue" is-link @click.native="select()"></Cell>
-      </group>
-
-      <!--<CellBox class="title">我的假期</CellBox>-->
-
-      <!--<group title="我的假期">-->
-        <!--<datetime-range title="开始时间" start-date="2018-01-01" end-date="2020-01-01"  v-model="value"></datetime-range>-->
-      <!--</group>-->
-
-      <group title="我的假期">
+      <group title="">
         <datetime
-          title="开始时间"
+          title="登录日期"
           format="YYYY-MM-DD HH:mm"
           v-model="beginDate"
           @on-change="change"
           placeholder="请选择日期"
-          ></datetime>
-
-        <datetime
-          title="结束时间"
-          format="YYYY-MM-DD HH:mm"
-          v-model="overDate"
-          @on-change="change"
-          placeholder="请选择日期"
         ></datetime>
-        <group>
-          <CellBox class="title">时长</CellBox>
-        </group>
+
       </group>
 
-
-      <!--<group  title="请假原因">-->
-        <!--<x-input title="" placeholder="请输入请假原因" focus>-->
-
-        <!--</x-input>-->
+      <!--<group title=" ">-->
+        <!--<Cell  title="计划主题" :value="selectValue" is-link @click.native="select()"></Cell>-->
       <!--</group>-->
 
-      <group title=" 请假原因" class="tit">
-        <x-textarea title="" placeholder="请输入请假原因"></x-textarea>
+      <!--<group  title="请假原因">-->
+      <!--<x-input title="" placeholder="请输入请假原因" focus>-->
+
+      <!--</x-input>-->
+      <!--</group>-->
+
+      <group title="问题描述" class="tit">
+        <x-textarea title="" placeholder="请输入"></x-textarea>
+      </group>
+      <group title="意见与建议" class="tit">
+        <x-textarea title="" placeholder="请输入"></x-textarea>
+      </group>
+
+      <group title="联系电话" class="tit">
+        <x-input title="" placeholder="请输入"></x-input>
+      </group>
+
+      <group title=" ">
+      <Cell  title="处理状态" :value="selectValue" is-link @click.native="select()"></Cell>
+      </group>
+
+      <group title="处理结果" class="tit">
+        <x-input title="" placeholder="请输入"></x-input>
       </group>
 
       <group title=" ">
         <CellBox class="title">
           <div class="subTitle">附件</div>
           <a href="javascript:void(0)">
-          <div class="icon">
-             <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
-            <!--<span>选择文件</span>-->
-            <div>
-            <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
-            </div>
+            <div class="icon">
+              <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
+              <div>
+                <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
+              </div>
 
-          </div>
+            </div>
           </a>
         </CellBox>
       </group>
@@ -75,7 +72,8 @@
         :menus="menu"
         theme="android"
         @on-click-menu="onClick"
-       >
+
+      >
       </actionsheet>
     </div>
   </div>
@@ -99,7 +97,7 @@
       XInput,
       XTextarea,
       XButton
-  },
+    },
     methods:{
       select(){
         this.show=true;
@@ -135,10 +133,10 @@
         overDate:"",
         uploadName:[],
         menu: {
-          menu1: '年假',
-          menu2: '事假',
-          menu3: '度假',
-          menu4: '节日假',
+          menu1: '计划1',
+          menu2: '计划2',
+          menu3: '计划3',
+          menu4: '计划4',
         },
       }
     }
@@ -153,9 +151,9 @@
   }
   .title{
     font-size:0.36rem;
-    &>div{
-        padding-right:0.36rem;
-      }
+  &>div{
+      padding-right:0.36rem;
+    }
   }
   .title:before{
     display:none;
@@ -168,31 +166,32 @@
     position:relative;
     display: -webkit-box;
     -webkit-box-align: center;
-    span{
-      color: #fff;
-      background: @content-color;
-      padding: 0.10rem;
-      border-radius: 0.1rem;
-    }
-    div svg{
-      vertical-align: -20%;
-      fill:@content-color;
-    }
-   input{
-      width:100%;
-      height:50px;
-      opacity:0;
-      cursor:pointer;
-      position:absolute;
-      left: 0;
-    }
+  span {
+    color: #fff;
+    background: @content-color;
+    padding: 0.10rem;
+    border-radius: 0.1rem;
+  }
+
+  div svg {
+    vertical-align: -20%;
+    fill: @content-color;
+  }
+  input{
+    width:100%;
+    height:50px;
+    opacity:0;
+    cursor:pointer;
+    position:absolute;
+    left: 0;
+  }
   }
   .btnWrap{
     position: fixed;
     width: 100%;
     bottom: 0;
-    button.weui-btn{
-      border-radius:0 !important;
-    }
+  button.weui-btn{
+    border-radius:0 !important;
+  }
   }
 </style>

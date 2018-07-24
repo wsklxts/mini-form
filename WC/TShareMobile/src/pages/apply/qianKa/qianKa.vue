@@ -26,7 +26,7 @@
             <a href="javascript:void(0)">
               <div class="icon">
                 <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
-                <span>选择文件</span>
+                <!--<span>选择文件</span>-->
                 <div>
                   <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
                 </div>

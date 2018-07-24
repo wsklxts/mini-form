@@ -42,7 +42,7 @@
             </h3>
             <div class="listItem">
               <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-                <grid-item v-for="(i,index) in query" :key="index">
+                <grid-item v-for="(i,index) in query" :key="index" @on-item-click="gotoItem(i.title,index)">
                   <span class="listItemImg"><img :src="i.img" alt=""></span>
                   <span class="grid-center">{{i.title}}</span>
                 </grid-item>
@@ -56,7 +56,7 @@
             </h3>
             <div class="listItem">
               <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false" >
-                <grid-item v-for="(i,index) in work" :key="index" >
+                <grid-item v-for="(i,index) in work" :key="index" @on-item-click="gotoItem(i.title,index)">
                   <span class="listItemImg"><img :src="i.img" alt=""></span>
                   <span class="grid-center">{{i.title}}</span>
                 </grid-item>
@@ -80,9 +80,8 @@
     name:"apply",
     methods:{
       gotoItem(item,index){
+        console.log(item);
         if(item.includes("请/销假")){
-          console.log("请/销假");
-  //          this.$router.push("/apply/racation")
           this.$router.push({ path: "/apply/vacation" })
         }else if(item.includes("签卡申请")){
           this.$router.push({ path: "/apply/qianKa" })
@@ -90,7 +89,24 @@
           this.$router.push({ path: "/apply/jiaBan" })
         }else if(item.includes("培训申请")){
           this.$router.push({ path: "/apply/peiXun" })
+        }else if(item.includes("我的假期")){
+          this.$router.push({ path: "/apply/jiaqi" })
+        }else if(item.includes("我的薪资")){
+          this.$router.push({ path: "/apply/salary" })
+        }else if(item.includes("打卡数据")){
+          this.$router.push({ path: "/apply/dakaData" })
+        }else if(item.includes("考勤异常")){
+          this.$router.push({ path: "/apply/kaoQinErr" })
+        }else if(item.includes("我的计划")){
+          this.$router.push({ path: "/apply/mePlan" })
+        }else if(item.includes("我的日志")){
+          this.$router.push({ path: "/apply/meLog" })
+        }else if(item.includes("工作总结")){
+          this.$router.push({ path: "/apply/workSum" })
+        }else if(item.includes("投诉建议")){
+          this.$router.push({ path: "/apply/suggest" })
         }
+
   //        switch(item){
   //          case "请/销假":
   //            console.log("请/销假");

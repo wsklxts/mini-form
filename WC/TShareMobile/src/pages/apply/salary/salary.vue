@@ -1,83 +1,10 @@
 <template>
   <div>
-    <XHeader  title="加班申请" :left-options="{showBack: true}"></XHeader>
+    <XHeader  title="我的薪资" :left-options="{showBack: true}"></XHeader>
     <div class="template">
 
+      我的薪资
 
-      <!--<CellBox class="title">我的假期</CellBox>-->
-
-      <!--<group title="我的假期">-->
-      <!--<datetime-range title="开始时间" start-date="2018-01-01" end-date="2020-01-01"  v-model="value"></datetime-range>-->
-      <!--</group>-->
-
-      <group title="">
-        <datetime
-          title="开始时间"
-          format="YYYY-MM-DD HH:mm"
-          v-model="beginDate"
-          @on-change="change"
-          placeholder="请选择日期"
-        ></datetime>
-
-        <datetime
-          title="结束时间"
-          format="YYYY-MM-DD HH:mm"
-          v-model="overDate"
-          @on-change="change"
-          placeholder="请选择日期"
-        ></datetime>
-        <group>
-          <CellBox class="title">时长</CellBox>
-        </group>
-      </group>
-
-      <group title=" ">
-        <Cell  title="加班结算方式" :value="selectValue" is-link @click.native="select()"></Cell>
-      </group>
-
-      <!--<group  title="请假原因">-->
-      <!--<x-input title="" placeholder="请输入请假原因" focus>-->
-
-      <!--</x-input>-->
-      <!--</group>-->
-
-      <group title=" 加班原因" class="tit">
-        <x-textarea title="" placeholder="请输入加班原因"></x-textarea>
-      </group>
-
-      <group title=" ">
-        <CellBox class="title">
-          <div class="subTitle">附件</div>
-          <a href="javascript:void(0)">
-            <div class="icon">
-              <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
-              <!--<span>选择文件</span>-->
-              <div>
-                <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
-              </div>
-
-            </div>
-          </a>
-        </CellBox>
-      </group>
-
-      <div class="uploadNameWrap">
-        <div v-for="f in uploadName">{{f}}</div>
-      </div>
-
-      <div class="btnWrap">
-        <x-button type="default" text="提交"></x-button>
-      </div>
-
-
-      <actionsheet
-        v-model="show"
-        :menus="menu"
-        theme="android"
-        @on-click-menu="onClick"
-
-      >
-      </actionsheet>
     </div>
   </div>
 </template>
