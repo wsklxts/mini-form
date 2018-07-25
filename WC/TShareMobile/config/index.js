@@ -7,8 +7,11 @@ const path = require('path')
 
 //let h= window.location.hostname;
 
-let h = "192.168.1.100"
-//let h = "192.168.0.44"
+//let h = "192.168.1.100"
+//let h="localhost"
+let hh = "http://localhost:8001"
+
+let h = "192.168.0.33"
 
 module.exports = {
   dev: {
@@ -16,7 +19,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': {
+        target: 'http://192.168.0.33:8001/MobileService/Web/WebPage',// 请换成你的地址
+        //changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: h, // can be overwritten by process.env.HOST
@@ -50,7 +61,15 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
-
+    proxyTable: {
+      '/api': {
+        target: 'http://localhost:8001/MobileService/Web/WebPage',// 请换成你的地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
     /**
      * Source Maps
      */

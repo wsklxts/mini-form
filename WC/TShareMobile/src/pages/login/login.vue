@@ -7,21 +7,25 @@
 
         <section class="userInput">
           <group class="inputItem">
-            <x-input title="" placeholder="请输入用户名" focus>
+            <x-input title="" placeholder="请输入用户名" focus v-model="userInput.usercode">
               <img slot="label" src="../../../static/login/1.png" alt="">
             </x-input>
           </group>
 
           <group class="inputItem">
-            <x-input title="" type="password" placeholder="请输入密码">
+            <form action="">
+            <x-input title="" type="password" placeholder="请输入密码" v-model="userInput.password">
               <img slot="label" src="../../../static/login/2.png" alt="">
             </x-input>
+            </form>
           </group>
         </section>
 
         <section class="btn">
           <XButton type="default" @click.native="login()">登录</XButton>
         </section>
+
+        <toast v-model="showToast" type="text" width="5rem" position="bottom">{{toastText}}</toast>
       </div>
     </div>
 </template>
@@ -29,15 +33,42 @@
 
 <script type="text/ecmascript-6">
 
-  import { XInput,Group,XButton  } from 'vux'
+  import { XInput,Group,XButton,Toast  } from 'vux'
 
   export default {
     components: {
-      XInput,Group,XButton
+      XInput,Group,XButton,Toast
+    },
+    data(){
+      return{
+        userInput:{
+          compcode: "", usertype: "", usercode: "", password: ""
+        },
+        showToast:false,
+        toastText:"网络超时或账号密码错误！"
+      }
     },
     methods:{
       login(){
-        alert(1);
+        console.log(this);
+        var params={}
+        let  _this=this
+        this.axios({
+          params: this.userInput,
+          method:"post",
+          baseURL:"api",
+          url:"LoginAutoMobile.aspx"
+        }).then(function(data){
+          console.log(data);
+          if(data.data===1){
+            _this.$router.push({path:"/personTask/taskWait"})
+          }else{
+            _this.showToast=true;
+          }
+        }).catch(function(err){
+          console.log(err);
+        })
+
       }
     }
   }
