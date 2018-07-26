@@ -8,10 +8,10 @@ const path = require('path')
 //let h= window.location.hostname;
 
 //let h = "192.168.1.100"
-//let h="localhost"
+let h="localhost"
 let hh = "http://localhost:8001"
 
-let h = "192.168.0.33"
+//let h = "192.168.0.33"
 
 module.exports = {
   dev: {
@@ -21,7 +21,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://192.168.0.33:8001/MobileService/Web/WebPage',// 请换成你的地址
+        target: 'http://localhost:8001/MobileService/Web/WebPage',// 请换成你的地址
         //changeOrigin: true,
         pathRewrite: {
           '^/api': ''

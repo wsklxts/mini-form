@@ -7,14 +7,14 @@
 
         <section class="userInput">
           <group class="inputItem">
-            <x-input title="" placeholder="请输入用户名" focus v-model="userInput.usercode">
+            <x-input title="" placeholder="请输入用户名" required ref="inp" v-model="userInput.usercode">
               <img slot="label" src="../../../static/login/1.png" alt="">
             </x-input>
           </group>
 
           <group class="inputItem">
             <form action="">
-            <x-input title="" type="password" placeholder="请输入密码" v-model="userInput.password">
+            <x-input title="" type="password" required  placeholder="请输入密码" ref="inp2" v-model="userInput.password">
               <img slot="label" src="../../../static/login/2.png" alt="">
             </x-input>
             </form>
@@ -25,7 +25,8 @@
           <XButton type="default" @click.native="login()">登录</XButton>
         </section>
 
-        <toast v-model="showToast" type="text" width="5rem" position="bottom">{{toastText}}</toast>
+        <loading :show="loginIn" text="登录中"></loading>
+        <toast v-model="showToast" type="warn" width="5rem" position="middle">{{toastText}}</toast>
       </div>
     </div>
 </template>
@@ -33,11 +34,11 @@
 
 <script type="text/ecmascript-6">
 
-  import { XInput,Group,XButton,Toast  } from 'vux'
+  import { XInput,Group,XButton,Toast,Loading   } from 'vux'
 
   export default {
     components: {
-      XInput,Group,XButton,Toast
+      XInput,Group,XButton,Toast,Loading
     },
     data(){
       return{
@@ -45,28 +46,58 @@
           compcode: "", usertype: "", usercode: "", password: ""
         },
         showToast:false,
+        loginIn:false,
         toastText:"网络超时或账号密码错误！"
       }
     },
+    mounted(){
+      this.$refs.inp.$refs.input.focus()
+    },
     methods:{
       login(){
-        console.log(this);
-        var params={}
+        if(this.userInput.usercode=="" || this.userInput.password==""){
+          this.toastText="请输入账号密码"
+          this.showToast=true
+          if(this.userInput.usercode==""){
+            this.$refs.inp.$refs.input.focus()
+            return
+          }
+          if(this.userInput.password==""){
+            this.$refs.inp2.$refs.input.focus()
+            return
+          }
+          return
+        }
+
+
+        this.loginIn=true
         let  _this=this
+
+
         this.axios({
           params: this.userInput,
           method:"post",
           baseURL:"api",
           url:"LoginAutoMobile.aspx"
         }).then(function(data){
-          console.log(data);
+          _this.loginIn=false
           if(data.data===1){
-            _this.$router.push({path:"/personTask/taskWait"})
+            _this.$store.commit("changeLogin",100)
+            console.log(_this.$route);
+            if(_this.$route.query.redirect){
+              _this.$router.push({path:_this.$route.query.redirect})
+            }else{
+              _this.$router.push({path:"/personTask/taskWait"})
+            }
           }else{
             _this.showToast=true;
+            _this.toastText="账号密码错误"
           }
         }).catch(function(err){
           console.log(err);
+          _this.loginIn=false
+          _this.toastText="网络超时"
+          _this.showToast=true;
         })
 
       }

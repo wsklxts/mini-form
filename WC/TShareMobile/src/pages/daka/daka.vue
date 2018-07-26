@@ -1,7 +1,9 @@
 
 <template>
   <div>
-    <XHeader  title="打卡" :left-options="{showBack: false}"></XHeader>
+    <XHeader  title="打卡" :left-options="{showBack: false}" >
+      <a slot="right" @click="setBtn"> 设置</a>
+    </XHeader>
 
     <div class="daka template">
       <section class="userWrap">
@@ -46,6 +48,16 @@
         headImg:{img:require("../../../static/daka/head.jpg"),title:"头像"}
       }
     },
+    methods:{
+      setBtn(){
+        console.log(this);
+        this.$router.push({path:"/daka/setAccount"})
+      }
+//      setBtn:()=>{
+//        console.log(this);
+//        this.$router.push({path:"/setAccount"})
+//      }
+    },
     components:{
       Grid,
       GridItem,
@@ -58,6 +70,9 @@
 
 <style lang="less" type="text/less" scoped>
   @import '~vux/src/styles/1px.less';
+  .vux-header-right a{
+    color:#fff !important;
+  }
   .daka{
     .tips{
       padding:0.36rem;
