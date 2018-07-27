@@ -19,12 +19,20 @@
 
   import { Grid, GridItem,XHeader,XButton } from 'vux'
   import tabs from "../../../components/common/tabs.vue"
+  import setCookie from "@/common/setCookie"
+
+
+
+
+
   export default {
     name:"apply",
     methods:{
       logout(){
         console.log(this.$store);
-        this.$store.commit("changeLogin",1)
+//        let userCode=setCookie.getCookie("isAutoLogin");
+//        setCookie.setCookie("isAutoLogin","0")
+        this.$store.commit("isAutoLogin",0)
         this.$router.push({path:"/login"})
       }
     },

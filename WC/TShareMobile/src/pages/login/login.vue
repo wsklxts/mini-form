@@ -82,7 +82,7 @@
         }).then(function(data){
           _this.loginIn=false
           if(data.data===1){
-            _this.$store.commit("changeLogin",100)
+            _this.$store.commit("isAutoLogin","1")
             console.log(_this.$route);
             if(_this.$route.query.redirect){
               _this.$router.push({path:_this.$route.query.redirect})

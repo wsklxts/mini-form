@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store/index'
 import HelloWorld from '@/pages/HelloWorld/HelloWorld'
 import personTask from '@/pages/personTask/personTask'
 
@@ -21,6 +22,7 @@ import suggest from '@/pages/apply/suggest/suggest'
 
 import manage from '@/pages/manage/manage'
 import daka from '@/pages/daka/daka'
+import setAccount from '@/pages/daka/setAccount/setAccount'
 import login from '@/pages/login/login'
 
 
@@ -140,6 +142,11 @@ const router = new Router({
       path: '/daka',
       name: 'daka',
       component: daka
+    },
+    {
+      path: '/daka/setAccount',
+      name: 'setAccount',
+      component: setAccount
     }
 
 
@@ -151,9 +158,14 @@ router.beforeEach((to, from, next) => {
   //let token = store.state.token;
   //判断要去的路由有没有requiresAuth
   if (to.meta.requiresAuth) {
-    console.log(to);
-    console.log(from);
-    next();
+    if(store.state.isLogin=="1") { // 已经登陆
+      next()   // 正常跳转到你设置好的页面
+    }else{
+      next({
+          path: '/login',
+          query: { redirect: to.fullPath } // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
+        });
+    }
     //if (token) {
     //  next();
     //} else {

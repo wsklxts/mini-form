@@ -21,7 +21,7 @@
         <div>管理中心</div>
       </router-link>
       <router-link :to="{name:'daka'}" tag="li">
-        <div class="tabImg"  :class="{ active4: $route.path== '/daka'}">
+        <div class="tabImg"  :class="{ active4: $route.path.indexOf('daka') !== -1}">
         </div>
         <div>打卡</div>
       </router-link>
