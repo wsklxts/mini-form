@@ -33,6 +33,9 @@
 
 
 <script type="text/ecmascript-6">
+  import qs from 'qs'
+
+  console.log(qs);
 
   import { XInput,Group,XButton,Toast,Loading   } from 'vux'
 
@@ -75,13 +78,12 @@
 
 
         this.axios({
-          params: this.userInput,
           method:"post",
-          baseURL:"api",
-          url:"LoginAutoMobile.aspx"
+          data: qs.stringify(this.userInput),
+          url:"LoginAutoMobileJSON.aspx"
         }).then(function(data){
           _this.loginIn=false
-          if(data.data===1){
+          if(data.data.data[1]["isAutoLogin"]==1){
             _this.$store.commit("isAutoLogin","1")
             console.log(_this.$route);
             if(_this.$route.query.redirect){

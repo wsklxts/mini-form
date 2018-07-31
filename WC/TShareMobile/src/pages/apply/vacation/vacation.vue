@@ -29,9 +29,17 @@
           @on-change="change"
           placeholder="请选择日期"
         ></datetime>
+
         <group>
-          <CellBox class="title">时长</CellBox>
+          <x-input title="请假天数" v-model="days" text-align="right" placeholder="请输入假天数"></x-input>
+          <x-input title="请假小时" v-model="hours" text-align="right" placeholder="请输入假小时"></x-input>
         </group>
+
+        <!--<group>-->
+          <!--<CellBox class="title">时长</CellBox>-->
+        <!--</group>-->
+
+
       </group>
 
 
@@ -52,6 +60,7 @@
           <div class="icon">
              <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
             <!--<span>选择文件</span>-->
+
             <div>
             <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
             </div>
@@ -68,7 +77,7 @@
       <div class="btnWrap">
         <x-button type="default" text="提交"></x-button>
       </div>
-
+`
 
       <actionsheet
         v-model="show"
@@ -83,6 +92,7 @@
 
 
 <script type="text/ecmascript-6">
+
 
 
   import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton     } from 'vux'
@@ -140,6 +150,8 @@
           menu3: '度假',
           menu4: '节日假',
         },
+        days:"",
+        hours:""
       }
     }
   }

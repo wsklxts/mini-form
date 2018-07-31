@@ -42,6 +42,8 @@
 <script type="text/ecmascript-6">
   import { Grid, GridItem,XHeader } from 'vux'
   import tabs from "../../components/common/tabs.vue"
+
+
   export default {
     data(){
       return{

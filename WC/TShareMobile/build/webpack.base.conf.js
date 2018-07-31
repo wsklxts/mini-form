@@ -10,6 +10,7 @@ function resolve (dir) {
 }
 
 
+
 let originalConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {

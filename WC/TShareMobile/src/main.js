@@ -7,15 +7,25 @@ import axios from 'axios'
 import router from './router'
 
 
-Vue.prototype.axios=axios
 
 Vue.config.productionTip = false
 
+if(process.env.NODE_ENV=="development"){
+  axios.defaults.baseURL="api"
+}else if(process.env.NODE_ENV=="production"){
+  axios.defaults.baseURL = 'http://localhost:8001/MobileService/Web/WebPage';
+}
+
+
+
+console.log(process.env.NODE_ENV);
+//var root = process.env.API_ROOT
 
 
 /* eslint-disable no-new */
 
 
+Vue.prototype.axios=axios
 
 new Vue({
   el: '#app',

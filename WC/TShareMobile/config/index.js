@@ -13,6 +13,8 @@ let hh = "http://localhost:8001"
 
 //let h = "192.168.0.33"
 
+
+
 module.exports = {
   dev: {
 
@@ -22,7 +24,7 @@ module.exports = {
     proxyTable: {
       '/api': {
         target: 'http://localhost:8001/MobileService/Web/WebPage',// 请换成你的地址
-        //changeOrigin: true,
+        changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }
@@ -61,15 +63,15 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
-    proxyTable: {
-      '/api': {
-        target: 'http://localhost:8001/MobileService/Web/WebPage',// 请换成你的地址
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    },
+    //proxyTable: {
+    //  '/api': {
+    //    target: 'http://localhost:8001/MobileService/Web/WebPage',// 请换成你的地址
+    //    changeOrigin: false,
+    //    pathRewrite: {
+    //      '^/api': ''
+    //    }
+    //  }
+    //},
     /**
      * Source Maps
      */
