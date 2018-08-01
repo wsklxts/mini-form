@@ -70,6 +70,8 @@
   import tabs from "../../components/common/tabs.vue"
   import { Tab, TabItem,Swiper,SwiperItem,XHeader  } from 'vux'
 
+
+
   export default {
     components: {
       Tab,
@@ -79,6 +81,10 @@
       XHeader,
       tabs
 
+    },
+    mounted(){
+      console.log(window.sessionStorage.getItem("global_empname"));
+//      console.log(this.$store);
     },
     methods:{
       handler(){

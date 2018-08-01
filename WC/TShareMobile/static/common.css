@@ -52,3 +52,8 @@ img{
 .fr{
   float:right;
 }
+
+.weui-skin_android .weui-actionsheet .weui-actionsheet__menu{
+  max-height: 360px !important;
+  overflow: auto !important;
+}

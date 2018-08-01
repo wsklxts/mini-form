@@ -4,20 +4,14 @@
     <div class="template">
 
       <group>
-        <Cell  title="请假类型" :value="selectValue" is-link @click.native="select()"></Cell>
+        <Cell  title="请假类型" :value="form.type" is-link @click.native="select()"></Cell>
       </group>
-
-      <!--<CellBox class="title">我的假期</CellBox>-->
-
-      <!--<group title="我的假期">-->
-        <!--<datetime-range title="开始时间" start-date="2018-01-01" end-date="2020-01-01"  v-model="value"></datetime-range>-->
-      <!--</group>-->
 
       <group title="我的假期">
         <datetime
           title="开始时间"
           format="YYYY-MM-DD HH:mm"
-          v-model="beginDate"
+          v-model="form.beginDate"
           @on-change="change"
           placeholder="请选择日期"
           ></datetime>
@@ -25,32 +19,21 @@
         <datetime
           title="结束时间"
           format="YYYY-MM-DD HH:mm"
-          v-model="overDate"
+          v-model="form.overDate"
           @on-change="change"
           placeholder="请选择日期"
         ></datetime>
 
         <group>
-          <x-input title="请假天数" v-model="days" text-align="right" placeholder="请输入假天数"></x-input>
-          <x-input title="请假小时" v-model="hours" text-align="right" placeholder="请输入假小时"></x-input>
+          <x-input title="请假天数" v-model="form.days" text-align="right" placeholder="请输入假天数"></x-input>
+          <x-input title="请假小时" v-model="form.hours" text-align="right" placeholder="请输入假小时"></x-input>
         </group>
-
-        <!--<group>-->
-          <!--<CellBox class="title">时长</CellBox>-->
-        <!--</group>-->
-
-
       </group>
 
 
-      <!--<group  title="请假原因">-->
-        <!--<x-input title="" placeholder="请输入请假原因" focus>-->
-
-        <!--</x-input>-->
-      <!--</group>-->
 
       <group title=" 请假原因" class="tit">
-        <x-textarea title="" placeholder="请输入请假原因"></x-textarea>
+        <x-textarea title="" v-model="form.reason" placeholder="请输入请假原因"></x-textarea>
       </group>
 
       <group title=" ">
@@ -75,11 +58,12 @@
       </div>
 
       <div class="btnWrap">
-        <x-button type="default" text="提交"></x-button>
+        <x-button type="default" text="提交" @click.native="formSubmit"></x-button>
       </div>
 `
 
       <actionsheet
+        ref="popup"
         v-model="show"
         :menus="menu"
         theme="android"
@@ -92,8 +76,6 @@
 
 
 <script type="text/ecmascript-6">
-
-
 
   import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton     } from 'vux'
 
@@ -111,32 +93,51 @@
       XButton
   },
     methods:{
+      formSubmit(){
+        console.log(this.form);
+        this.$http.post("/MobileService/MyApply.asmx/AddAskLeaveRecord",this.form)
+          .then(r=>{
+            console.log(r);
+          })
+
+      },
       select(){
         this.show=true;
       },
       onClick (key,value) {
         console.log(value)
-        this.selectValue=value;
+        this.form.selectValue=value;
       },
       change(){
         console.log(this.beginDate);
       },
       upload(e){
-        this.uploadName=[]
+        this.form.uploadName=[]
         console.log(e.target.files);
         for(var f in e.target.files){
 //        for(var i=0; i<e.target.files.length;i++){
 //          console.log(e.target.files[f].name);
 //          console.log(e.target.files[f]);
           if(typeof e.target.files[f] == "object"){
-            this.uploadName.push(e.target.files[f].name)
+            this.form.uploadName.push(e.target.files[f].name)
           }
 
         }
       }
     },
+    mounted(){
+
+    },
     data(){
       return{
+        form:{
+          type:"",
+          startDate:"",
+          endDate:"",
+//          uploadName:"",
+//          days:"",
+//          hours:"",
+        },
         stringValue: '0',
         show: false,
         selectValue:"请选择",
@@ -145,10 +146,16 @@
         overDate:"",
         uploadName:[],
         menu: {
-          menu1: '年假',
-          menu2: '事假',
-          menu3: '度假',
-          menu4: '节日假',
+          menu1: '病假',
+          menu2: '出差',
+          menu3: '产假',
+          menu4: '工伤',
+          menu5: '婚假',
+          menu6: '年假',
+          menu7: '丧假',
+          menu8: '事假',
+          menu9: '调休',
+          menu11: '停工待料',
         },
         days:"",
         hours:""
@@ -160,6 +167,7 @@
 
 
 <style lang="less" type="text/less" scoped>
+
   .uploadNameWrap{
     text-align: center;
   }

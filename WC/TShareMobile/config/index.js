@@ -23,7 +23,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8001/MobileService/Web/WebPage',// 请换成你的地址
+        target: 'http://localhost:8001',// 请换成你的地址
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

@@ -77,30 +77,63 @@
         let  _this=this
 
 
-        this.axios({
-          method:"post",
-          data: qs.stringify(this.userInput),
-          url:"LoginAutoMobileJSON.aspx"
-        }).then(function(data){
-          _this.loginIn=false
-          if(data.data.data[1]["isAutoLogin"]==1){
-            _this.$store.commit("isAutoLogin","1")
-            console.log(_this.$route);
-            if(_this.$route.query.redirect){
-              _this.$router.push({path:_this.$route.query.redirect})
+        this.$http.post("/MobileService/Web/WebPage/LoginAutoMobileJSON.aspx",
+          qs.stringify(this.userInput))
+          .then(data=>{
+            console.log(data);
+            let d=data.data && data.data.data[0]
+            this.loginIn=false
+            if(data.data && data.data.data[1]["isAutoLogin"]==1){
+              this.$store.commit("isAutoLogin","1")
+              console.log(this.$route);
+              if(this.$route.query.redirect){
+                this.$router.push({path:this.$route.query.redirect})
+              }else{
+                console.log(d);
+                window.sessionStorage.setItem("global_empname",d.global_empname)
+//                this.$store.commit("userInfo",d.global_empname)
+
+                this.$router.push({path:"/personTask/taskWait"})
+              }
             }else{
-              _this.$router.push({path:"/personTask/taskWait"})
+              this.showToast=true;
+              this.toastText="账号密码错误"
             }
-          }else{
-            _this.showToast=true;
-            _this.toastText="账号密码错误"
-          }
-        }).catch(function(err){
+          }).catch((err)=>{
           console.log(err);
-          _this.loginIn=false
-          _this.toastText="网络超时"
-          _this.showToast=true;
+          this.loginIn=false
+          this.toastText="网络超时"
+          this.showToast=true;
+
         })
+
+
+//
+//        this.axios({
+//          method:"post",
+//          data: qs.stringify(this.userInput),
+//          url:"/MobileService/Web/WebPage/LoginAutoMobileJSON.aspx"
+//        }).then(function(data){
+//          _this.loginIn=false
+//          console.log(data);
+//          if(data.data && data.data.data[1]["isAutoLogin"]==1){
+//            _this.$store.commit("isAutoLogin","1")
+//            console.log(_this.$route);
+//            if(_this.$route.query.redirect){
+//              _this.$router.push({path:_this.$route.query.redirect})
+//            }else{
+//              _this.$router.push({path:"/personTask/taskWait"})
+//            }
+//          }else{
+//            _this.showToast=true;
+//            _this.toastText="账号密码错误"
+//          }
+//        }).catch(function(err){
+//          console.log(err);
+//          _this.loginIn=false
+//          _this.toastText="网络超时"
+//          _this.showToast=true;
+//        })
 
       }
     }

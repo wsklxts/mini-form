@@ -9,13 +9,18 @@ let cookie=setCookie.getCookie("isAutoLogin")
 
 const store = new Vuex.Store({
   state: {
+    userInfo:{
+      global_empname:""
+    },
     isLogin: cookie
   },
   mutations: {
     isAutoLogin(state,data){
       setCookie.setCookie("isAutoLogin",data,3)
       state.isLogin = data;
-
+    },
+    userInfo(state,data){
+      state.userInfo.global_empname=data
     }
   },
   getters: {

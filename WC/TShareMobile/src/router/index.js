@@ -36,6 +36,25 @@ import taskWait from '@/pages/personTask/taskWait'
 Vue.use(Router)
 
 const router = new Router({
+  scrollBehavior (to, from, savedPosition) {
+    // return 期望滚动到哪个的位置
+
+    return new Promise((resolve, reject) => {
+      //setTimeout(() => {
+        if (savedPosition) {
+          return resolve(savedPosition)
+        } else {
+          resolve({ x: 0, y: 0 })
+        }
+      //}, 5500)
+    })
+
+    //if (savedPosition) {
+    //  return savedPosition
+    //} else {
+    //  return { x: 0, y: 0 }
+    //}
+  },
   routes: [
     {
       path: '*',
