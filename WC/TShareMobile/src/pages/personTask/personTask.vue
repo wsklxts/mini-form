@@ -83,8 +83,8 @@
 
     },
     mounted(){
-      console.log(window.sessionStorage.getItem("global_empname"));
-//      console.log(this.$store);
+
+
     },
     methods:{
       handler(){

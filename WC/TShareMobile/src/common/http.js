@@ -19,7 +19,11 @@ if(process.env.NODE_ENV=="development"){
 }
 
 
-
+var instance = axios.create({
+  headers:{
+    'Content-type': 'application/json'
+  },
+});
 
 
 //http request 拦截器
@@ -46,7 +50,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     console.log(response);
-    if(response.data && response.data.data[1].isAutoLogin == "3"){
+    if(response.data!=="" && response.data.data[1].isAutoLogin == "3"){
       router.replace({
         path: '/HelloWorld',
         query: {redirect: router.currentRoute.fullPath}
@@ -73,7 +77,7 @@ axios.interceptors.response.use(
 export const $http = {
   get: function(url,params={}){
     return new Promise((resolve,reject) => {
-      axios.get(url,{
+      instance.get(url,{
           params:params
         })
         .then(response => {
@@ -86,7 +90,7 @@ export const $http = {
   },
   post: function (url,data = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, data)
+      instance.post(url, data)
         .then(response => {
           resolve(response);
         }, err => {

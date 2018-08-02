@@ -1,16 +1,16 @@
 <template>
 
   <div>
-    <XHeader  title="helloWorld" :left-options="{showBack: true}">
-      <a slot="right" @click="detailBtn"> 详情</a>
+    <XHeader  title="请假详情" :left-options="{showBack: true}">
+
     </XHeader>
     <div class="template">
-      {{$route.path}}11
+      {{$route.path}}
       HelloWorld
 
-      <div class="btnWrap">
-        <x-button type="default" text="提交" @click.native="formSubmit"></x-button>
-      </div>
+      <!--<div class="btnWrap">-->
+        <!--<x-button type="default" text="提交" @click.native="formSubmit"></x-button>-->
+      <!--</div>-->
     </div>
 
   </div>
@@ -61,8 +61,8 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-  button.weui-btn{
-    border-radius:0 !important;
-  }
+    button.weui-btn{
+        border-radius:0 !important;
+    }
   }
 </style>

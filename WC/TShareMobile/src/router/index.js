@@ -7,6 +7,7 @@ import personTask from '@/pages/personTask/personTask'
 
 import apply from '@/pages/apply/apply'
 import vacation from '@/pages/apply/vacation/vacation'
+import vacationDetails from '@/pages/apply/vacation/vacationDetails/vacationDetails'
 import qianKa from '@/pages/apply/qianKa/qianKa'
 import jiaBan from '@/pages/apply/jiaBan/jiaBan'
 import peiXun from '@/pages/apply/peiXun/peiXun'
@@ -96,6 +97,11 @@ const router = new Router({
       path:"/apply/vacation",
       name:"vacation",
       component: vacation
+    },
+    {
+      path:"/apply/vacation/details",
+      name:"vacationDetails",
+      component: vacationDetails
     },
     {
       path:"/apply/qianKa",

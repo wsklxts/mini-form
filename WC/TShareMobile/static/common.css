@@ -57,3 +57,7 @@ img{
   max-height: 360px !important;
   overflow: auto !important;
 }
+.weui-dialog__title {
+  font-weight: 700 !important;
+  font-size: 0.32rem !important;
+}

@@ -35,7 +35,6 @@
 <script type="text/ecmascript-6">
   import qs from 'qs'
 
-  console.log(qs);
 
   import { XInput,Group,XButton,Toast,Loading   } from 'vux'
 
@@ -71,12 +70,7 @@
           }
           return
         }
-
-
         this.loginIn=true
-        let  _this=this
-
-
         this.$http.post("/MobileService/Web/WebPage/LoginAutoMobileJSON.aspx",
           qs.stringify(this.userInput))
           .then(data=>{
@@ -90,9 +84,9 @@
                 this.$router.push({path:this.$route.query.redirect})
               }else{
                 console.log(d);
-                window.sessionStorage.setItem("global_empname",d.global_empname)
-//                this.$store.commit("userInfo",d.global_empname)
-
+                localStorage.setItem("global_empname",d.global_empname)
+                localStorage.setItem("global_empid",d.global_empid)
+                localStorage.setItem("comp_code",d.comp_code)
                 this.$router.push({path:"/personTask/taskWait"})
               }
             }else{
