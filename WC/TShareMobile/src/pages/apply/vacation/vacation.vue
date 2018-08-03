@@ -45,11 +45,9 @@
           <div class="icon">
              <input type="file" name="fileUpload" multiple="multiple" @change="upload"/>
             <!--<span>选择文件</span>-->
-
             <div>
             <x-icon type="ios-plus" size="30" class="cell-x-icon"></x-icon>
             </div>
-
           </div>
           </a>
         </CellBox>
@@ -74,6 +72,9 @@
       </actionsheet>
 
       <toast v-model="errMsgToast" type="warn" width="5rem">{{errMsg}}</toast>
+      <toast v-model="successMsgToast" type="success" width="5rem">{{Message}}</toast>
+
+
 
       <confirm v-model="checkbox"
                title="请选择审批人，否则提交失败!"
@@ -82,16 +83,14 @@
                @on-show="onShow"
                @on-hide="onHide">
         <div>
-          {{commonListC}}
           <checklist
+                     ref="refChecklist"
                      :options="commonList"
-                     v-model="checklistModel"
                      @on-change="changeChecklist"
           >
           </checklist>
         </div>
       </confirm>
-{{commonListC}}
     </div>
   </div>
 </template>
@@ -119,19 +118,32 @@
     methods:{
       changeChecklist(a,b){
         console.log(a);
+        this.ActorsId=a
       },
       onConfirm(){
         console.log("确定");
         let formData={
-          receiptID:this.actors.id,
-          workFlowCode:"K001"
+          receiptID:this.receiptID,
+          workFlowCode:"K001",
+          Actors: JSON.stringify(this.ActorsId),
+          global_empid:this.form.empId,
+          comp_code:this.form.company,
+          nodeID:1,
         }
-        let receiptID=this.actors.id
-        this.$http.post("MobileWeb/MyApply/IsAllowSelectorHandler.ashx")
+        this.$http.get("/MobileWeb/MyApply/IsAllowSelectorHandler.ashx",formData)
           .then(r=>{
             console.log(r);
+            if(r.IsSuccess==true){
+              this.successMsgToast=true
+              this.Message=r.Message
+            }else{
+              this.successMsgToast=true
+              this.Message="出错啦"
+            }
           })
-          .catch()
+          .catch(e=>{
+            console.log(e);
+          })
 
       },
       onCancel(){
@@ -187,11 +199,12 @@
             if(data.success==1){
               this.checkbox=true
               this.actors=data.actors
+              this.receiptID=data.id
               console.log(this.actors);
               for(let i=0;i<this.actors.length;i++){
                 console.log(this.actors[i]);
-                this.commonList.push(this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"] "+this.actors[i].EmpID)
-                this.receiptID.push(this.actors[i].EmpID)
+//                this.commonList.push(this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"] - "+this.actors[i].EmpID)
+                this.commonList.push({key:JSON.stringify(this.actors[i].EmpID),value:this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"]"})
               }
             }else if(data.success=="0"){
               this.errMsg=data.msg
@@ -226,35 +239,20 @@
       this.form.company=window.localStorage.getItem("comp_code")
     },
     computed:{
-      commonListC: function(){
-        let arr=[]
-        let newArr=[]
 
-        console.log(this.commonList.length);
-        for(let i=0;i<this.commonList.length;i++){
-
-          alert(1)
-//          console.log(this.commonList[i].split(" "));
-//          arr=this.commonList[i].split(" ")
-//          arr.pop()
-//          arr.join(" ")
-//          newArr[i]=arr
-//          console.log(newArr);
-//          return newArr
-        }
-//        return this.commonList[2]
-//        return "123"
-      }
     },
     data(){
       return{
-        receiptID:[],
+        Message:"",
+        successMsgToast:false,
+        receiptID:"",
         checklistModel:[],
         commonList: [],
         checkbox:false,
         errMsgToast:false,
         errMsg:"",
         actors:[],
+        ActorsId:[],
         form:{
           type:"",
           startDate:"",

@@ -61,3 +61,12 @@ img{
   font-weight: 700 !important;
   font-size: 0.32rem !important;
 }
+
+.btnWrap{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+button.weui-btn{
+  border-radius:0 !important;
+}
+}
