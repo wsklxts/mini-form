@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import setCookie from "@/common/setCookie"
+import * as types from './type'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,9 @@ const store = new Vuex.Store({
     userInfo:{
       global_empname:""
     },
-    isLogin: cookie
+    isLogin: cookie,
+    loading:false,
+    loadingText:"加载中...",
   },
   mutations: {
     isAutoLogin(state,data){
@@ -21,19 +24,28 @@ const store = new Vuex.Store({
     },
     userInfo(state,data){
       state.userInfo.global_empname=data
-    }
+    },
+
+    /*loading*/
+    [types.HIDE_LOADING](state){
+      state.loading=false;
+    },
+    [types.SHOW_LOADING](state,t){
+      state.loadingText= t || "加载中..."
+      state.loading=true;
+    },
   },
   getters: {
-    "GET_MSG": function(state) {
-      console.log('获取', state.user_name)
-      return state.user_name
-    }
+
   },
   actions: {
-    "SET_MSG": function(state, user_name) {
-      console.log('获取', state.user_name)
-      store.commit("SET_MSG", user_name)
-    }
+    /*loading*/
+    hideLoading:({commit})=>{
+      commit(types.HIDE_LOADING)
+    },
+    showLoading:({commit},t)=>{
+      commit(types.SHOW_LOADING,t)
+    },
   }
 })
 export default store

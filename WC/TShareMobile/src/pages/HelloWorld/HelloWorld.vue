@@ -19,6 +19,14 @@
 
       {{refChecklist}}
 
+
+      <scroller lock-x scrollbar-y height="200px" ref="scrollerBottom" use-pullup bounce @on-scroll-bottom="onScrollBottom">
+      <div class="box2">
+        <p v-for="i in bottomCount" :key="i">placeholder {{ i  }}</p>
+      </div>
+      </scroller>
+
+
       <div class="btnWrap">
         <x-button type="default" text="提交" @click.native="onConfirm"></x-button>
       </div>
@@ -32,32 +40,28 @@
 <script>
 
   import {TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
-    ,Toast,Checklist
+    ,Toast,Checklist,Scroller,LoadMore
   } from 'vux'
   import qs from 'qs'
   console.log(qs);
   export default {
     name: 'HelloWorld',
     methods:{
+      onScrollBottom () {
+        if (this.onFetching) {
+          // do nothing
+        } else {
+          this.onFetching = true
+          setTimeout(() => {
+            this.bottomCount += 10
+          this.$nextTick(() => {
+            this.$refs.scrollerBottom.reset()
+        })
+          this.onFetching = false
+        }, 1000)
+        }
+      },
       onConfirm(){
-        console.log("确定");
-
-
-//        let formData={
-//          receiptID:"1534",
-//          workFlowCode:"K001",
-//          Actors: [],
-//          global_empid:"40",
-//          comp_code:"0101",
-//          nodeID:"1"
-//        }
-
-        let formData={company: '0101', globalEmpId: '40' ,pageIndex: 1, size: 10,type:0}
-
-
-
-//        this.$http.get("/MobileWeb/MyApply/IsAllowSelectorHandler.ashx?receiptID=1534&workFlowCode=K001&Actors=['40']&global_empid=40&comp_code=0101&nodeID=1")
-//        this.$http.get("/MobileWeb/MyApply/IsAllowSelectorHandler.ashx",formData)
         this.$http.post("/MobileService/MyApply.asmx/GetAskLeaveqingjiaRecord",formData)
           .then(r=>{
           console.log(r);
@@ -78,8 +82,9 @@
 
       },
       formSubmit(){
+      },
 
-      }
+
     },
     components: {
       Actionsheet,
@@ -91,10 +96,11 @@
       Datetime,
       XInput,
       XTextarea,
-      XButton,Toast,Checklist
+      XButton,Toast,Checklist,Scroller,LoadMore
     },
     data () {
       return {
+        bottomCount:20,
         refChecklist:"",
         commonList:[{key: 'aa', value: '001 value'}, {key: 'bb', value: '002 value'}, {key: 'cc', value: '003 value'}],
         checkListModel:[],

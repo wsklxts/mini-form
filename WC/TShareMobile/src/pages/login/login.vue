@@ -38,6 +38,7 @@
 
   import { XInput,Group,XButton,Toast,Loading   } from 'vux'
 
+
   export default {
     components: {
       XInput,Group,XButton,Toast,Loading
@@ -70,10 +71,12 @@
           }
           return
         }
-        this.loginIn=true
+//        this.loginIn=true
+
         this.$http.post("/MobileService/Web/WebPage/LoginAutoMobileJSON.aspx",
-          qs.stringify(this.userInput))
+          qs.stringify(this.userInput),{ContentType:"application/x-www-form-urlencoded",loading:"登录中..."})
           .then(data=>{
+
             console.log(data);
             let d=data.data && data.data.data[0]
             this.loginIn=false

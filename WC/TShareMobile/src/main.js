@@ -20,11 +20,14 @@ Vue.config.productionTip = false
 Vue.prototype.$http=$http
 //Vue.prototype.axios=axios
 
-new Vue({
+const v = new Vue({
   el: '#app',
   router,
   store,
   components: { App },
   template: '<App/>'
+})
+
+v.$nextTick(()=>{
 })
 

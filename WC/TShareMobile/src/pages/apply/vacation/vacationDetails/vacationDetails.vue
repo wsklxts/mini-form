@@ -6,33 +6,30 @@
 
     <div class="template">
 
+      <!--<scroller :height="fHeight" lock-x scrollbar-y  ref="scrollerBottom"  bounce @on-scroll-bottom="onScrollBottom">-->
+        <!--<div class="box2">-->
+          <group v-for="(l,index) in listData" :key="index">
+            <cell title="开始时间"  v-show="l.alsdate" :value="l.alsdate"></cell>
+            <cell title="结束时间"  v-show="l.aledate" :value="l.aledate"></cell>
+            <cell title="申请日期"  v-show="l.alfdate" :value="l.alfdate"></cell>
+            <cell title="请假时间"  v-show="l.aldaytime" :value="l.aldaytime"></cell>
+            <cell title="提交状态"  v-show="l.issendtext" :value="l.issendtext"></cell>
+            <cell title="提交时间"  v-show="l.senddate" :value="l.senddate"></cell>
+            <cell title="审批状态"  v-show="l.apstatustext" :value="l.apstatustext"></cell>
+            <cell title="审批时间"  v-show="l.apdate" :value="l.apdate"></cell>
+            <cell title="审批意见"  v-show="l.apnode" :value="l.apnode"></cell>
+            <cell title="创 建 人" v-show="l.createby"  :value="l.createby"></cell>
+            <cell title="创建时间"  v-show="l.createtime" :value="l.createtime"></cell>
+            <cell title="修改人"   v-show="l.updateby"  :value="l.updateby"></cell>
+            <cell title="修改时间"  v-show="l.updatetime"  :value="l.updatetime"></cell>
+            <div style=" background: rgb(142, 172, 201);color:white;text-align:center">以上第{{index+1}}项</div>
+          </group>
+          <load-more tip="正在加载" v-show="loadMoreDom"></load-more>
+          <div v-show="loadMoreFinish" class="loadMoreFinish">加载完毕</div>
+        <!--</div>-->
+      <!--</scroller>-->
 
-      <scroller  ref="scrollerBottom" lock-x scrollbar-y height="200px" ref="scroller" use-pullup bounce @on-scroll-bottom="onScrollBottom">
-        <div class="box2">
-          <p v-for="i in scrollList">placeholder {{ i  }}</p>
-        </div>
-      </scroller>
-
-
-      <group v-for="(l,index) in listData" :key="index">
-        <cell title="开始时间"  v-show="l.alsdate" :value="l.alsdate"></cell>
-        <cell title="结束时间"  v-show="l.aledate" :value="l.aledate"></cell>
-        <cell title="申请日期"  v-show="l.alfdate" :value="l.alfdate"></cell>
-        <cell title="请假时间"  v-show="l.aldaytime" :value="l.aldaytime"></cell>
-        <cell title="提交状态"  v-show="l.issendtext" :value="l.issendtext"></cell>
-        <cell title="提交时间"  v-show="l.senddate" :value="l.senddate"></cell>
-        <cell title="审批状态"  v-show="l.apstatustext" :value="l.apstatustext"></cell>
-        <cell title="审批时间"  v-show="l.apdate" :value="l.apdate"></cell>
-        <cell title="审批意见"  v-show="l.apnode" :value="l.apnode"></cell>
-        <cell title="创 建 人" v-show="l.createby"  :value="l.createby"></cell>
-        <cell title="创建时间"  v-show="l.createtime" :value="l.createtime"></cell>
-        <cell title="修改人"   v-show="l.updateby"  :value="l.updateby"></cell>
-        <cell title="修改时间"  v-show="l.updatetime"  :value="l.updatetime"></cell>
-
-        <!--<cell v-if="listData.length" title="修改时间" :value="l" v-for="(l,index) in listData[0]" :key="index"></cell>-->
-        <div style=" background: rgb(142, 172, 201);color:white;text-align:center">以上第{{index+1}}项</div>
-
-      </group>
+      <!--<loading :show="isLoading" text="加载中"></loading>-->
 
       <!--<div class="btnWrap">-->
         <!--<x-button type="default" text="提交" @click.native="formSubmit"></x-button>-->
@@ -51,46 +48,142 @@
 
 <script>
 
+
   import {TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
-    ,Toast,GroupTitle,Scroller,LoadMore
+    ,Toast,GroupTitle,Scroller,LoadMore,Loading
   } from 'vux'
   import qs from 'qs'
+
+  function getScrollTop(){
+    var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+    if(document.body){
+      bodyScrollTop = document.body.scrollTop;
+    }
+    if(document.documentElement){
+      documentScrollTop = document.documentElement.scrollTop;
+    }
+    scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+    return scrollTop;
+  }
+
+  //文档的总高度
+
+  function getScrollHeight(){
+    var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+    if(document.body){
+      bodyScrollHeight = document.body.scrollHeight;
+    }
+    if(document.documentElement){
+      documentScrollHeight = document.documentElement.scrollHeight;
+    }
+    scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+    return scrollHeight;
+  }
+
+  //浏览器视口的高度
+
+  function getWindowHeight(){
+    var windowHeight = 0;
+    if(document.compatMode == "CSS1Compat"){
+      windowHeight = document.documentElement.clientHeight;
+    }else{
+      windowHeight = document.body.clientHeight;
+    }
+    return windowHeight;
+  }
+
+  window.onscroll = function(){
+//    if(getScrollTop() + getWindowHeight() == getScrollHeight()){
+//    if(getScrollTop() + getWindowHeight() == getScrollHeight()){
+//      console.log("已经到最底部了！!");
+//    }
+  };
+
+
   export default {
     name: 'HelloWorld',
     mounted(){
-      this.getListData()
+      var vv = "{'data':null}";
+      var jj = eval("(" + vv + ")");
+      console.log(jj);
+      console.log("mmm");
+      this.getListData(this.pageIndex)
+      if(this.loadDataSwitch){
+        window.addEventListener("scroll",this.scroll)
+      }
+
+
+    },
+    computed:{
+      isLoading(){
+//        return this.$store.state.loading
+      },
+      fHeight(){
+        let fHeight= (parseFloat(document.documentElement.style.fontSize)+42)*0.95
+        fHeight = (-fHeight).toString()
+        return fHeight
+      },
     },
     methods:{
+      scroll(){
+        var g = getScrollTop() + getWindowHeight()
+        if (g  === getScrollHeight()) {
+          console.log("到底部");
+          if(this.loadDataSwitch){
+            this.getListData(this.pageIndex+=1)
+          }
+        }
+      },
+      onScrollBottom () {
+        if (this.onFetching) {
+          // do nothing
+        } else {
+          this.onFetching = true
+          setTimeout(() => {
+            this.bottomCount += 10
+          this.$nextTick(() => {
+            this.$refs.scrollerBottom.reset()
+        })
+          this.onFetching = false
+        }, 20)
+        }
+      },
       btn(){
         this.$router.go(-1)
       },
-      onScrollBottom(){
-        console.log("更多");
 
-        setTimeout(() => {
-          this.scrollList+=10
-        this.$nextTick(() => {
-          this.$refs.scrollerBottom.reset()
-         })
-      }, 2000)
-      },
-      getListData(){
+      getListData(pageIndex){
+        console.log(pageIndex);
+        const empName=window.localStorage.getItem("global_empname")
+        const empId=window.localStorage.getItem("global_empid")
+        const company=window.localStorage.getItem("comp_code")
+        console.log(3);
+        let formData={company:company, globalEmpId: empId ,pageIndex: pageIndex, size: 10,type:0}
 
-        let formData={company: '0101', globalEmpId: '40' ,pageIndex: 1, size: 10,type:0}
-
-        this.$http.post("/MobileService/MyApply.asmx/GetAskLeaveqingjiaRecord",formData)
+        this.$http.post("/MobileService/MyApply.asmx/GetAskLeaveqingjiaRecord",formData,{showLoad:false})
           .then(r=>{
-          console.log(r);
-        let data= JSON.parse(r.data.d)
-        this.listData=data.data
-        console.log(this.listData);
-      })
-        .catch(e=>{
-            console.log(e);
+//          let data= JSON.parse(r.data.d).data
+          console.log(r)
+          let data= eval("(" + r.data.d + ")");
+          data=data.data
+
+          console.log(data)
+          if(data){
+            for(let d in data){
+              this.loadMoreDom=true
+              this.listData.push(data[d])
+            }
+          }else{
+          this.loadDataSwitch=false
+            this.loadMoreDom=false
+            this.loadMoreFinish=true
+        }
+
+
+      }).catch(err=>{
+          this.loadMoreDom=false
+          this.loadMoreFinish=true
         })
-
-
-
       },
       detailBtn(){
 
@@ -109,15 +202,24 @@
       Datetime,
       XInput,
       XTextarea,
-      XButton,Toast,GroupTitle,Scroller,LoadMore
+      XButton,Toast,GroupTitle,Scroller,LoadMore,Loading
   },
     data () {
       return {
+        loadDataSwitch:true,
+        pageIndex:1,
+        loadMoreDom:false,
+        loadMoreFinish:false,
+        fontHeight:0,
         scrollList:20,
         listData:[],
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+//        isLoading:this.$store.state.loading
       }
-    }
+    },
+    destroyed(){
+      window.removeEventListener("scroll",this.scroll)
+    },
   }
 
 </script>
@@ -135,5 +237,13 @@
   .weui-cell {
     padding: 8px 16px !important;
     font-size:0.24rem !important;
+  }
+  .box2{
+    /*padding-top:1rem*/
+  }
+
+  .loadMoreFinish{
+    text-align: center;
+    padding: 0.18rem 0;
   }
 </style>

@@ -6,6 +6,7 @@
 
 import axios from 'axios';
 import router from '../router'
+import stores from "../store"
 //axios.defaults.timeout = 5000;
 
 
@@ -19,11 +20,13 @@ if(process.env.NODE_ENV=="development"){
 }
 
 
+let ContentType="application/json"
 var instance = axios.create({
   headers:{
-    'Content-type': 'application/json'
+    //'Content-type': ContentType
   },
 });
+
 
 
 //http request 拦截器
@@ -31,13 +34,13 @@ axios.interceptors.request.use(
   config => {
     // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
     //config.data = JSON.stringify(config.data);
-    console.log(config);
-    config.headers = {
-      'Content-Type':'application/x-www-form-urlencoded'
-    }
+    //config.headers = {
+    //  'Content-Type':'application/x-www-form-urlencoded'
+    //}
     // if(token){
     //   config.params = {'token':token}
     // }
+    //stores.dispatch('showLoading')
     return config;
   },
   error => {
@@ -49,16 +52,26 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
   response => {
-    console.log(response);
-    if(response.data!=="" && response.data.data[1].isAutoLogin == "3"){
-      router.replace({
-        path: '/HelloWorld',
-        query: {redirect: router.currentRoute.fullPath}
-      })
-    }
 
+    //if(response.data!=="" && response.data.data[1].isAutoLogin == "3"){
+    //  router.replace({
+    //    path: '/HelloWorld',
+    //    query: {redirect: router.currentRoute.fullPath}
+    //  })
+    //
+    //}
+    //setTimeout(function(){
+    //  console.log(3);
+    //  stores.dispatch('hideLoading')
+    //  //return response;
+    //},2000)
 
+    setTimeout(function(){
+      stores.dispatch('hideLoading')
+    },500)
     return response;
+    //stores.dispatch('hideLoading')
+
   },
   error => {
     return Promise.reject(error)
@@ -74,12 +87,21 @@ axios.interceptors.response.use(
  * @returns {Promise}
  */
 
+
+
+
 export const $http = {
-  get: function(url,params={}){
+  _paramFormat:function(c){
+    return{
+      contentType:c && c.ContentType? c.ContentType : "application/json",
+      loading:c && c.loading ? c.loading : ""
+    }
+  },
+  get: function(url,params={},config){
+    const orm = this._paramFormat(config)
+    stores.dispatch('showLoading',orm.loading)
     return new Promise((resolve,reject) => {
-      instance.get(url,{
-          params:params
-        })
+      axios.get(url,{params:params},{ headers:{"Content-Type":orm.contentType}})
         .then(response => {
           resolve(response.data);
         })
@@ -88,11 +110,15 @@ export const $http = {
         })
     })
   },
-  post: function (url,data = {}) {
+  post: function (url,data = {},config) {
+    const orm = this._paramFormat(config)
+    stores.dispatch('showLoading',orm.loading)
     return new Promise((resolve, reject) => {
-      instance.post(url, data)
+      axios.post(url, data,{ headers:{"Content-Type":orm.contentType}})
         .then(response => {
-          resolve(response);
+          setTimeout(function(){
+            resolve(response);
+          },300)
         }, err => {
           reject(err)
         })
