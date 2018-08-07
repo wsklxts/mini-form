@@ -45,6 +45,7 @@
 
 
   export default {
+    name:"daka",
     data(){
       return{
         headImg:{img:require("../../../static/daka/head.jpg"),title:"头像"}

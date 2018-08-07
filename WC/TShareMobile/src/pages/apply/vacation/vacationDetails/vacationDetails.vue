@@ -53,66 +53,16 @@
     ,Toast,GroupTitle,Scroller,LoadMore,Loading
   } from 'vux'
   import qs from 'qs'
-
-  function getScrollTop(){
-    var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
-    if(document.body){
-      bodyScrollTop = document.body.scrollTop;
-    }
-    if(document.documentElement){
-      documentScrollTop = document.documentElement.scrollTop;
-    }
-    scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
-    return scrollTop;
-  }
-
-  //文档的总高度
-
-  function getScrollHeight(){
-    var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
-    if(document.body){
-      bodyScrollHeight = document.body.scrollHeight;
-    }
-    if(document.documentElement){
-      documentScrollHeight = document.documentElement.scrollHeight;
-    }
-    scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
-    return scrollHeight;
-  }
-
-  //浏览器视口的高度
-
-  function getWindowHeight(){
-    var windowHeight = 0;
-    if(document.compatMode == "CSS1Compat"){
-      windowHeight = document.documentElement.clientHeight;
-    }else{
-      windowHeight = document.body.clientHeight;
-    }
-    return windowHeight;
-  }
-
-  window.onscroll = function(){
-//    if(getScrollTop() + getWindowHeight() == getScrollHeight()){
-//    if(getScrollTop() + getWindowHeight() == getScrollHeight()){
-//      console.log("已经到最底部了！!");
-//    }
-  };
+  import {getScrollTop,getWindowHeight,getScrollHeight} from "@/common/util"
 
 
   export default {
     name: 'HelloWorld',
     mounted(){
-      var vv = "{'data':null}";
-      var jj = eval("(" + vv + ")");
-      console.log(jj);
-      console.log("mmm");
       this.getListData(this.pageIndex)
       if(this.loadDataSwitch){
         window.addEventListener("scroll",this.scroll)
       }
-
-
     },
     computed:{
       isLoading(){
@@ -174,10 +124,10 @@
               this.listData.push(data[d])
             }
           }else{
-          this.loadDataSwitch=false
+            this.loadDataSwitch=false
             this.loadMoreDom=false
             this.loadMoreFinish=true
-        }
+          }
 
 
       }).catch(err=>{

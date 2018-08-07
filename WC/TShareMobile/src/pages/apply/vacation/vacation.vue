@@ -75,7 +75,6 @@
       <toast v-model="successMsgToast" type="success" width="5rem">{{Message}}</toast>
 
 
-
       <confirm v-model="checkbox"
                title="请选择审批人，否则提交失败!"
                @on-cancel="onCancel"
@@ -101,6 +100,7 @@
   import {TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
   ,Toast,Confirm,Checklist
   } from 'vux'
+
   import qs from 'qs'
   export default {
     components: {
@@ -209,7 +209,6 @@
             }else if(data.success=="0"){
               this.errMsg=data.msg
               this.errMsgToast=true
-
             }})
 
       },
@@ -235,7 +234,7 @@
     },
     mounted(){
       this.form.empName=window.localStorage.getItem("global_empname")
-      this.form.empId=window.localStorage.getItem("global_empid")
+      this.form.empId=  window.localStorage.getItem("global_empid")
       this.form.company=window.localStorage.getItem("comp_code")
     },
     computed:{

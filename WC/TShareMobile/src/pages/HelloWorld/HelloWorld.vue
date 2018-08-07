@@ -5,31 +5,37 @@
       <a slot="right" @click="detailBtn"> 详情</a>
     </XHeader>
     <div class="template">
-      {{$route.path}}11
+      {{$route.path}}
       HelloWorld
 
-      <checklist
-        ref="refChecklist"
-        :options="commonList"
-        @on-change="changeChecklist"
-        :value="checkListModel"
-        :check-disabled="false"
-      >
-      </checklist>
+      <!--<checklist-->
+        <!--ref="refChecklist"-->
+        <!--:options="commonList"-->
+        <!--@on-change="changeChecklist"-->
+        <!--:value="checkListModel"-->
+        <!--:check-disabled="false"-->
+      <!--&gt;-->
+      <!--</checklist>-->
 
       {{refChecklist}}
 
 
-      <scroller lock-x scrollbar-y height="200px" ref="scrollerBottom" use-pullup bounce @on-scroll-bottom="onScrollBottom">
-      <div class="box2">
-        <p v-for="i in bottomCount" :key="i">placeholder {{ i  }}</p>
-      </div>
-      </scroller>
+      <!--<scroller lock-x scrollbar-y height="200px" ref="scrollerBottom" use-pullup bounce @on-scroll-bottom="onScrollBottom">-->
+      <!--<div class="box2">-->
+        <!--<p v-for="i in bottomCount" :key="i">placeholder {{ i  }}</p>-->
+      <!--</div>-->
+      <!--</scroller>-->
 
 
-      <div class="btnWrap">
+
+
+
+      <div class="">
         <x-button type="default" text="提交" @click.native="onConfirm"></x-button>
       </div>
+
+
+      <tabs></tabs>
     </div>
 
   </div>
@@ -42,31 +48,19 @@
   import {TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
     ,Toast,Checklist,Scroller,LoadMore
   } from 'vux'
+  import tabs from "@/components/common/tabs"
   import qs from 'qs'
-  console.log(qs);
   export default {
     name: 'HelloWorld',
     methods:{
-      onScrollBottom () {
-        if (this.onFetching) {
-          // do nothing
-        } else {
-          this.onFetching = true
-          setTimeout(() => {
-            this.bottomCount += 10
-          this.$nextTick(() => {
-            this.$refs.scrollerBottom.reset()
-        })
-          this.onFetching = false
-        }, 1000)
-        }
-      },
       onConfirm(){
-        this.$http.post("/MobileService/MyApply.asmx/GetAskLeaveqingjiaRecord",formData)
+        let formData ={company: '0101', globalEmpId: '40' ,pageIndex: 1, size: 10}
+
+        this.$http.post("/MobileService/MyApply.asmx/GetQkRecord",formData)
           .then(r=>{
           console.log(r);
           let data= JSON.parse(r.data.d)
-        console.log(data);
+          console.log(data);
       })
         .catch(e=>{
             console.log(e);
@@ -74,9 +68,6 @@
 
       },
       changeChecklist(a,b){
-        console.log(a);
-        console.log(b);
-        console.log(this.$refs.refChecklist);
       },
       detailBtn(){
 
@@ -96,7 +87,7 @@
       Datetime,
       XInput,
       XTextarea,
-      XButton,Toast,Checklist,Scroller,LoadMore
+      XButton,Toast,Checklist,Scroller,LoadMore,tabs
     },
     data () {
       return {
@@ -114,9 +105,6 @@
 
 <style lang="less" type="text/less" scoped>
   .btnWrap{
-    position: fixed;
-    width: 100%;
-    bottom: 0;
   button.weui-btn{
     border-radius:0 !important;
   }

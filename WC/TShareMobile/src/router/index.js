@@ -9,6 +9,9 @@ import apply from '@/pages/apply/apply'
 import vacation from '@/pages/apply/vacation/vacation'
 import vacationDetails from '@/pages/apply/vacation/vacationDetails/vacationDetails'
 import qianKa from '@/pages/apply/qianKa/qianKa'
+import qiankaDetail from '@/pages/apply/qianKa/qiankaDetail/qiankaDetail'
+
+
 import jiaBan from '@/pages/apply/jiaBan/jiaBan'
 import peiXun from '@/pages/apply/peiXun/peiXun'
 import jiaqi from '@/pages/apply/jiaqi/jiaqi'
@@ -39,22 +42,14 @@ Vue.use(Router)
 const router = new Router({
   scrollBehavior (to, from, savedPosition) {
     // return 期望滚动到哪个的位置
-
     return new Promise((resolve, reject) => {
-      //setTimeout(() => {
         if (savedPosition) {
           return resolve(savedPosition)
         } else {
           resolve({ x: 0, y: 0 })
         }
-      //}, 5500)
     })
 
-    //if (savedPosition) {
-    //  return savedPosition
-    //} else {
-    //  return { x: 0, y: 0 }
-    //}
   },
   routes: [
     {
@@ -107,6 +102,11 @@ const router = new Router({
       path:"/apply/qianKa",
       name:"qianKa",
       component: qianKa
+    },
+    {
+      path:"/apply/qianKa/qiankaDetail",
+      name:"qiankaDetail",
+      component: qiankaDetail
     },
     {
       path:"/apply/jiaBan",

@@ -21,11 +21,11 @@ if(process.env.NODE_ENV=="development"){
 
 
 let ContentType="application/json"
-var instance = axios.create({
-  headers:{
-    //'Content-type': ContentType
-  },
-});
+//var instance = axios.create({
+//  headers:{
+//    //'Content-type': ContentType
+//  },
+//});
 
 
 
@@ -68,7 +68,7 @@ axios.interceptors.response.use(
 
     setTimeout(function(){
       stores.dispatch('hideLoading')
-    },500)
+    },300)
     return response;
     //stores.dispatch('hideLoading')
 
@@ -115,6 +115,7 @@ export const $http = {
     stores.dispatch('showLoading',orm.loading)
     return new Promise((resolve, reject) => {
       axios.post(url, data,{ headers:{"Content-Type":orm.contentType}})
+      //axios.post(url, data)
         .then(response => {
           setTimeout(function(){
             resolve(response);

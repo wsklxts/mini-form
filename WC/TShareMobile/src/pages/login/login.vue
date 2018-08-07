@@ -4,14 +4,12 @@
         <section class="logo">
           <img src="../../../static/login/logo.png" alt="">
         </section>
-
         <section class="userInput">
           <group class="inputItem">
             <x-input title="" placeholder="请输入用户名" required ref="inp" v-model="userInput.usercode">
               <img slot="label" src="../../../static/login/1.png" alt="">
             </x-input>
           </group>
-
           <group class="inputItem">
             <form action="">
             <x-input title="" type="password" required  placeholder="请输入密码" ref="inp2" v-model="userInput.password">
@@ -20,12 +18,10 @@
             </form>
           </group>
         </section>
-
         <section class="btn">
           <XButton type="default" @click.native="login()">登录</XButton>
         </section>
-
-        <loading :show="loginIn" text="登录中"></loading>
+        <!--<loading :show="loginIn" text="登录中"></loading>-->
         <toast v-model="showToast" type="warn" width="5rem" position="middle">{{toastText}}</toast>
       </div>
     </div>
@@ -34,8 +30,6 @@
 
 <script type="text/ecmascript-6">
   import qs from 'qs'
-
-
   import { XInput,Group,XButton,Toast,Loading   } from 'vux'
 
 
@@ -49,7 +43,6 @@
           compcode: "", usertype: "", usercode: "", password: ""
         },
         showToast:false,
-        loginIn:false,
         toastText:"网络超时或账号密码错误！"
       }
     },
@@ -71,22 +64,15 @@
           }
           return
         }
-//        this.loginIn=true
-
         this.$http.post("/MobileService/Web/WebPage/LoginAutoMobileJSON.aspx",
           qs.stringify(this.userInput),{ContentType:"application/x-www-form-urlencoded",loading:"登录中..."})
           .then(data=>{
-
-            console.log(data);
             let d=data.data && data.data.data[0]
-            this.loginIn=false
             if(data.data && data.data.data[1]["isAutoLogin"]==1){
               this.$store.commit("isAutoLogin","1")
-              console.log(this.$route);
               if(this.$route.query.redirect){
                 this.$router.push({path:this.$route.query.redirect})
               }else{
-                console.log(d);
                 localStorage.setItem("global_empname",d.global_empname)
                 localStorage.setItem("global_empid",d.global_empid)
                 localStorage.setItem("comp_code",d.comp_code)
@@ -98,40 +84,9 @@
             }
           }).catch((err)=>{
           console.log(err);
-          this.loginIn=false
           this.toastText="网络超时"
           this.showToast=true;
-
         })
-
-
-//
-//        this.axios({
-//          method:"post",
-//          data: qs.stringify(this.userInput),
-//          url:"/MobileService/Web/WebPage/LoginAutoMobileJSON.aspx"
-//        }).then(function(data){
-//          _this.loginIn=false
-//          console.log(data);
-//          if(data.data && data.data.data[1]["isAutoLogin"]==1){
-//            _this.$store.commit("isAutoLogin","1")
-//            console.log(_this.$route);
-//            if(_this.$route.query.redirect){
-//              _this.$router.push({path:_this.$route.query.redirect})
-//            }else{
-//              _this.$router.push({path:"/personTask/taskWait"})
-//            }
-//          }else{
-//            _this.showToast=true;
-//            _this.toastText="账号密码错误"
-//          }
-//        }).catch(function(err){
-//          console.log(err);
-//          _this.loginIn=false
-//          _this.toastText="网络超时"
-//          _this.showToast=true;
-//        })
-
       }
     }
   }
@@ -150,7 +105,6 @@
   .vux-x-input .weui-cell__hd img{
     width: 0.48rem;
     height: 0.48rem;
-
   }
   .userInput{
     padding:0 0.58rem;

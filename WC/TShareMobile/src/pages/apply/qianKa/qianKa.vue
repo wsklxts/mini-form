@@ -1,6 +1,8 @@
 <template>
     <div>
-      <XHeader  title="签卡" :left-options="{showBack: true}"></XHeader>
+      <XHeader  title="签卡" :left-options="{showBack: true}">
+        <a slot="right" @click="detailBtn"> 详情</a>
+      </XHeader>
       <div  class="template">
         <group title="">
           <datetime
@@ -13,11 +15,12 @@
           </group>
 
           <group title=" ">
-            <Cell  title="补卡类型" :value="selectValue" is-link @click.native="select()"></Cell>
+            <Cell  title="刷卡类型" :value="selectValue1" is-link @click.native="select(1)"></Cell>
+            <Cell  title="签卡类型" :value="selectValue2" is-link @click.native="select(2)"></Cell>
           </group>
 
-        <group title=" 补卡原因" class="tit">
-          <x-textarea title="" placeholder="请输入补卡原因"></x-textarea>
+        <group title=" 签卡原因" class="tit">
+          <x-textarea title="" v-model="form.reason" placeholder="请输入签卡原因"></x-textarea>
         </group>
 
         <group title=" ">
@@ -40,9 +43,12 @@
           <div v-for="f in uploadName">{{f}}</div>
         </div>
         <div class="btnWrap">
-          <x-button type="default" text="提交"></x-button>
+          <x-button type="default" text="提交"  @click.native="formSubmit"></x-button>
         </div>
 
+
+        <toast v-model="errMsgToast" type="warn" width="5rem">{{errMsgText}}</toast>
+        <toast v-model="successMsgToast" type="success" width="5rem">{{successMsgText}}</toast>
 
 
         <actionsheet
@@ -59,53 +65,126 @@
 
 <script type="text/ecmascript-6">
 
-  import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton     } from 'vux'
+  import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton,
+    Toast
+  } from 'vux'
 
     export default {
         components: {
-          TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
+          TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton,
+          Toast
         },
-      methods:{
-        select(){
-          this.show=true;
-        },
-        onClick (key,value) {
-          console.log(value)
-          this.selectValue=value;
-        },
-        change(){
-          console.log(this.beginDate);
-        },
-        upload(e){
-          this.uploadName=[]
-          console.log(e.target.files);
-          for(var f in e.target.files){
-//        for(var i=0; i<e.target.files.length;i++){
-//          console.log(e.target.files[f].name);
-//          console.log(e.target.files[f]);
-            if(typeof e.target.files[f] == "object"){
-              this.uploadName.push(e.target.files[f].name)
+        name: 'qianKa',
+        methods:{
+          detailBtn(){
+            this.$router.push({path:"/apply/qianKa/qiankaDetail"})
+          },
+          select(n){
+            this.show=true;
+            this.selectType=n
+            if(n==1){
+              this.menu={
+                1: '上班卡',
+                2: '下班卡',
+                3: '上下班卡',
+              }
+            }else if (n==2){
+              this.menu={
+                1: '公事',
+                2: '私事'
+              }
             }
+          },
+          checkform(){
+            if(this.beginDate == ""){
+              this.errMsgToast=true
+              this.errMsgText="请选择时间"
+              return false
+            }else if(this.form.type1==""){
+              this.errMsgToast=true
+              this.errMsgText="刷卡类型"
+              return false
+            }else if(this.form.type2==""){
+              this.errMsgToast=true
+              this.errMsgText="签卡类型"
+              return false
+            }else if(this.form.reason==""){
+              this.errMsgToast=true
+              this.errMsgText="请输入原因"
+              return false
+            }
+            return true
+          },
+          formSubmit(){
+            if(!this.checkform())
+            return
+            this.$http.post("/MobileService/MyApply.asmx/AddQKRecord",this.form)
+              .then(r=>{
+                console.log(r);
+                let data= JSON.parse(r.data.d)
+                console.log(data);
+                this.successMsgToast=true
+                this.successMsgText=data.msg
+              })
+              .catch(e=>{
+                console.log(e);
+              })
+            console.log(this.form);
+          },
+          onClick (key,value) {
+            if(this.selectType==1){
+              this.selectValue1=value;
+              this.form.type1=key
+            }else if(this.selectType==2){
+              this.selectValue2=value;
+              this.form.type2=key
+            }
+            console.log(key)
+          },
+          change(){
+            console.log(this.beginDate);
+            let d = this.beginDate.split(" ")
+            this.form.qkDate=d[0]
+            this.form.qkTime=d[1]
+          },
+          upload(e){
+            this.uploadName=[]
+            console.log(e.target.files);
+            for(var f in e.target.files){
+  //        for(var i=0; i<e.target.files.length;i++){
+  //          console.log(e.target.files[f].name);
+  //          console.log(e.target.files[f]);
+              if(typeof e.target.files[f] == "object"){
+                this.uploadName.push(e.target.files[f].name)
+              }
 
-          }
-        },
+            }
+          },
       },
 
       data(){
         return{
+          form:{
+            empName:window.localStorage.getItem("global_empname"),
+            empId:window.localStorage.getItem("global_empid"),
+            company:window.localStorage.getItem("comp_code"),
+            fieldCustomParams:"[]",
+            reason:"",
+            type1:"",
+            type2:"",
+          },
+          errMsgToast:false,
+          successMsgToast:false,
+          errMsgText:"",
+          successMsgText:"",
+          selectType:"",
           stringValue: '0',
           show: false,
-          selectValue:"请选择",
-          value:['2017-01-15', '03', '05'],
+          selectValue1:"请选择",
+          selectValue2:"请选择",
           beginDate:"",
-          overDate:"",
           uploadName:[],
-          menu: {
-            menu1: '类型1',
-            menu2: '类型2',
-            menu3: '类型3',
-            menu4: '类型4',
-          },
+          menu:null
         }
       }
 

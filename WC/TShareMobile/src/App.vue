@@ -2,12 +2,13 @@
   <div id="app">
     <loading :show="isLoading" :text="loadingText"></loading>
 
-    <!--<div class="spinnerWrap" v-show="isLoading">-->
-      <!--<spinner class="spinner" type="android"  ></spinner>-->
-    <!--</div>-->
+    <keep-alive>
+
+    </keep-alive>
 
 
     <router-view></router-view>
+
   </div>
 </template>
 
