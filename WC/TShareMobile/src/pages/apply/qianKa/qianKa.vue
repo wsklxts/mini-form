@@ -69,12 +69,16 @@
     Toast
   } from 'vux'
 
-    export default {
+
+  export default {
         components: {
           TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton,
           Toast
         },
         name: 'qianKa',
+        mounted(){
+          this.$root.v.$emit('form',123)
+        },
         methods:{
           detailBtn(){
             this.$router.push({path:"/apply/qianKa/qiankaDetail"})
@@ -96,6 +100,7 @@
             }
           },
           checkform(){
+
             if(this.beginDate == ""){
               this.errMsgToast=true
               this.errMsgText="请选择时间"

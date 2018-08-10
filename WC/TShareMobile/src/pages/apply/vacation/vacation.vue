@@ -90,6 +90,7 @@
           </checklist>
         </div>
       </confirm>
+
     </div>
   </div>
 </template>
@@ -203,7 +204,6 @@
               console.log(this.actors);
               for(let i=0;i<this.actors.length;i++){
                 console.log(this.actors[i]);
-//                this.commonList.push(this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"] - "+this.actors[i].EmpID)
                 this.commonList.push({key:JSON.stringify(this.actors[i].EmpID),value:this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"]"})
               }
             }else if(data.success=="0"){
@@ -248,10 +248,10 @@
         checklistModel:[],
         commonList: [],
         checkbox:false,
-        errMsgToast:false,
-        errMsg:"",
         actors:[],
         ActorsId:[],
+        errMsgToast:false,
+        errMsg:"",
         form:{
           type:"",
           startDate:"",

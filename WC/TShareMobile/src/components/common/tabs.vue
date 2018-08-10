@@ -124,10 +124,9 @@
            background: url(../../../static/tabImg/打卡1.png) no-repeat center center;
            background-size:0.50rem;
          }
-
-
         &>div{
             color:black;
+            font-size:0.28rem;
           }
 
         & > div:first-child {

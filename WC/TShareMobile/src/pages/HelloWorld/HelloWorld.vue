@@ -31,9 +31,10 @@
 
 
       <div class="">
-        <x-button type="default" text="提交" @click.native="onConfirm"></x-button>
+        <x-button type="default" @show="false" text="提交" @click.native="onConfirm"></x-button>
+        <x-button type="default" text="提交2" @click.native="onConfirm2"></x-button>
       </div>
-
+      {{ii}}
 
       <tabs></tabs>
     </div>
@@ -52,11 +53,20 @@
   import qs from 'qs'
   export default {
     name: 'HelloWorld',
+    created(){
+      this.$root.v.$on('form',function(i){
+        this.ii=i
+      }.bind(this))
+    },
+    computed:{
+
+    },
     methods:{
       onConfirm(){
-        let formData ={company: '0101', globalEmpId: '40' ,pageIndex: 1, size: 10}
 
-        this.$http.post("/MobileService/MyApply.asmx/GetQkRecord",formData)
+        let formData ={ company: '0101', empId: '40', empName: '陈志平',otDate:'2018-08-20',otSTime:'16:31', otETime: '16:31',reason:'44',drpSTimeFlag:'',drpETimeFlag:'',otKouTime:'22',fieldCustomParams:'[]'}
+
+        this.$http.post("/MobileService/MyApply.asmx/AddOutTimeRecord",formData)
           .then(r=>{
           console.log(r);
           let data= JSON.parse(r.data.d)
@@ -65,7 +75,11 @@
         .catch(e=>{
             console.log(e);
         })
-
+      },
+      onConfirm2(){
+        this.$root.v.$on('form',function(i){
+          this.ii=i
+        }.bind(this))
       },
       changeChecklist(a,b){
       },
@@ -91,6 +105,7 @@
     },
     data () {
       return {
+        ii:"aa",
         bottomCount:20,
         refChecklist:"",
         commonList:[{key: 'aa', value: '001 value'}, {key: 'bb', value: '002 value'}, {key: 'cc', value: '003 value'}],

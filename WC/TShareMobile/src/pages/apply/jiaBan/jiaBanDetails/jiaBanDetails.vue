@@ -1,13 +1,19 @@
 <template>
+
   <div>
-    <XHeader  title="签卡详情" :left-options="{showBack: true}">
+    <XHeader  title="加班详情" :left-options="{showBack: true}">
     </XHeader>
+
     <div class="template">
+
+      <!--<scroller :height="fHeight" lock-x scrollbar-y  ref="scrollerBottom"  bounce @on-scroll-bottom="onScrollBottom">-->
+      <!--<div class="box2">-->
       <group v-for="(l,index) in listData" :key="index">
-        <cell title="签卡时间"  v-show="l.qkrfdate" :value="l.qkrfdate"></cell>
-        <cell title="刷卡类型"  v-show="l.type1" :value="l.type1"></cell>
-        <cell title="签卡类型"  v-show="l.type2" :value="l.type2"></cell>
-        <cell title="签卡原因"  v-show="l.qkreason" :value="l.qkreason"></cell>
+        <cell title="加班日期"  v-show="l.otfdate" :value="l.otfdate"></cell>
+        <cell title="扣休息(分)"  v-show="l.ot_koutime" :value="l.ot_koutime"></cell>
+        <cell title="上班时间"  v-show="l.otstimetext" :value="l.otstimetext"></cell>
+        <cell title="下班时间"  v-show="l.otetimetext" :value="l.otetimetext"></cell>
+        <cell title="加班原因"  v-show="l.otreason" :value="l.otreason"></cell>
         <cell title="提交状态"  v-show="l.issendtext" :value="l.issendtext"></cell>
         <cell title="提交时间"  v-show="l.senddate" :value="l.senddate"></cell>
         <cell title="审批状态"  v-show="l.apstatustext" :value="l.apstatustext"></cell>
@@ -21,37 +27,47 @@
       </group>
       <load-more tip="正在加载" v-show="loadMoreDom"></load-more>
       <div v-show="loadMoreFinish" class="loadMoreFinish">加载完毕</div>
+
+
       <div class="btnWrap">
-        <x-button type="default" text="申请签卡" @click.native="btn"></x-button>
+        <x-button type="default" text="申请请假" @click.native="btn"></x-button>
       </div>
+
     </div>
+
   </div>
+
+
 </template>
 
 <script>
 
 
+
   import {TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
-    ,Toast,Checklist,Scroller,LoadMore,GroupTitle,Loading
+    ,Toast,GroupTitle,Scroller,LoadMore,Loading
   } from 'vux'
-
-
-
-  import tabs from "@/components/common/tabs"
   import qs from 'qs'
   import {getScrollTop,getWindowHeight,getScrollHeight} from "@/common/util"
+
+
   export default {
-    name: 'qiankaDetail',
+    name: '',
     mounted(){
-
-
       this.getListData(this.pageIndex)
       if(this.loadDataSwitch){
         window.addEventListener("scroll",this.scroll)
       }
+
     },
     computed:{
-
+      isLoading(){
+      },
+      fHeight(){
+        let fHeight= (parseFloat(document.documentElement.style.fontSize)+42)*0.95
+        fHeight = (-fHeight).toString()
+        return fHeight
+      },
     },
     methods:{
       scroll(){
@@ -72,13 +88,15 @@
         const empName=window.localStorage.getItem("global_empname")
         const empId=window.localStorage.getItem("global_empid")
         const company=window.localStorage.getItem("comp_code")
+
         let formData={company:company, globalEmpId: empId ,pageIndex: pageIndex, size: 10}
 
-        this.$http.post("/MobileService/MyApply.asmx/GetQkRecord",formData)
+        this.$http.post("/MobileService/MyApply.asmx/GetOutTimeRecord",formData,{showLoad:false})
           .then(r=>{
           console.log(r)
         let data= eval("(" + r.data.d + ")");
         data=data.data
+        console.log(data);
         if(data){
           for(let d in data){
             this.loadMoreDom=true
@@ -93,9 +111,15 @@
 
       }).catch(err=>{
           this.loadMoreDom=false
+        this.loadMoreFinish=true
       })
       },
+      detailBtn(){
 
+      },
+      formSubmit(){
+
+      }
     },
     components: {
       Actionsheet,

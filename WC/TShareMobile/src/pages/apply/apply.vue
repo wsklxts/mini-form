@@ -76,7 +76,14 @@
   import { Grid, GridItem,XHeader } from 'vux'
   import tabs from "../../components/common/tabs.vue"
   export default {
+    created(){
+//      this.$root.v.$emit('form',123)
+//      console.log("c");
+    },
     mounted(){
+      this.$root.v.$on('form',function(i){
+        console.log(i);
+      })
       console.log("apply");
     },
     name:"apply",

@@ -2,6 +2,7 @@
  * Created by Administrator on 2018/8/7.
  */
 
+import Vue from "vue"
 
 export function getScrollTop(){
   var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
@@ -40,6 +41,19 @@ export function getWindowHeight(){
   }
   return windowHeight;
 }
+
+
+export const global_empname = window.localStorage.getItem("global_empname")
+export const global_empid = window.localStorage.getItem("global_empid")
+export const comp_code = window.localStorage.getItem("comp_code")
+
+
+
+export default new Vue({
+
+})
+
+
 //
 //window.onscroll = function(){
 ////    if(getScrollTop() + getWindowHeight() == getScrollHeight()){

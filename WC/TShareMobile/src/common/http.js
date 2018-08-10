@@ -74,6 +74,8 @@ axios.interceptors.response.use(
 
   },
   error => {
+    stores.dispatch('hideLoading')
+    stores.dispatch("showErrToast",error)
     return Promise.reject(error)
   }
 )
@@ -120,8 +122,8 @@ export const $http = {
           setTimeout(function(){
             resolve(response);
           },300)
-        }, err => {
-          reject(err)
+        }, error => {
+          reject(error)
         })
     })
   },

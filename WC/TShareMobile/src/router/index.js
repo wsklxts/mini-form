@@ -13,6 +13,7 @@ import qiankaDetail from '@/pages/apply/qianKa/qiankaDetail/qiankaDetail'
 
 
 import jiaBan from '@/pages/apply/jiaBan/jiaBan'
+import jiaBanDetails from '@/pages/apply/jiaBan/jiaBanDetails/jiaBanDetails'
 import peiXun from '@/pages/apply/peiXun/peiXun'
 import jiaqi from '@/pages/apply/jiaqi/jiaqi'
 import salary from '@/pages/apply/salary/salary'
@@ -112,6 +113,11 @@ const router = new Router({
       path:"/apply/jiaBan",
       name:"jiaBan",
       component: jiaBan
+    },
+    {
+      path:"/apply/jiaBan/jiaBanDetails",
+      name:"jiaBanDetails",
+      component: jiaBanDetails
     },
     {
       path:"/apply/peiXun",

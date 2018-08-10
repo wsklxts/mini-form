@@ -1,6 +1,8 @@
 <template>
   <div>
-    <XHeader  title="加班申请" :left-options="{showBack: true}"></XHeader>
+    <XHeader  title="加班申请" :left-options="{showBack: true}">
+      <a slot="right" @click="detailBtn"> 详情</a>
+    </XHeader>
     <div class="template">
 
 
@@ -14,7 +16,7 @@
         <datetime
           title="开始时间"
           format="YYYY-MM-DD HH:mm"
-          v-model="beginDate"
+          v-model="form.beginDate"
           @on-change="change"
           placeholder="请选择日期"
         ></datetime>
@@ -22,18 +24,25 @@
         <datetime
           title="结束时间"
           format="YYYY-MM-DD HH:mm"
-          v-model="overDate"
+          v-model="form.endDate"
           @on-change="change"
           placeholder="请选择日期"
         ></datetime>
-        <group>
-          <CellBox class="title">时长</CellBox>
-        </group>
+        <!--<group>-->
+          <!--<CellBox class="title">时长</CellBox>-->
+        <!--</group>-->
+        <x-input type="number" :required="true" title="扣休息时间" v-model="form.otKouTime" text-align="right" placeholder="请输入扣休息时间"></x-input>
       </group>
 
-      <group title=" ">
-        <Cell  title="加班结算方式" :value="selectValue" is-link @click.native="select()"></Cell>
-      </group>
+
+      <!--<group>-->
+
+      <!--</group>-->
+
+      <!---->
+      <!--<group title=" ">-->
+        <!--<Cell  title="加班结算方式" :value="selectValue" is-link @click.native="select()"></Cell>-->
+      <!--</group>-->
 
       <!--<group  title="请假原因">-->
       <!--<x-input title="" placeholder="请输入请假原因" focus>-->
@@ -42,7 +51,7 @@
       <!--</group>-->
 
       <group title=" 加班原因" class="tit">
-        <x-textarea title="" placeholder="请输入加班原因"></x-textarea>
+        <x-textarea title="" placeholder="请输入加班原因" v-model="form.reason"></x-textarea>
       </group>
 
       <group title=" ">
@@ -66,8 +75,24 @@
       </div>
 
       <div class="btnWrap">
-        <x-button type="default" text="提交"></x-button>
+        <x-button type="default" text="提交" @click.native="formSubmit"></x-button>
       </div>
+      <toast v-model="errMsgToast" type="warn" width="5rem">{{Message}}</toast>
+      <toast v-model="successMsgToast" type="success" width="5rem">{{Message}}</toast>
+
+      <confirm v-model="checkbox"
+               title="请选择审批人，否则提交失败!"
+               @on-confirm="onConfirm"
+              >
+        <div>
+          <checklist
+            ref="refChecklist"
+            :options="commonList"
+            @on-change="changeChecklist"
+          >
+          </checklist>
+        </div>
+      </confirm>
 
 
       <actionsheet
@@ -86,7 +111,9 @@
 <script type="text/ecmascript-6">
 
 
-  import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton     } from 'vux'
+  import { TransferDom,Confirm,Checklist, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton,Toast     } from 'vux'
+  import {global_empname,global_empid,comp_code} from "@/common/util"
+
 
   export default {
     components: {
@@ -99,15 +126,121 @@
       Datetime,
       XInput,
       XTextarea,
-      XButton
+      XButton,Toast,Confirm,Checklist
     },
     methods:{
+      detailBtn(){
+        this.$router.push({path:"/apply/jiaBan/jiaBanDetails"})
+      },
+      changeChecklist(a,b){
+        console.log(a);
+        this.ActorsId=a
+      },
+      checkForm(){
+        console.log("11:0555550" > "11:1111");
+        if(this.form.beginDate==""){
+          this.errMsgToast=true
+          this.Message="请输入开始时间"
+        }else if(this.form.endDate==""){
+          this.errMsgToast=true
+          this.Message="请输入结束时间"
+        }else if(this.form.otKouTime==""){
+          this.errMsgToast=true
+          this.Message="扣休息时间"
+        }else if(this.form.reason==""){
+          this.errMsgToast=true
+          this.Message="请输入原因"
+        }else{
+          return true
+        }
+//        const bDate=this.form.beginDate.split(" ")[1].split(":").join("")
+        const bDate=this.form.beginDate
+        const eDate=this.form.endDate
+        if(bDate>=eDate){
+          this.errMsgToast=true
+          this.Message="结束时间必须大于开始时间"
+          alert(2)
+        }else{
+          alert(1)
+          return true
+        }
+        return false
+
+      },
       select(){
         this.show=true;
       },
       onClick (key,value) {
         console.log(value)
         this.selectValue=value;
+      },
+      onConfirm(){
+        console.log("确定");
+        let formData={
+          receiptID:this.receiptID,
+          workFlowCode:"K002",
+          Actors: JSON.stringify(this.ActorsId),
+          global_empid:global_empid,
+          comp_code:comp_code,
+          nodeID:1,
+        }
+        this.$http.get("/MobileWeb/MyApply/IsAllowSelectorHandler.ashx",formData)
+          .then(r=>{
+            console.log(r);
+            if(r.IsSuccess==true){
+              this.successMsgToast=true
+              this.Message=r.Message
+              this.commonList=[]
+            }else{
+              this.errMsgToast=true
+              this.Message=r.Message
+            }
+          })
+          .catch(e=>{
+            console.log(e);
+          })
+
+      },
+      formSubmit(){
+
+        if(!this.checkForm())return
+
+        const formData ={
+          company:comp_code,
+          empId:global_empid,
+          empName: global_empname,
+          otDate:this.form.beginDate.split(" ")[0],
+          otSTime:this.form.beginDate.split(" ")[1],
+          otETime: this.form.endDate.split(" ")[1],
+          reason:this.form.reason,
+          drpSTimeFlag:'',
+          drpETimeFlag:'',
+          otKouTime:this.form.otKouTime,
+          fieldCustomParams:'[]'
+        }
+        console.log(formData);
+
+        this.$http.post("/MobileService/MyApply.asmx/AddOutTimeRecord",formData)
+          .then(r=>{
+            console.log(r);
+            let data= JSON.parse(r.data.d)
+            console.log(data);
+            if(data.success==1){
+              this.checkbox=true
+              this.actors=data.actors
+              this.receiptID=data.id
+              console.log(this.actors);
+              for(let i=0;i<this.actors.length;i++){
+                console.log(this.actors[i]);
+                this.commonList.push({key:JSON.stringify(this.actors[i].EmpID),value:this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"]"})
+              }
+            }else if(data.success=="0"){
+              this.message=data.msg
+              this.errMsgToast=true
+            }
+          })
+          .catch(e=>{
+          })
       },
       change(){
         console.log(this.beginDate);
@@ -128,12 +261,23 @@
     },
     data(){
       return{
+        form:{
+          otKouTime:"",
+          reason:"",
+          beginDate:"",
+          endDate:"",
+        },
+        commonList: [],
+        receiptID:"",
+        checkbox:false,
+        actors:[],
+        ActorsId:[],
+        Message:"",
+        errMsgToast:false,
+        successMsgToast:false,
         stringValue: '0',
         show: false,
         selectValue:"请选择",
-        value:['2017-01-15', '03', '05'],
-        beginDate:"",
-        overDate:"",
         uploadName:[],
         menu: {
           menu1: '方式1',

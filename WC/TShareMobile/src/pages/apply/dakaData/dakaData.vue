@@ -11,7 +11,7 @@
 
 
 <script type="text/ecmascript-6">
-
+  import Vue from 'vue'
 
   import { TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton     } from 'vux'
 

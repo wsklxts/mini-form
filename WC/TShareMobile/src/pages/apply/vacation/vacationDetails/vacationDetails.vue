@@ -49,6 +49,7 @@
 <script>
 
 
+
   import {TransferDom, Actionsheet, Group, XSwitch, Cell,XHeader,CellBox ,Datetime,XInput,XTextarea,XButton
     ,Toast,GroupTitle,Scroller,LoadMore,Loading
   } from 'vux'
@@ -57,12 +58,13 @@
 
 
   export default {
-    name: 'HelloWorld',
+    name: '',
     mounted(){
       this.getListData(this.pageIndex)
       if(this.loadDataSwitch){
         window.addEventListener("scroll",this.scroll)
       }
+
     },
     computed:{
       isLoading(){
@@ -103,21 +105,16 @@
       },
 
       getListData(pageIndex){
-        console.log(pageIndex);
         const empName=window.localStorage.getItem("global_empname")
         const empId=window.localStorage.getItem("global_empid")
         const company=window.localStorage.getItem("comp_code")
-        console.log(3);
         let formData={company:company, globalEmpId: empId ,pageIndex: pageIndex, size: 10,type:0}
 
         this.$http.post("/MobileService/MyApply.asmx/GetAskLeaveqingjiaRecord",formData,{showLoad:false})
           .then(r=>{
-//          let data= JSON.parse(r.data.d).data
           console.log(r)
           let data= eval("(" + r.data.d + ")");
           data=data.data
-
-          console.log(data)
           if(data){
             for(let d in data){
               this.loadMoreDom=true
@@ -164,7 +161,6 @@
         scrollList:20,
         listData:[],
         msg: 'Welcome to Your Vue.js App',
-//        isLoading:this.$store.state.loading
       }
     },
     destroyed(){

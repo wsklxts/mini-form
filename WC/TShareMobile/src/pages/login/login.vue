@@ -6,7 +6,7 @@
         </section>
         <section class="userInput">
           <group class="inputItem">
-            <x-input title="" placeholder="请输入用户名" required ref="inp" v-model="userInput.usercode">
+            <x-input title="" placeholder="请输入用户名"  required ref="inp" v-model="userInput.usercode">
               <img slot="label" src="../../../static/login/1.png" alt="">
             </x-input>
           </group>
@@ -47,7 +47,7 @@
       }
     },
     mounted(){
-      this.$refs.inp.$refs.input.focus()
+//      this.$refs.inp.$refs.input.focus()
     },
     methods:{
       login(){

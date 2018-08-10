@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <loading :show="isLoading" :text="loadingText"></loading>
+    <!--<loading :show="isLoading" :text="loadingText"></loading>-->
+    <loading v-model="isLoading" :text="loadingText"></loading>
+    <toast v-model="errMsgToast" type="warn" width="5rem">{{errMsgText}}</toast>
 
     <keep-alive>
-
     </keep-alive>
-
 
     <router-view></router-view>
 
@@ -16,13 +16,13 @@
 
 import tabs from "./components/common/tabs.vue"
 import TXhead from "./components/common/TXhead.vue"
-import {Loading,Spinner} from "vux"
+import {Loading,Spinner,Toast} from "vux"
 
 export default {
   name: 'App',
   components:{
     tabs,
-    TXhead,Loading,Spinner
+    TXhead,Loading,Spinner,Toast
   },
   data(){
     return{
@@ -31,6 +31,7 @@ export default {
   beforeCreate(){
   },
   mounted(){
+    console.log("app");
   },
   updated(){
 
@@ -38,6 +39,17 @@ export default {
   computed:{
     isLoading(){
       return this.$store.state.loading
+    },
+    errMsgText(){
+      return this.$store.state.errMsgText
+    },
+    errMsgToast:{
+      get: function () {
+        return this.$store.state.showErrToast
+      },
+      set: function (newValue) {
+        this.$store.state.showErrToast=newValue
+      }
     },
     loadingText(){
       return this.$store.state.loadingText
