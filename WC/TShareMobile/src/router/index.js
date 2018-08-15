@@ -6,6 +6,9 @@ import personTask from '@/pages/personTask/personTask'
 
 
 import apply from '@/pages/apply/apply'
+import announcement from '@/pages/apply/announcement/announcement'
+import AnnouncementDetails from '@/pages/apply/announcement/AnnouncementDetails/AnnouncementDetails'
+import AnnouncementDC from '@/pages/apply/announcement/AnnouncementDetails/AnnouncementDC'
 import vacation from '@/pages/apply/vacation/vacation'
 import vacationDetails from '@/pages/apply/vacation/vacationDetails/vacationDetails'
 import qianKa from '@/pages/apply/qianKa/qianKa'
@@ -88,6 +91,21 @@ const router = new Router({
       meta: {
         requiresAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       },
+    },
+    {
+      path:"/apply/announcement",
+      name:"announcement",
+      component: announcement
+    },
+    {
+      path:"/apply/AnnouncementDetails",
+      name:"AnnouncementDetails",
+      component: AnnouncementDetails
+    },
+    {
+      path:"/apply/AnnouncementDetails/AnnouncementDC",
+      name:"AnnouncementDC",
+      component: AnnouncementDC
     },
     {
       path:"/apply/vacation",

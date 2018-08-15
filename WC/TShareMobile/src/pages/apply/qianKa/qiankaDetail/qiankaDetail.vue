@@ -11,12 +11,12 @@
         <cell title="提交状态"  v-show="l.issendtext" :value="l.issendtext"></cell>
         <cell title="提交时间"  v-show="l.senddate" :value="l.senddate"></cell>
         <cell title="审批状态"  v-show="l.apstatustext" :value="l.apstatustext"></cell>
-        <cell title="审批时间"  v-show="l.apdate" :value="l.apdate"></cell>
-        <cell title="审批意见"  v-show="l.apnode" :value="l.apnode"></cell>
-        <cell title="创 建 人" v-show="l.createby"  :value="l.createby"></cell>
-        <cell title="创建时间"  v-show="l.createtime" :value="l.createtime"></cell>
-        <cell title="修改人"   v-show="l.updateby"  :value="l.updateby"></cell>
-        <cell title="修改时间"  v-show="l.updatetime"  :value="l.updatetime"></cell>
+        <!--<cell title="审批时间"  v-show="l.apdate" :value="l.apdate"></cell>-->
+        <!--<cell title="审批意见"  v-show="l.apnode" :value="l.apnode"></cell>-->
+        <!--<cell title="创 建 人" v-show="l.createby"  :value="l.createby"></cell>-->
+        <!--<cell title="创建时间"  v-show="l.createtime" :value="l.createtime"></cell>-->
+        <!--<cell title="修改人"   v-show="l.updateby"  :value="l.updateby"></cell>-->
+        <!--<cell title="修改时间"  v-show="l.updatetime"  :value="l.updatetime"></cell>-->
         <div style=" background: rgb(142, 172, 201);color:white;text-align:center">以上第{{index+1}}项</div>
       </group>
       <load-more tip="正在加载" v-show="loadMoreDom"></load-more>

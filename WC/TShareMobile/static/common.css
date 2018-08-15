@@ -18,7 +18,7 @@ img{
   width:100%
 }
 #app{
-  padding-bottom:44px;
+  padding-bottom:50px
 }
 .vux-header{
   position:fixed !important;
@@ -65,10 +65,10 @@ img{
 .btnWrap{
   position: fixed;
   width: 100%;
-  bottom: 0;
-button.weui-btn{
-  border-radius:0 !important;
-}
+  bottom:0px;
+  button.weui-btn{
+    border-radius:0 !important;
+  }
 }
 
 .weui-loadmore {

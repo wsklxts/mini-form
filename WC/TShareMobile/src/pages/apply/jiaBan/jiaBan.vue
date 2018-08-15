@@ -137,35 +137,34 @@
         this.ActorsId=a
       },
       checkForm(){
-        console.log("11:0555550" > "11:1111");
         if(this.form.beginDate==""){
           this.errMsgToast=true
           this.Message="请输入开始时间"
+          return false
         }else if(this.form.endDate==""){
           this.errMsgToast=true
           this.Message="请输入结束时间"
+          return false
         }else if(this.form.otKouTime==""){
           this.errMsgToast=true
           this.Message="扣休息时间"
+          return false
         }else if(this.form.reason==""){
           this.errMsgToast=true
           this.Message="请输入原因"
-        }else{
-          return true
+          return false
         }
 //        const bDate=this.form.beginDate.split(" ")[1].split(":").join("")
         const bDate=this.form.beginDate
         const eDate=this.form.endDate
+        console.log( bDate);
+        console.log(eDate);
         if(bDate>=eDate){
           this.errMsgToast=true
           this.Message="结束时间必须大于开始时间"
-          alert(2)
-        }else{
-          alert(1)
-          return true
+          return false
         }
-        return false
-
+        return true
       },
       select(){
         this.show=true;
@@ -235,7 +234,7 @@
                 this.commonList.push({key:JSON.stringify(this.actors[i].EmpID),value:this.actors[i].EmpName+" ["+this.actors[i].EmpCode+"]"})
               }
             }else if(data.success=="0"){
-              this.message=data.msg
+              this.Message=data.msg
               this.errMsgToast=true
             }
           })

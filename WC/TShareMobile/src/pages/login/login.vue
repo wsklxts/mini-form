@@ -68,6 +68,7 @@
           qs.stringify(this.userInput),{ContentType:"application/x-www-form-urlencoded",loading:"登录中..."})
           .then(data=>{
             let d=data.data && data.data.data[0]
+            console.log(d);
             if(data.data && data.data.data[1]["isAutoLogin"]==1){
               this.$store.commit("isAutoLogin","1")
               if(this.$route.query.redirect){

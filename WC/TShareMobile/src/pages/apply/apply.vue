@@ -13,7 +13,7 @@
             </h3>
             <div class="listItem">
               <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-                <grid-item v-for="(i,index) in info" :key="index">
+                <grid-item v-for="(i,index) in info" :key="index" @on-item-click="gotoItem(i.title,index)">
                   <span class="listItemImg"><img :src="i.img" alt=""></span>
                   <span class="grid-center">{{i.title}}</span>
                 </grid-item>
@@ -77,14 +77,8 @@
   import tabs from "../../components/common/tabs.vue"
   export default {
     created(){
-//      this.$root.v.$emit('form',123)
-//      console.log("c");
     },
     mounted(){
-      this.$root.v.$on('form',function(i){
-        console.log(i);
-      })
-      console.log("apply");
     },
     name:"apply",
     methods:{
@@ -114,7 +108,10 @@
           this.$router.push({ path: "/apply/workSum" })
         }else if(item.includes("投诉建议")){
           this.$router.push({ path: "/apply/suggest" })
+        }else if(item.includes("公告")){
+          this.$router.push({ path: "/apply/announcement" })
         }
+
 
   //        switch(item){
   //          case "请/销假":

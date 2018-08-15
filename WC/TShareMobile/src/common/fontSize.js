@@ -3,9 +3,6 @@
  */
 (function() {
   var newRem = function() {
-    //var html = document.documentElement;
-    //console.log(html.getBoundingClientRect().width/16);
-    //html.style.fontSize = html.getBoundingClientRect().width / 16 + 'px';
     document.documentElement.style.fontSize = document.documentElement.clientWidth / 720*100 + "px";
   };
   window.addEventListener('resize', newRem, false);

@@ -6,8 +6,12 @@ import App from './App'
 import axios from 'axios'
 import router from './router'
 import {$http} from './common/http'
-//import aa,{abc}  from './common/api'
+import FastClick from 'fastclick'
+import "../static/common.css"
+import "@/common/fontSize"
 
+
+FastClick.attach(document.body);
 
 Vue.config.productionTip = false
 
