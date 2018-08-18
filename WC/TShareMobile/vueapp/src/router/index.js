@@ -7,6 +7,12 @@ import personTask from '@/pages/personTask/personTask'
 
 import apply from '@/pages/apply/apply'
 import announcement from '@/pages/apply/announcement/announcement'
+import inform from '@/pages/apply/inform/inform'
+import news from '@/pages/apply/news/news'
+import newsDetails from '@/pages/apply/news/newsDetails/newsDetails'
+import newsContent from '@/pages/apply/news/newsDetails/newsContent'
+import informDetails from '@/pages/apply/inform/informDetails/informDetails'
+import informContent from '@/pages/apply/inform/informDetails/informContent'
 import AnnouncementDetails from '@/pages/apply/announcement/AnnouncementDetails/AnnouncementDetails'
 import AnnouncementDC from '@/pages/apply/announcement/AnnouncementDetails/AnnouncementDC'
 import vacation from '@/pages/apply/vacation/vacation'
@@ -29,6 +35,7 @@ import suggest from '@/pages/apply/suggest/suggest'
 
 
 import manage from '@/pages/manage/manage'
+import meDep from '@/pages/manage/meDep/meDep'
 import daka from '@/pages/daka/daka'
 import setAccount from '@/pages/daka/setAccount/setAccount'
 import login from '@/pages/login/login'
@@ -93,6 +100,26 @@ const router = new Router({
       },
     },
     {
+      path:"/apply/news",
+      name:"news",
+      component: news
+    },
+    {
+      path:"/apply/news/newsDetails",
+      name:"newsDetails",
+      component: newsDetails
+    },
+    {
+      path:"/apply/news/newsContent",
+      name:"newsContent",
+      component: newsContent
+    },
+    {
+      path:"/apply/inform",
+      name:"inform",
+      component: inform
+    },
+    {
       path:"/apply/announcement",
       name:"announcement",
       component: announcement
@@ -106,6 +133,16 @@ const router = new Router({
       path:"/apply/AnnouncementDetails/AnnouncementDC",
       name:"AnnouncementDC",
       component: AnnouncementDC
+    },
+    {
+      path:"/apply/inform/informDetails",
+      name:"informDetails",
+      component: informDetails
+    },
+    {
+      path:"/apply/inform/informContent",
+      name:"informContent",
+      component: informContent
     },
     {
       path:"/apply/vacation",
@@ -186,6 +223,11 @@ const router = new Router({
       path: '/manage',
       name: 'manage',
       component: manage
+    },
+    {
+      path: '/manage/meDep',
+      name: 'meDep',
+      component: meDep
     },
     {
       path: '/daka',

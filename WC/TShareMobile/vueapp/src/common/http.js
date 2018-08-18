@@ -103,9 +103,9 @@ export const $http = {
     const orm = this._paramFormat(config)
     stores.dispatch('showLoading',orm.loading)
     return new Promise((resolve,reject) => {
-      axios.get(url,{params:params},{ headers:{"Content-Type":orm.contentType}})
+      axios.get(url,{data:params},{ headers:{"Content-Type":orm.contentType}})
         .then(response => {
-          resolve(response.data);
+          resolve(response);
         })
         .catch(err => {
           reject(err)

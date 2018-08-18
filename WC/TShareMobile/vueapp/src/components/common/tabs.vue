@@ -15,7 +15,7 @@
         </div>
         <div>应用中心</div>
       </router-link>
-      <router-link :to="{name:'manage',query:{name:123}}" tag="li" >
+      <router-link :to="{name:'manage'}" tag="li" >
         <div class="tabImg"  :class="{ active3: $route.path== '/manage'}">
         </div>
         <div>管理中心</div>

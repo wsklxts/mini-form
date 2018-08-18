@@ -110,6 +110,10 @@
           this.$router.push({ path: "/apply/suggest" })
         }else if(item.includes("公告")){
           this.$router.push({ path: "/apply/announcement" })
+        }else if(item.includes("通知")){
+          this.$router.push({ path: "/apply/inform" })
+        }else if(item.includes("公司")){
+          this.$router.push({ path: "/apply/news" })
         }
 
 

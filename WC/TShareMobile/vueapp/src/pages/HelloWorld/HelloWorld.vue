@@ -34,7 +34,7 @@
         <x-button type="default" @show="false" text="提交" @click.native="onConfirm"></x-button>
         <x-button type="default" text="提交2" @click.native="onConfirm2"></x-button>
       </div>
-      {{ii}}
+      <div v-html="ii"></div>
 
       <tabs></tabs>
     </div>
@@ -64,10 +64,13 @@
     methods:{
       onConfirm(){
 
-        let formData ={ company: '0101', empId: '40', empName: '陈志平',otDate:'2018-08-20',otSTime:'16:31', otETime: '16:31',reason:'44',drpSTimeFlag:'',drpETimeFlag:'',otKouTime:'22',fieldCustomParams:'[]'}
+//        let formData ={ company: '0101', empId: '40', empName: '陈志平',otDate:'2018-08-20',otSTime:'16:31', otETime: '16:31',reason:'44',drpSTimeFlag:'',drpETimeFlag:'',otKouTime:'22',fieldCustomParams:'[]'}
+        let formData ={company: '0101',pageIndex: 1, size: 10, globalEmpId: '40',type:'无分类'}
 
-        this.$http.post("/MobileService/MyApply.asmx/AddOutTimeRecord",formData)
+//        this.$http.post("/MobileService/MyApply.asmx/AddOutTimeRecord",formData)
+        this.$http.post("/MobileService/News.asmx/GetNews",formData)
           .then(r=>{
+          this.ii=r
           console.log(r);
           let data= JSON.parse(r.data.d)
           console.log(data);

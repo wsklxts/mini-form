@@ -7,6 +7,7 @@
 }
 body{
   font-size:0.28rem;
+  /*touch-action: none;*/
 }
 section> h3{
   font-size: 0.30rem !important;

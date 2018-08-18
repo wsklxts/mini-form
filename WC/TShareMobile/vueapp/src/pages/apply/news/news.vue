@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <XHeader  title="公告分类" :left-options="{showBack: true}">
+    <XHeader  title="公司新闻" :left-options="{showBack: true}">
       <!--<a slot="right" @click="detailBtn"> 详情</a>-->
     </XHeader>
     <div class="template">
@@ -9,8 +9,8 @@
         <cell :title="l.type"
               is-link v-for="(l,index) in listData"
               :key="index"
-              @click.native="toAnnouncementDetails(l.type)"
-              inline-desc='12312'
+              @click.native="toDetails(l.type)"
+              inline-desc=''
         >
           <div class="badge-value">
             <badge :text="l.unread" v-show="l.unread"></badge>
@@ -57,9 +57,9 @@
       },
     },
     methods:{
-      toAnnouncementDetails(l){
+      toDetails(l){
 //        this.$router.push({path:"/apply/AnnouncementDetails?type="+l})
-        this.$router.push({path:"/apply/AnnouncementDetails", query: { type: l }})
+        this.$router.push({path:"/apply/news/newsDetails", query: { type: l }})
       },
       scroll(){
         var g = getScrollTop() + getWindowHeight()
@@ -82,7 +82,7 @@
 
         let formData={company:company, globalempid: empId ,pageIndex: pageIndex, size: 10}
 
-        this.$http.post("/MobileService/Notice.asmx/GetNoticeType",formData,{showLoad:false})
+        this.$http.post("/MobileService/News.asmx/getNewsType",formData,{showLoad:false})
           .then(r=>{
           console.log(r)
         let data= eval("(" + r.data.d + ")");

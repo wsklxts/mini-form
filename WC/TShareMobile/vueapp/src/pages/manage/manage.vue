@@ -11,7 +11,7 @@
         </h3>
         <div class="listItem">
           <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-            <grid-item v-for="(i,index) in meTeam" :key="index">
+            <grid-item v-for="(i,index) in meTeam" :key="index" @on-item-click="gotoItem(i.title,index)">
               <span class="listItemImg"><img :src="i.img" alt=""></span>
               <span class="grid-center">{{i.title}}</span>
             </grid-item>
@@ -70,6 +70,14 @@
       GridItem,
       XHeader,
       tabs
+    },
+    methods:{
+      gotoItem(item,index){
+        console.log(item);
+        if (item.includes("我的部门")) {
+          this.$router.push({path: "/manage/meDep"})
+        }
+      }
     },
     mounted(){
       console.log(this);
