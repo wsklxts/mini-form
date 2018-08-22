@@ -9,18 +9,19 @@ import {$http} from './common/http'
 import FastClick from 'fastclick'
 import "../static/common.css"
 import "@/common/fontSize"
+import BScroll from 'better-scroll'
 
 
-FastClick.attach(document.body);
+//FastClick.attach(document.body);
 
 Vue.config.productionTip = false
-
 
 
 
 /* eslint-disable no-new */
 
 
+Vue.prototype.BScroll=BScroll
 Vue.prototype.$http=$http
 
 new Vue({

@@ -17,9 +17,9 @@
       <div v-show="loadMoreFinish" class="loadMoreFinish">加载完毕</div>
 
 
-      <div class="btnWrap">
-        <x-button type="default" text="申请请假" @click.native="btn"></x-button>
-      </div>
+      <!--<div class="btnWrap">-->
+        <!--<x-button type="default" text="申请请假" @click.native="btn"></x-button>-->
+      <!--</div>-->
 
     </div>
 

@@ -1,14 +1,6 @@
 <template>
-  <div>
 
-
-    <div class="template">
-      <div>代办数据</div>
-      <div>代办数据</div>
-      <div>代办数据</div>
-      <div>代办数据</div>
-      <div>代办数据</div>
-      <div>代办数据</div>
+    <div >
       <div>代办数据</div>
       <div>代办数据</div>
       <div>代办数据</div>
@@ -24,8 +16,6 @@
       <div>代办数据</div>
 </div>
 
-    <tabs></tabs>
-    </div>
 </template>
 
 
@@ -54,8 +44,6 @@
 
     export default {
         components: {
-          XHeader,
-          tabs
         },
         methods: {
             handler(){

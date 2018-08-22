@@ -13,16 +13,12 @@
 </template>
 
 <script>
-
-import tabs from "./components/common/tabs.vue"
-import TXhead from "./components/common/TXhead.vue"
 import {Loading,Spinner,Toast} from "vux"
 
 export default {
   name: 'App',
   components:{
-    tabs,
-    TXhead,Loading,Spinner,Toast
+    Loading,Spinner,Toast
   },
   data(){
     return{

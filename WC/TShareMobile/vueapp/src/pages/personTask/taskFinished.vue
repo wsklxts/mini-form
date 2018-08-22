@@ -1,26 +1,10 @@
 <template>
-    <div class="template">
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
-      <div>已办数据</div>
+    <div>
+      <div>已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据已办数据</div>
       <div>已办数据</div>
       <div>已办数据</div>
       <div>已办数据</div>
 
-      <tabs></tabs>
     </div>
 
 </template>

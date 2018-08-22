@@ -19,7 +19,7 @@ img{
   width:100%
 }
 #app{
-  padding-bottom:50px
+  margin-bottom:44px
 }
 .vux-header{
   position:fixed !important;
@@ -76,4 +76,13 @@ img{
   margin:0 !important;
   width: 100% !important;
   padding:0.32rem auto !important;
+}
+
+.vux-slider > .vux-swiper {
+  overflow-y: auto !important;
+  position: relative;
+}
+.vux-slider {
+  overflow-y: auto !important;
+  position: relative;
 }

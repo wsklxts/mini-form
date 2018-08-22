@@ -7,8 +7,9 @@ const path = require('path')
 
 //let h= window.location.hostname;
 
-//let h = "192.168.1.100"
-let h="localhost"
+//let h = "192.168.0.44"
+//let h="localhost"
+let h="192.168.43.246"
 let hh = "http://localhost:8001"
 
 //let h = "192.168.0.33"

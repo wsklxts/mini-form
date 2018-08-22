@@ -50,6 +50,11 @@
 //      this.$refs.inp.$refs.input.focus()
     },
     methods:{
+      setLocal(d){
+        localStorage.setItem("global_empname",d.global_empname)
+        localStorage.setItem("global_empid",d.global_empid)
+        localStorage.setItem("comp_code",d.comp_code)
+      },
       login(){
         if(this.userInput.usercode=="" || this.userInput.password==""){
           this.toastText="请输入账号密码"
@@ -71,12 +76,10 @@
             console.log(d);
             if(data.data && data.data.data[1]["isAutoLogin"]==1){
               this.$store.commit("isAutoLogin","1")
+              this.setLocal(d)
               if(this.$route.query.redirect){
                 this.$router.push({path:this.$route.query.redirect})
               }else{
-                localStorage.setItem("global_empname",d.global_empname)
-                localStorage.setItem("global_empid",d.global_empid)
-                localStorage.setItem("comp_code",d.comp_code)
                 this.$router.push({path:"/personTask/taskWait"})
               }
             }else{

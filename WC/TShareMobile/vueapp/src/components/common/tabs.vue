@@ -3,6 +3,8 @@
   <div class="tabs">
     <!--命名路由-->
     <ul>
+
+
       <router-link  to="/personTask/taskWait"  tag="li">
         <!--<div class="tabImg"  :class="{ active1: $route.path== '/personTask/taskWait'}">-->
           <!--{{$route.path.indexOf('personTask') !== -1}}-->
@@ -38,7 +40,13 @@
       return{
         msg:"tabs",
         activeTab:null,
-        n:1
+        n:1,
+        list:[
+          {name:"页面1"},
+          {name:"页面2"},
+          {name:"页面3"},
+          {name:"页面4"},
+        ]
       }
     },
     methods: {
@@ -69,12 +77,13 @@
       padding: 0;
     }
     ul {
+      height: 0.95rem;
       display: flex;
       width: 100%;
       font-size:0.32rem;
       & > li {
             text-align: center;
-            padding: 0.08rem 0.12rem;
+            /*padding: 0.08rem 0.12rem;*/
             cursor: pointer;
             flex: 1;
 
