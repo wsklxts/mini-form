@@ -7,51 +7,10 @@
     <div class="template">
       <!--{{$route.path}}-->
       <!--HelloWorld-->
-
-      <div class="wrapper" ref="wrapper">
-        <ul class="content">
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          <li>aaaa</li>
-          ...
-        </ul>
+      <div class="">
+        <x-button type="default" @show="false" text="提交" @click.native="onConfirm"></x-button>
+        <x-button type="default" text="提交2" @click.native="onConfirm2"></x-button>
       </div>
-
-
 
 
       <tabs></tabs>
@@ -77,10 +36,10 @@
     name: 'HelloWorld',
     mounted() {
       this.$nextTick(() => {
-        this.scroll = new BScroll(this.$refs.wrapper, {
-          scrollY: true,
-          click: true
-        })
+//        this.scroll = new BScroll(this.$refs.wrapper, {
+//          scrollY: true,
+//          click: true
+//        })
       })
 
     },
@@ -97,10 +56,13 @@
       onConfirm(){
 
 //        let formData ={ company: '0101', empId: '40', empName: '陈志平',otDate:'2018-08-20',otSTime:'16:31', otETime: '16:31',reason:'44',drpSTimeFlag:'',drpETimeFlag:'',otKouTime:'22',fieldCustomParams:'[]'}
-        let formData ={company: '0101',pageIndex: 1, size: 10, globalEmpId: '40',type:'无分类'}
+//        let formData ={company: '0101',pageIndex: 1, size: 10, globalEmpId: '40',type:'无分类'}
+        let formData ={id:270}
 
 //        this.$http.post("/MobileService/MyApply.asmx/AddOutTimeRecord",formData)
-        this.$http.post("/MobileService/News.asmx/GetNews",formData)
+        this.$http.post("/MobileService/Web/Handler/hdlGetiframeCotnent.ashx",qs.stringify(formData),
+          {ContentType:"application/x-www-form-urlencoded"}
+        )
           .then(r=>{
           this.ii=r
           console.log(r);

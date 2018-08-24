@@ -5,24 +5,15 @@
       <!--<a slot="right" @click="detailBtn"> 详情</a>-->
     </XHeader>
     <div class="template">
-      <group >
-        <cell :title="l.ab_caption"
-              is-link v-for="(l,index) in listData"
-              :key="index"
-              :inline-desc='l.senddate'
-              @click.native="toAnnouncementDC(l.ab_id)"
-        >
-          <!--<div class="badge-value">-->
-            <!--<span class="vertical-middle"></span>-->
-            <!--<badge :text="l.unread" v-show="l.unread"></badge>-->
-          <!--</div>-->
-        </cell>
-      </group>
+      <div class="title">
+        {{subject}}
+      </div>
+      <div class="releaseDate">发布时间：{{senddate}}</div>
+      <div class="content" v-html="content"></div>
+
+
       <load-more tip="正在加载" v-show="loadMoreDom"></load-more>
       <div v-show="loadMoreFinish" class="loadMoreFinish">加载完毕</div>
-
-
-
 
     </div>
 
@@ -42,10 +33,10 @@
   export default {
     name: '',
     mounted(){
-      this.getListData(this.pageIndex)
-      if(this.loadDataSwitch){
-        window.addEventListener("scroll",this.scroll)
-      }
+      this.getListData()
+//      if(this.loadDataSwitch){
+//        window.addEventListener("scroll",this.scroll)
+//      }
 
     },
     computed:{
@@ -75,33 +66,29 @@
         this.$router.go(-1)
       },
 
-      getListData(pageIndex){
+      getListData(){
         const empName=window.localStorage.getItem("global_empname")
         const empId=window.localStorage.getItem("global_empid")
         const company=window.localStorage.getItem("comp_code")
 
         let formData={
-          company:company,
-          globalEmpId: empId ,
-          pageIndex: pageIndex,
-          size: 8,
-          type:this.$route.query.type
+//          company:company,
+          empId: empId ,
+//          pageIndex: pageIndex,
+//          size: 8,
+          id:this.$route.query.type
         }
 
-        this.$http.post("/MobileService/Notice.asmx/GetNotice",formData,{showLoad:false})
+        this.$http.post("/MobileService/Web/Handler/hdlGetNotice.ashx",qs.stringify(formData),{ContentType:"application/x-www-form-urlencoded"})
           .then(r=>{
-          console.log(r)
-        let data= eval("(" + r.data.d + ")");
-        data=data.data
+        let data=r.data
         console.log(data);
         if(data){
-          for(let d in data){
-            this.loadMoreDom=true
-            this.listData.push(data[d])
-          }
-          if(getScrollHeight() == getWindowHeight()){
-            this.getListData(this.pageIndex+=1)
-          }
+          this.content=data.content
+          this.senddate=data.senddate
+          this.subject=data.subject
+
+
         }else{
           this.loadDataSwitch=false
           this.loadMoreDom=false
@@ -111,7 +98,6 @@
 
       }).catch(err=>{
           this.loadMoreDom=false
-        this.loadMoreFinish=true
       })
       },
       detailBtn(){
@@ -123,6 +109,9 @@
     },
     data () {
       return {
+        subject:"",
+        senddate:"",
+        content:"",
         loadDataSwitch:true,
         pageIndex:1,
         loadMoreDom:false,

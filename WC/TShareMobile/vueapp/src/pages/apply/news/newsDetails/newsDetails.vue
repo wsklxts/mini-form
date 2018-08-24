@@ -5,18 +5,11 @@
       <!--<a slot="right" @click="detailBtn"> 详情</a>-->
     </XHeader>
     <div class="template">
-      <group >
-        <cell :title="l.subject"
-              is-link v-for="(l,index) in listData"
-              :key="index"
-              :inline-desc='l.publishdate'
-              @click.native="toContent(l.ab_id)"
-        >
-          <div class="badge-value">
-          <badge :text="l.unread" v-show="l.unread"></badge>
-          </div>
-        </cell>
-      </group>
+      <div class="title">
+        {{subject}}
+      </div>
+      <div class="releaseDate">发布时间：{{senddate}}</div>
+      <div class="content" v-html="content"></div>
       <load-more tip="正在加载" v-show="loadMoreDom"></load-more>
       <div v-show="loadMoreFinish" class="loadMoreFinish">加载完毕</div>
 
@@ -80,27 +73,23 @@
         const company=window.localStorage.getItem("comp_code")
 
         let formData={
-          company:company,
-          globalEmpId: empId ,
-          pageIndex: pageIndex,
-          size: 10,
-          type:this.$route.query.type
+//          company:company,
+//          globalEmpId: empId ,
+//          pageIndex: pageIndex,
+//          size: 10,
+          id:this.$route.query.type
         }
 
-        this.$http.post("/MobileService/News.asmx/GetNews",formData,{showLoad:false})
+        this.$http.post("/MobileService/Web/Handler/hdlGetNews.ashx",qs.stringify(formData),{ContentType:"application/x-www-form-urlencoded"})
           .then(r=>{
           console.log(r)
-        let data = eval("(" + r.data.d + ")");
-        data=data.data
+        let data=r.data
         console.log(data);
         if(data){
-          for(let d in data){
-            this.loadMoreDom=true
-            this.listData.push(data[d])
-          }
-          if(getScrollHeight() == getWindowHeight()){
-            this.getListData(this.pageIndex+=1)
-          }
+          this.content=data.content
+          this.senddate=data.publisherDate
+          this.subject=data.caption
+
         }else{
           this.loadDataSwitch=false
           this.loadMoreDom=false
@@ -122,6 +111,9 @@
     },
     data () {
       return {
+        subject:"",
+        senddate:"",
+        content:"",
         loadDataSwitch:true,
         pageIndex:1,
         loadMoreDom:false,

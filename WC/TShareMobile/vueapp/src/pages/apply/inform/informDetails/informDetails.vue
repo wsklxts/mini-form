@@ -81,14 +81,15 @@
         const company=window.localStorage.getItem("comp_code")
 
         let formData={
-          company:company,
-          globalEmpId: empId ,
-          pageIndex: pageIndex,
-          size: 8,
-          type:this.$route.query.type
+//          company:company,
+//          globalEmpId: empId ,
+//          pageIndex: pageIndex,
+//          size: 8,
+          id:this.$route.query.type
         }
 
-        this.$http.post("/MobileService/TongZhi.asmx/GetTongZhi",formData,{showLoad:false})
+        this.$http.post("/MobileService/Web/Handler/hdlGetiframeCotnent.ashx",qs.stringify(formData),
+          {ContentType:"application/x-www-form-urlencoded"})
           .then(r=>{
           console.log(r)
         let data= eval("(" + r.data.d + ")");

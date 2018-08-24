@@ -3,61 +3,32 @@
   <div>
 <XHeader title="个人中心"  :left-options="{showBack: false}"></XHeader>
 
-  <div class="personTask"  v-bind:style="paTop">
-    <!--<ul>-->
-      <!--<router-link :to="{name:'personTask'}" tag="li">-->
+  <div class="personTask"  :style="paTop">
 
-      <!--</router-link>-->
-      <!--<router-link :to="{name:'apply'}" tag="li">-->
-        <!--<div class="tabImg"  :class="{ active2: $route.path== '/apply'}">-->
-
-        <!--</div>-->
-        <!--<div>应用中心</div>-->
-      <!--</router-link>-->
-      <!--<router-link :to="{name:'manage'}" tag="li">-->
-        <!--<div class="tabImg"  :class="{ active3: $route.path== '/manage'}">-->
-        <!--</div>-->
-        <!--<div>管理中心</div>-->
-      <!--</router-link>-->
-    <!--</ul>-->
-
-
-
-      <tab bar-active-color="#3096fd" active-color="#3096fd" v-model="index">
-        <tab-item @on-item-click="handler" :selected="$route.path== '/personTask/taskWait'" >
-          <router-link to="/personTask/taskWait" tag="div">代办</router-link>
-        </tab-item >
-        <tab-item :selected="$route.path== '/personTask/taskFinished'" >
-           <router-link to="/personTask/taskFinished" tag="div">已办</router-link>
-        </tab-item>
-        <tab-item :selected="$route.path== '/personTask/taskLaunch'" >
-          <router-link to="/personTask/taskLaunch" tag="div">我发起</router-link>
-        </tab-item>
-      </tab>
-
+    <tab bar-active-color="#3096fd" active-color="#3096fd" v-model="index">
+      <tab-item @on-item-click="handler" :selected="$route.path== '/personTask/taskWait'" >
+        <router-link to="/personTask/taskWait" tag="div">代办</router-link>
+      </tab-item >
+      <tab-item :selected="$route.path=='/personTask/taskFinished'" >
+         <router-link to="/personTask/taskFinished" tag="div">已办</router-link>
+      </tab-item>
+      <tab-item :selected="$route.path=='/personTask/taskLaunch'" >
+        <router-link to="/personTask/taskLaunch" tag="div">我发起</router-link>
+      </tab-item>
+    </tab>
 
     <swiper ref="swi" @touchstart.native="touchstart" @touchmove.native="touchmove" @touchend.native="touchend" v-model="index" :aspect-ratio="aHeight" :show-dots="false" @on-index-change="ichane" @on-get-height="gheight">
     <!--<swiper v-model="index" height="auto" :show-dots="false" @on-index-change="ichane" @on-get-height="gheight">-->
-      <swiper-item  >
-
-          <taskWait   ref="taskWait" v-show="showtaskWait"></taskWait>
-
+      <swiper-item>
+          <taskWait ref="taskWait" v-show="showtaskWait"></taskWait>
       </swiper-item>
       <swiper-item >
-
           <taskFinished ref="taskFinished" v-show="showtaskFinished"></taskFinished>
-
       </swiper-item>
       <swiper-item >
-
           <taskLaunch ref="taskLaunch" v-show="showtaskLaunch"></taskLaunch>
-
       </swiper-item>
     </swiper>
-
-
-
-
     <tabs></tabs>
 </div>
   </div>
@@ -71,8 +42,6 @@
   import taskWait from "./taskWait.vue"
   import taskFinished from "./taskFinished.vue"
   import taskLaunch from "./taskLaunch.vue"
-
-
 
   export default {
     components: {
@@ -113,8 +82,7 @@
         if(this.ii==0){
           this.$router.push({path:"/personTask/taskWait"})
           this.showtaskWait=true
-        }
-        else if(this.ii==1){
+        }else if(this.ii==1){
           this.$router.push({path:"/personTask/taskFinished"})
           this.showtaskFinished=true
         }else if(this.ii==2){
@@ -143,7 +111,6 @@
 
 <style lang="less" type="text/less" scoped>
   @tab-bar-active-color:red;
-
   .vux-tab-wrap {
     position: fixed !important;
      padding-top: 0;

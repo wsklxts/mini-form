@@ -6,12 +6,15 @@
     </XHeader>
     <div class="template">
       <group >
-        <cell :title="l.type"
+        <cell :title="l.ab_caption"
               is-link v-for="(l,index) in listData"
               :key="index"
-              @click.native="toAnnouncementDetails(l.type)"
-              inline-desc=''
+              @click.native="toAnnouncementDetails(l.ab_id)"
+              :inline-desc='l.senddate'
         >
+          <div class="imgWrap" slot="icon">
+            <img :src="imgLoad(l.ab_captionimg)">
+          </div>
           <div class="badge-value">
             <badge :text="l.unread" v-show="l.unread"></badge>
           </div>
@@ -48,6 +51,7 @@
 
     },
     computed:{
+
       isLoading(){
       },
       fHeight(){
@@ -57,6 +61,12 @@
       },
     },
     methods:{
+      imgLoad(url){
+        if(url){
+          return "http://localhost:8001/"+url
+        }
+        return "/static/com/null_logo.png"
+      },
       toAnnouncementDetails(l){
 //        this.$router.push({path:"/apply/AnnouncementDetails?type="+l})
         this.$router.push({path:"/apply/AnnouncementDetails", query: { type: l }})
@@ -80,9 +90,9 @@
         const empId=window.localStorage.getItem("global_empid")
         const company=window.localStorage.getItem("comp_code")
 
-        let formData={company:company, globalempid: empId ,pageIndex: pageIndex, size: 10}
+        let formData={company:company, globalEmpId: empId ,pageIndex: pageIndex, size: 10,type:""}
 
-        this.$http.post("/MobileService/Notice.asmx/GetNoticeType",formData,{showLoad:false})
+        this.$http.post("/MobileService/Notice.asmx/GetNotice",formData,{showLoad:false})
           .then(r=>{
           console.log(r)
         let data= eval("(" + r.data.d + ")");
@@ -169,5 +179,12 @@
   .loadMoreFinish{
     text-align: center;
     padding: 0.18rem 0;
+  }
+  .weui-cell__hd{
+    width:3rem !important
+  }
+  .imgWrap{
+    width:1.80rem;
+    padding-right:0.35rem
   }
 </style>

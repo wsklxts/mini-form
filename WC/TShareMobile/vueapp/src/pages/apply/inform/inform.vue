@@ -6,11 +6,11 @@
     </XHeader>
     <div class="template">
       <group >
-        <cell :title="l.type"
+        <cell :title="l.name"
               is-link v-for="(l,index) in listData"
               :key="index"
-              @click.native="toDetails(l.type)"
-              inline-desc=''
+              @click.native="toDetails(l)"
+              :inline-desc='l.senddate'
         >
           <div class="badge-value">
             <badge :text="l.unread" v-show="l.unread"></badge>
@@ -59,7 +59,7 @@
     methods:{
       toDetails(l){
 //        this.$router.push({path:"/apply/AnnouncementDetails?type="+l})
-        this.$router.push({path:"/apply/inform/informDetails", query: { type: l }})
+        this.$router.push({path:"/apply/inform/informDetails", query: { type: l.id }})
       },
       scroll(){
         var g = getScrollTop() + getWindowHeight()
@@ -80,9 +80,9 @@
         const empId=window.localStorage.getItem("global_empid")
         const company=window.localStorage.getItem("comp_code")
 
-        let formData={company:company, globalempid: empId ,pageIndex: pageIndex, size: 10}
+        let formData={company:company, globalEmpId: empId ,pageIndex: pageIndex, size: 10,type:""}
 
-        this.$http.post("/MobileService/TongZhi.asmx/GetTongZhiType",formData,{showLoad:false})
+        this.$http.post("/MobileService/TongZhi.asmx/GetTongZhi",formData,{showLoad:false})
           .then(r=>{
           console.log(r)
         let data= eval("(" + r.data.d + ")");
