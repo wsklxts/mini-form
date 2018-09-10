@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="common/index.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="common/reset.css">
+
+    <script src="libs/scripts/boot.js"></script>
+    <script src="libs/scripts/jquery-ui.min.js"></script>
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <script src="common/index.js"></script>
+  <script type="text/javascript">
+    function getHtml(e){
+      var formBuild=$(".formBuild");
+      console.log(formBuild.html())
+      var form1=new mini.Form("formBuild");
+      var items=form1.getFields();
+      console.log(items);
+    }
+  </script>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="controls">
+    <div class="controlsWrap">
+      <a name="mini-textbox"  id="text" name="mini-textbox" class="mini-button" iconCls="fa-text-width">单行文本</a>
+      <a name="mini-textarea"  id="textArea" class="mini-button" iconCls="fa-list-ul ">多行文本</a>
+      <a name="mini-radiobuttonlist"  id="radio" class="mini-button" iconCls="fa-dot-circle-o ">单选框</a>
+      <a name="mini-checkboxlist"  id="checkBox" class="mini-button" iconCls="fa-check-square-o ">多选框</a>
+      <a name="mini-combobox"  id="select" class="mini-button" iconCls="fa-angle-double-down ">下拉框</a>
+      <a name="mini-datepicker"  id="date" class="mini-button" iconCls="fa-calendar-minus-o ">日期</a>
+      <a name="mini-fileupload"  id="file" class="mini-button" iconCls="fa-file">文件上传</a>
+      <a name="mini-textbox"  id="pp" class="mini-button" iconCls="fa-list-alt">段落</a>
+      <a name="mini-textbox"  class="mini-button" value="" onclick="getHtml">Html</a>
+    </div>
+  </div>
+
+  <div class="formBuildWrap">
+    <ul id="formBuild" class="formBuild">
+
+        <div style="display:inline">0<br/></div>
+
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+</body>
+
+<script>
+
+</script>
+
+</html>

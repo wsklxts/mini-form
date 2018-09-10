@@ -1,0 +1,54 @@
+
+
+
+.container{
+  padding:22px;
+}
+
+.controls{
+  position:fixed;
+  left:0;
+  top:0;
+  width:16%;
+  padding:22px;
+  box-sizing: border-box;
+}
+.controls a{
+  display:inline-block;
+  margin-bottom:12px;
+  width:77%;
+  min-width:100px;
+}
+
+.formBuild{
+  width:83%;
+  box-sizing: border-box;
+  float:right;
+  border:1px solid #ccc;
+  min-height:588px;
+}
+.formBuild li{
+  display:inline-block;
+  margin:10px;
+  position:relative;
+}
+.formBuild li .buttonWrap{
+  position: absolute;
+  top: -30px;
+  right: 8px;
+  display:none;
+}
+.formBuild li .buttonWrap div{
+  text-align: center;
+  line-height: 22px;
+  width: 21px;
+  height: 22px;
+  background: #ccc;
+  display: inline-block;
+  margin: 5px;
+  box-sizing: border-box;
+}
+.mini-panel-body{
+  min-height:534px !important
+}
+
