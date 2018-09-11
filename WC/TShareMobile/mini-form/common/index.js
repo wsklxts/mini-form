@@ -18,19 +18,31 @@ $(function(){
 
   var clone=null
   var before=null
+  var buttonWrapS=false
+  var button=null
+  var placeholderIndex
 
   $(formBuild).sortable({
     opacity: 0.9,
     connectWith: $(formBuild),
     cancel: '',
     cursor: 'move',
-    placeholder: '',
+    placeholder: 'controlP',
     revert: 150,
+
+    start:function(event,ui){
+      console.log("start");
+      $(".buttonWrap").css("display","none")
+      buttonWrapS=true
+    },
     beforeStop: (evt, ui) => (evt, ui),
     distance: 3,
     update: function(event, ui) {
 
     },
+    stop:function(){
+      buttonWrapS=false
+    }
   })
   var toCancel
 
@@ -40,7 +52,7 @@ $(function(){
     connectWith: $(formBuild),
     scroll: false,
     cursor: 'move',
-    placeholder: '',
+    placeholder: 'controlP',
     start:function(event,ui){
       console.log("start");
       ui.item.show().addClass('moving')
@@ -55,6 +67,7 @@ $(function(){
     beforeStop: function(e,u){
       console.log("beforeStop");
       toCancel=false
+      placeholderIndex=u.placeholder.index();
     },
     distance: 3,
     update: function(event, ui) {
@@ -71,55 +84,103 @@ $(function(){
     console.log(u);
     var type=$(u.item).attr("id");
     var miniC=mini.get(type)
-    var filedsWrap=$("<li></li>")
+    console.log(miniC);
+    var filedsWrap=$("<li class='filed'></li>")
     var fields=$(`<div class=${miniC.name}> </div>`)
-    var attrs={}
-    var button=$("<div class='buttonWrap'><div class='buttonadd'>+</div>  <div class='buttonsub'>-</div> </div>")
+    var lable=null
+    button=$("<div class='buttonWrap'><div class='buttonadd'>+</div>  <div class='buttonsub'>-</div> </div>")
     switch(miniC.name){
       case "mini-textbox":
         fields.attr("emptyText","请输入")
-        attrs.lable=$('<lable>单行输入框：</lable>')
+        lable=$('<lable>单行输入框：</lable>')
         break;
       case "mini-textarea":
         fields.attr("emptyText","请输入")
-        attrs.lable=$('<lable>多行输入框：</lable>')
+        lable=$('<lable>多行输入框：</lable>')
         break;
       case "mini-radiobuttonlist":
         fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-        attrs.lable=$('<lable>单选框：</lable>')
+        lable=$('<lable>单选框：</lable>')
         break;
-      case "lineFeed":
-        console.log(u.item[0]);
-        $(formBuild).append($(u.item[0]).clone())
+      case "lineFeedBtn":
+        fields=$(`<div class="brWrap"></div>`)
+        var br=$("<br />")
+        filedsWrap.addClass("lineFeed")
         break;
     }
 
+    if(br){
+      filedsWrap.append(lable,button ,fields,br)
+    }else{
+      filedsWrap.append(lable,button ,fields)
+    }
+    //filedsWrap.hover(function(e){
+    //  console.log($(this));
+    //  if(!buttonWrapS){
+    //    button.css("display","block")
+    //  }
+    //},function(){
+    //  button.css("display","none")
+    //})
 
 
-
-    filedsWrap.hover(function(e){
-      console.log($(this));
-      button.css("display","block")
-    },function(){
-      button.css("display","none")
-    })
     filedsWrap.on("click",".buttonadd, .buttonsub",function(){
       if($(this).hasClass("buttonadd")){
-
+        var fieldClone= $(this).parent().parent("li").clone(true)
+        fieldClone.children(".buttonWrap").css("display","none")
+        $(formBuild).append( fieldClone)
+        mini.parse();
       }
       if($(this).hasClass("buttonsub")){
-
+        $(this).parent().parent().remove()
       }
     })
 
+    console.log(placeholderIndex);
+    console.log($('> li', $(formBuild)).size());
+    console.log($('> li', $(formBuild))
+      .eq(placeholderIndex-2));
+
+
+
+
+
+    if($('> li', $(formBuild)).size() === 0){
+      $(formBuild).append(filedsWrap)
+    }else{
+      if(placeholderIndex==1){
+        $('> li', $(formBuild))
+          .eq(placeholderIndex-1).before(filedsWrap)
+      }else{
+        $('> li', $(formBuild))
+          .eq(placeholderIndex-2).after(filedsWrap)
+      }
+    }
+
+
+    //
+    //$('> li', $(formBuild))
+    //    .eq(placeholderIndex).after(filedsWrap)
+    //    //.eq().after(filedsWrap)
+    ////}
 
 
     //$(formBuild).append(filedsWrap)
 
 
+
     mini.parse();
   }
 
+  $(formBuild).on("mouseover",".filed",function(e){
+    if(!buttonWrapS){
+      $(this).children(".buttonWrap").css("display","block")
+    }
+  })
 
+
+  $(formBuild).on("mouseout",".filed",function(e){
+    $(this).children(".buttonWrap").css("display","none")
+  })
 
 })

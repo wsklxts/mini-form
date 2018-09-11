@@ -1,11 +1,10 @@
 
-.lineFeed{
-}
 .brWrap{
-  background: #ccc;
-  width: 20px;
-  height: 20px;
+  background: #afd6f3;
+  width: 15px;
+  height: 15px;
   display: inline-block;
+  border-radius: 20px;
 }
 
 .container{
@@ -41,21 +40,36 @@
 }
 .formBuild li .buttonWrap{
   position: absolute;
-  top: -30px;
-  right: 8px;
-  display:none;
+  top: -32px;
+  right: -6px;
+  width: 66px;
+   display: none;
 }
 .formBuild li .buttonWrap div{
   text-align: center;
   line-height: 22px;
   width: 21px;
   height: 22px;
-  background: #ccc;
+  background: #62b6f1;
   display: inline-block;
   margin: 5px;
   box-sizing: border-box;
+  color: white;
 }
 .mini-panel-body{
   min-height:534px !important
 }
 
+.formBuild li.lineFeed{
+  display:inline !important;
+}
+
+.controlP{
+  background: #afd6f3;
+  width: 100px;
+  height: 15px;
+  display: inline-block;
+  border-radius: 20px;
+
+
+}
