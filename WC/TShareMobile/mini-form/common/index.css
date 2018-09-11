@@ -1,5 +1,12 @@
 
-
+.lineFeed{
+}
+.brWrap{
+  background: #ccc;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
 
 .container{
   padding:22px;

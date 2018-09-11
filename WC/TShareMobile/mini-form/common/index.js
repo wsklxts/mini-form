@@ -88,18 +88,14 @@ $(function(){
         fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
         attrs.lable=$('<lable>单选框：</lable>')
         break;
+      case "lineFeed":
+        console.log(u.item[0]);
+        $(formBuild).append($(u.item[0]).clone())
+        break;
     }
 
 
 
-
-    filedsWrap.append(attrs.lable,fields,button)
-    //filedsWrap.data("aa","bb")
-    console.log(filedsWrap.get());
-    filedsWrap.get(0).dataset.v="vvvvvv";
-    console.log(filedsWrap.get(0).dataset.v);
-    //console.log(filedsWrap);
-    //console.log(filedsWrap.data("aa"));
 
     filedsWrap.hover(function(e){
       console.log($(this));
@@ -118,7 +114,9 @@ $(function(){
 
 
 
-    $(formBuild).append(filedsWrap)
+    //$(formBuild).append(filedsWrap)
+
+
     mini.parse();
   }
 
