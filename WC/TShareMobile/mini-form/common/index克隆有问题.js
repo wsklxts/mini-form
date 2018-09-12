@@ -79,38 +79,12 @@ $(function(){
     },
   })
 
-
-
-  var filedsWrap
   function makeControl(u){
-
-    createCDom(u)
-    addEventAc(u)
-
-
-
-
-    if($('> li', $(formBuild)).size() === 0){
-      $(formBuild).append(filedsWrap)
-    }else{
-      if(placeholderIndex==1){
-        $('> li', $(formBuild))
-          .eq(placeholderIndex-1).before(filedsWrap)
-      }else{
-        $('> li', $(formBuild))
-          .eq(placeholderIndex-2).after(filedsWrap)
-      }
-    }
-
-
-  }
-
-
-
-  function createCDom(u){
+    console.log(u);
     var type=$(u.item).attr("id");
     var miniC=mini.get(type)
-    filedsWrap=$("<li class='filed'></li>")
+    console.log(miniC);
+    var filedsWrap=$("<li class='filed'></li>")
     var fields=$(`<div class=${miniC.name}> </div>`)
     var lable=null
     button=$("<div class='buttonWrap'><div class='buttonadd'>+</div>  <div class='buttonsub'>-</div> </div>")
@@ -140,29 +114,33 @@ $(function(){
       filedsWrap.append(lable,button ,fields)
     }
 
-
-
-    return filedsWrap
-  }
-
-  function addEventAc(u){
-
-
     filedsWrap.on("click",".buttonadd, .buttonsub",function(){
-      if($(this).hasClass("buttonadd")){
-        //var fieldClone= $(this).parent().parent("li").clone(true)
-        var cDom=createCDom(u)
 
-        //fieldClone.children(".buttonWrap").css("display","none")
-        $(this).parent().parent("li").after(cDom)
+      if($(this).hasClass("buttonadd")){
+        var fieldClone= $(this).parent().parent("li").clone(true)
+        
+        fieldClone.children(".buttonWrap").css("display","none")
+        $(this).parent().parent("li").after(fieldClone)
         mini.parse();
       }
       if($(this).hasClass("buttonsub")){
         $(this).parent().parent().remove()
       }
     })
-  }
 
+
+    if($('> li', $(formBuild)).size() === 0){
+      $(formBuild).append(filedsWrap)
+    }else{
+      if(placeholderIndex==1){
+        $('> li', $(formBuild))
+          .eq(placeholderIndex-1).before(filedsWrap)
+      }else{
+        $('> li', $(formBuild))
+          .eq(placeholderIndex-2).after(filedsWrap)
+      }
+    }
+  }
 
   $(formBuild).on("mouseover",".filed",function(e){
     if(!buttonWrapS){
@@ -172,4 +150,7 @@ $(function(){
   $(formBuild).on("mouseout",".filed",function(e){
     $(this).children(".buttonWrap").css("display","none")
   })
+
+
+
 })

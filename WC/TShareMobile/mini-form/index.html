@@ -12,11 +12,15 @@
     <script src="common/index.js"></script>
   <script type="text/javascript">
     function getHtml(e){
-      var formBuild=$(".formBuild");
-      console.log(formBuild.html())
-      var form1=new mini.Form("formBuild");
-      var items=form1.getFields();
-      console.log(items);
+//      var formBuild=$(".formBuild");
+//      console.log(formBuild.html())
+//      var form1=new mini.Form("formBuild");
+//      var items=form1.getFields();
+//      console.log(items);
+      console.log($(formBuild).children("li"));
+      console.log($(formBuild).find("li"));
+      $("#textareaa").clone().appendTo($(".formBuild"))
+//      mini.parse()
     }
   </script>
 </head>
@@ -37,31 +41,41 @@
       <a name="mini-textbox"  id="pp" class="mini-button" iconCls="fa-list-alt">段落</a>
       <a name="mini-textbox"  class="mini-button" onclick="getHtml">Html</a>
 
-
+      <!--<a name="mini-textarea" class="mini-textarea" ></a>-->
       <!--<div id="lineFeed" name="lineFeed" class="lineFeed mini-button" style="display:inline">-->
         <!--<div class="brWrap"></div>-->
         <!--<br/>-->
       <!--</div>-->
+
+
+      <!--<a name="mini-textarea"  class="mini-textbox" emptyText="输入要">多行文本</a>-->
+      <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
+
+      <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
+
+
+
     </div>
   </div>
 
   <div class="formBuildWrap">
+
+    <!--<div id="textareaa">-->
+    <!--<textarea name="textarea"  cols="30" rows="10">textareatextarea</textarea>-->
+    <!--<input name="textarea"  cols="30" rows="10" placeholder="aaaaaaaaaaaaaa"/>-->
+    <!--</div>-->
+
     <ul id="formBuild" class="formBuild">
-
-
-
+      <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
+      <!--多行输入框：<textarea class="mini-textarea" emptyText="请输入备注"></textarea> <br />-->
     </ul>
-  </div>
 
+
+  </div>
 
 </div>
 
-
-
-</body>
-
 <script>
-
-</script>
+</body>
 
 </html>
