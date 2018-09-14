@@ -12,22 +12,36 @@
 }
 
 .controls{
-  position:fixed;
-  left:0;
-  top:0;
-  width:16%;
-  padding:22px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 16%;
+  padding: 22px;
   box-sizing: border-box;
 }
 .controls a{
   display:inline-block;
   margin-bottom:12px;
   width:77%;
-  min-width:100px;
 }
-
+.formBuildWrap{
+  width: 64%;
+  float: left;
+  margin-left: 12%;
+}
+.formBuildWrap>span{
+  padding: 10px;
+}
+.formAttributeWrap{
+  float: right;
+  width: 22%;
+}
+.formAttribute{
+  min-height:588px;
+  border: 1px solid #ccc;
+}
 .formBuild{
-  width:83%;
+  width:100%;
   box-sizing: border-box;
   float:right;
   border:1px solid #ccc;
@@ -41,9 +55,10 @@
 .formBuild li .buttonWrap{
   position: absolute;
   top: -32px;
-  right: -6px;
-  width: 66px;
-   display: none;
+  right: 0;
+  width: 106px;
+  height: 66px;
+  display: none;
 }
 .formBuild li .buttonWrap div{
   text-align: center;

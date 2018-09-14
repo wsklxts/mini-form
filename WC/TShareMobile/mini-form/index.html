@@ -10,6 +10,7 @@
     <script src="libs/scripts/jquery-ui.min.js"></script>
     <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
     <script src="common/index.js"></script>
+    <script src="common/swfupload/swfupload.js"></script>
   <script type="text/javascript">
     function getHtml(e){
 //      var formBuild=$(".formBuild");
@@ -29,6 +30,7 @@
 <div class="container">
 
   <div class="controls">
+    <h2>控件列表</h2>
     <div class="controlsWrap">
       <a name="lineFeedBtn" id="lineFeedBtn" class="mini-button" >换行符</a>
       <a name="mini-textbox"  id="text" name="mini-textbox" class="mini-button" iconCls="fa-text-width">单行文本</a>
@@ -40,6 +42,7 @@
       <a name="mini-fileupload"  id="file" class="mini-button" iconCls="fa-file">文件上传</a>
       <a name="mini-textbox"  id="pp" class="mini-button" iconCls="fa-list-alt">段落</a>
       <a name="mini-textbox"  class="mini-button" onclick="getHtml">Html</a>
+
 
       <!--<a name="mini-textarea" class="mini-textarea" ></a>-->
       <!--<div id="lineFeed" name="lineFeed" class="lineFeed mini-button" style="display:inline">-->
@@ -65,17 +68,40 @@
     <!--<input name="textarea"  cols="30" rows="10" placeholder="aaaaaaaaaaaaaa"/>-->
     <!--</div>-->
 
+
+
+    <span>控件容器</span> <span class="delAll">清空控件</span>
     <ul id="formBuild" class="formBuild">
       <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
+
+
+      <!--<input id="fileupload1" class="mini-fileupload"-->
+             <!--flashUrl="common/swfupload/swfupload.swf"-->
+
+      <!--/>-->
+
+
       <!--多行输入框：<textarea class="mini-textarea" emptyText="请输入备注"></textarea> <br />-->
     </ul>
 
+  </div>
 
+  <div class="formAttributeWrap">
+    <span>表单属性</span>
+    <div class="formAttribute">
+      <div class="fieldName">
+        <p>字段名称</p>
+        <input type="text">
+      </div>
+    </div>
   </div>
 
 </div>
 
 <script>
+  mini.parse();
+</script>
+
 </body>
 
 </html>
