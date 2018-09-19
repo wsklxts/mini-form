@@ -24,6 +24,16 @@
   margin-bottom:12px;
   width:77%;
 }
+.controls h2{
+  height: 31px;
+  background: #deedf7;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 77%;
+  line-height: 31px;
+  /*border: solid 1px #aed0ea;*/
+  font-size:18px;
+}
 .formBuildWrap{
   width: 64%;
   float: left;
@@ -37,15 +47,22 @@
   width: 22%;
 }
 .formAttribute{
-  min-height:588px;
-  border: 1px solid #ccc;
+  border: 1px solid #aed0ea;
+  min-height: 588px;
+}
+.mini-panel-border{
+  /*min-height: 610px;*/
 }
 .formBuild{
   width:100%;
   box-sizing: border-box;
   float:right;
-  border:1px solid #ccc;
+  border:1px solid #aed0ea;
   min-height:588px;
+}
+.formBuild li.active {
+  border:1px dashed #aed0ea;
+  padding:3px;
 }
 .formBuild li{
   display:inline-block;
@@ -72,7 +89,7 @@
   color: white;
 }
 .mini-panel-body{
-  min-height:534px !important
+  min-height:588px !important
 }
 
 .formBuild li.lineFeed{
@@ -86,5 +103,10 @@
   display: inline-block;
   border-radius: 20px;
 
-
+}
+.feildAttr{
+  margin:10px;
+}
+.feildAttr > lable{
+  display:block;
 }

@@ -5,24 +5,14 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" media="screen" href="common/index.css">
     <link rel="stylesheet" type="text/css" media="screen" href="common/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="common/mini.css">
 
     <script src="libs/scripts/boot.js"></script>
     <script src="libs/scripts/jquery-ui.min.js"></script>
-    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
     <script src="common/index.js"></script>
-    <script src="common/swfupload/swfupload.js"></script>
+    <!--<script src="common/swfupload/swfupload.js"></script>-->
   <script type="text/javascript">
-    function getHtml(e){
-//      var formBuild=$(".formBuild");
-//      console.log(formBuild.html())
-//      var form1=new mini.Form("formBuild");
-//      var items=form1.getFields();
-//      console.log(items);
-      console.log($(formBuild).children("li"));
-      console.log($(formBuild).find("li"));
-      $("#textareaa").clone().appendTo($(".formBuild"))
-//      mini.parse()
-    }
+
   </script>
 </head>
 <body>
@@ -39,68 +29,73 @@
       <a name="mini-checkboxlist"  id="checkBox" class="mini-button" iconCls="fa-check-square-o ">多选框</a>
       <a name="mini-combobox"  id="select" class="mini-button" iconCls="fa-angle-double-down ">下拉框</a>
       <a name="mini-datepicker"  id="date" class="mini-button" iconCls="fa-calendar-minus-o ">日期</a>
-      <a name="mini-fileupload"  id="file" class="mini-button" iconCls="fa-file">文件上传</a>
+      <a name="mini-htmlfile"  id="file" class="mini-button" iconCls="fa-file">文件上传</a>
       <a name="mini-textbox"  id="pp" class="mini-button" iconCls="fa-list-alt">段落</a>
       <a name="mini-textbox"  class="mini-button" onclick="getHtml">Html</a>
-
-
-      <!--<a name="mini-textarea" class="mini-textarea" ></a>-->
-      <!--<div id="lineFeed" name="lineFeed" class="lineFeed mini-button" style="display:inline">-->
-        <!--<div class="brWrap"></div>-->
-        <!--<br/>-->
-      <!--</div>-->
-
-
-      <!--<a name="mini-textarea"  class="mini-textbox" emptyText="输入要">多行文本</a>-->
-      <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
-
-      <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
-
-
 
     </div>
   </div>
 
+  <!--<div id="p2" class="mini-panel formBuildWrap" title="控件容器" width="64%"-->
+       <!--showCollapseButton="true" showCloseButton="true"-->
+  <!--&gt;-->
+
+  <!--</div>-->
+
   <div class="formBuildWrap">
 
-    <!--<div id="textareaa">-->
-    <!--<textarea name="textarea"  cols="30" rows="10">textareatextarea</textarea>-->
-    <!--<input name="textarea"  cols="30" rows="10" placeholder="aaaaaaaaaaaaaa"/>-->
-    <!--</div>-->
+    <!--<span class="formBuildName">控件容器</span> <span class="delAll">清空控件</span>-->
+    <div id="toolbar1" class="mini-toolbar" style="padding:2px;">
+      <table style="width:100%;" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="width:100%;">
+            <a style="cursor:default;padding:2px;padding-left:5px;">控件容器</a>
+            <span class="separator"></span>
+            <a class="mini-button" iconCls="icon-remove" plain="true" onclick="delAll()">清空控件</a>
+          </td>
+          <td style="white-space:nowrap;">
+            <a class="mini-button" iconCls="panel-expand" onclick="" plain="true">收缩</a>
+          </td>
+        </tr>
+      </table>
+    </div>
 
 
-
-    <span>控件容器</span> <span class="delAll">清空控件</span>
     <ul id="formBuild" class="formBuild">
-      <!--<a name="mini-textarea"  class="mini-textarea" emptyText="输入要">多行文本</a>-->
-
-
-      <!--<input id="fileupload1" class="mini-fileupload"-->
-             <!--flashUrl="common/swfupload/swfupload.swf"-->
-
-      <!--/>-->
-
-
-      <!--多行输入框：<textarea class="mini-textarea" emptyText="请输入备注"></textarea> <br />-->
     </ul>
 
   </div>
 
+
+  <!--<div id="fieldsAttr" class="mini-panel formAttributeWrap" title="表单属性" width="22%"-->
+       <!--showCollapseButton="true" showCloseButton="true"-->
+  <!--&gt;-->
+
+  <!--</div>-->
+
+
+
+
   <div class="formAttributeWrap">
-    <span>表单属性</span>
+    <div id="toolbar2" class="mini-toolbar" style="padding:2px;">
+      <table style="width:100%;" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="width:100%;">
+            <a style="cursor:default;padding:2px;padding-left:5px;">控件属性</a>
+            <span class="separator"></span>
+          </td>
+          <td style="white-space:nowrap;">
+            <a class="mini-button" iconCls="panel-expand" onclick="" plain="true">收缩</a>
+          </td>
+        </tr>
+      </table>
+    </div>
     <div class="formAttribute">
-      <div class="fieldName">
-        <p>字段名称</p>
-        <input type="text">
-      </div>
+
     </div>
   </div>
 
 </div>
-
-<script>
-  mini.parse();
-</script>
 
 </body>
 
