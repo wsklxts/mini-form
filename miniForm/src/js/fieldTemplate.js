@@ -5,6 +5,11 @@
 
 import fieldTemplateEvent from "./fieldTemplateEvent"
 import dragInsert from "./dragInsert"
+import {G} from "./globle"
+
+let formData= G.formData
+let controlId= G.controlId
+
 
 export default class fieldTemplate{
 
@@ -13,15 +18,46 @@ export default class fieldTemplate{
     this.miniC=mini.get(this.type)
 
     this.filedsWrap=$("<li class='filed'></li>")
-    this.fields=$(`<div class=${this.miniC.name}> </div>`)
+    this.fields=$(`<div class=${this.miniC.name} id=${this.miniC.name}${controlId+=1}> </div>`)
 
     this.fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
-    this.fieldData={}
-    dragInsert(this.filedsWrap)
-    fieldTemplateEvent(u,this.filedsWrap,this.fields)
 
-    //addEventAc(u,this.filedsWrap,this.fields)
-    //dragInsert(this.filedsWrap)
+
+    this.init()
+
+    var typeText={
+      text:"单行输入",
+      textArea:"多行输入",
+      radio:"单选框",
+      checkBox:"多选框",
+      select:"下拉框",
+      date:"日期",
+      file:"文件",
+      pp:"段落"
+    }
+
+    console.log(this.fields.attr("id"));
+
+
+    this.fieldData={
+      id:controlId+=1 ,
+      type:this.type,
+      lable:typeText[this.type],
+      className:"form-control",
+      placeholder:this.fields.attr("emptyText"),
+      width:""
+
+    }
+
+
+    formData.push(this.fieldData)
+
+
+    dragInsert(this.filedsWrap)
+    fieldTemplateEvent(u,this.filedsWrap,this.fields,this.fieldData)
+
+
+
   }
 
   init(){
@@ -72,6 +108,7 @@ export default class fieldTemplate{
 
 
   textbox(){
+    this.fields.attr("emptyText","请输入")
     this.filedsWrap.append(this.createLable("单行输入框："),this.fieldBtn,this.fields)
     this.filedsWrap.addClass("text")
     return this.filedsWrap

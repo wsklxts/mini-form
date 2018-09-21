@@ -11,7 +11,7 @@ import {G}  from "./globle"
 
 
 
-export default function fieldTemplateEvent(u,filedsWrap,fields){
+export default function fieldTemplateEvent(u,filedsWrap,fields,attrData){
 
   var buttonWrapS= G.buttonWrapS
   let formAttribute = $(".formAttribute")
@@ -44,7 +44,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields){
       filedsWrap.parent().children("li").removeClass("active")
       filedsWrap.addClass("active")
       exeTime(filedsWrap,"border-color")
-      makeFeildAttr($(this),fields)
+      makeFeildAttr(filedsWrap,fields,attrData)
     }
   })
 
@@ -77,12 +77,12 @@ export default function fieldTemplateEvent(u,filedsWrap,fields){
 
 
 
-  function makeFeildAttr(f,fields){
+  function makeFeildAttr(f,fields,data){
     if( formAttribute.children("div").size()){
       formAttribute.empty()
     }
 
-    let feildHTML=new attrTemplate(f,formAttribute).init()
+    let feildHTML=new attrTemplate(f,formAttribute,data).init()
 
 
     formAttribute.html(feildHTML.html)

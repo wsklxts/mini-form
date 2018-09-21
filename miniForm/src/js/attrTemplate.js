@@ -6,8 +6,9 @@
 export default class attrTemplate{
 
 
-  constructor(f,formAttribute) {
+  constructor(f,formAttribute,data) {
     this.f = f
+    this.d = data
     if( formAttribute.children("div").size()){
       formAttribute.empty()
     }
@@ -58,21 +59,20 @@ export default class attrTemplate{
   createCID(f){
     return `<div class="feildAttr">
             <lable>控件ID：</lable>
-            <div class="mini-textbox" value=${f.data("id")} allowInput="false"> </div>
+            <div class="mini-textbox" value=${this.d.id} allowInput="false"> </div>
            </div>`
   }
   createCType(f){
     return `<div class="feildAttr">
             <lable>控件类型：</lable>
-            <div class="mini-textbox" value=${f.attr("class").split(" ")[1]} allowInput="false"> </div>
+            <div class="mini-textbox" value=${this.d.type} allowInput="false"> </div>
            </div>`
   }
 
   createCCatipn(f){
-    console.log(f);
     return `<div class="feildAttr fcaption">
             <lable>控件标题：</lable>
-            <div id="fcaption" class="mini-textbox" value="${f.data("caption")}"></div>
+            <div id="fcaption" class="mini-textbox" value="${this.d.lable}"></div>
            </div>`
   }
   createCValue(f){
@@ -84,7 +84,7 @@ export default class attrTemplate{
   createCPlaceholder(f){
     return `<div class="feildAttr">
             <lable>占  位  符：</lable>
-            <div class="mini-textbox" value="${f.data("placeholder")}"></div>
+            <div class="mini-textbox" value="${this.d.placeholder}"></div>
            </div>`
   }
   createCWidth(f){

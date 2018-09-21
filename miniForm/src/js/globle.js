@@ -6,5 +6,7 @@
 
 export let G={
   buttonWrapS:false,
-  placeholderIndex:null
+  placeholderIndex:null,
+  formData:[],
+  controlId:0
 }
