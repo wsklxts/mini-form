@@ -46,32 +46,21 @@ export default class attrTemplate{
         this.createCID(f),
         this.createCType(f),
         this.createCCatipn(f),
-        obj.createCValue,
+        this.createCValue(f),
         this.createCPlaceholder(f),
         this.createCWidth(f),
         this.createCMaxLength(f),
         this.createCRequire(),
-        obj
       ],
-
-      //this.createCID(f)+
-      //this.createCType(f)+
-      //this.createCCatipn(f)+
-      //this.createCValue(f)+
-      //this.createCPlaceholder(f)+
-      //this.createCWidth(f)+
-      //this.createCMaxLength(f)+
-      //this.createCRequire(),
-
       subhtml:{
-        createCID:this.createCID(f),
-        createCType:this.createCType(f),
-        createCCatipn:this.createCCatipn(f),
-        createCValue:this.createCValue(f),
-        createCPlaceholder:this.createCPlaceholder(f),
-        createCWidth:this.createCWidth(f),
-        createCMaxLength:this.createCMaxLength(f),
-        createCRequire:this.createCRequire(),
+        createCID:html[0],
+        createCType:html[0],
+        createCCatipn:html[0],
+        createCValue:html[0],
+        createCPlaceholder:html[0],
+        createCWidth:html[0],
+        createCMaxLength:html[0],
+        createCRequire:html[0],
       }
     }
   }
