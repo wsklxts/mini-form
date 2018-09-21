@@ -63,9 +63,12 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData){
       mini.parse();
     }
     if($(this).hasClass("buttonsub")){
-      clearFeildAttr(filedsWrap)
+      //clearFeildAttr(filedsWrap)
+      console.log(attrData);
+      if(attrData.id==formAttribute.data("id")){
+        formAttribute.empty()
+      }
       filedsWrap.remove()
-
     }
     if($(this).hasClass("buttonedit")){
 
@@ -84,10 +87,11 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData){
 
     let feildHTML=new attrTemplate(f,formAttribute,data).init()
 
+    console.log(feildHTML.html[feildHTML.html.length-1]);
 
     formAttribute.html(feildHTML.html)
 
-    formAttribute.data("id",f.data("id"))
+    formAttribute.data("id",data.id)
     mini.parse()
 
     new attrEvent(f,feildHTML,function(v){
@@ -98,9 +102,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData){
   }
 
   function clearFeildAttr(f){
-    if(f.data("id")==formAttribute.data("id")){
-      formAttribute.empty()
-    }
+
   }
 
 }

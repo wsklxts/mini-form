@@ -29,15 +29,40 @@ export default class attrTemplate{
   }
 
   cText(f){
+
+    var obj={
+      createCID:this.createCID(f),
+      createCType:this.createCType(f),
+      createCCatipn:this.createCCatipn(f),
+      createCValue:this.createCValue(f),
+      createCPlaceholder:this.createCPlaceholder(f),
+      createCWidth:this.createCWidth(f),
+      createCMaxLength:this.createCMaxLength(f),
+      createCRequire:this.createCRequire(f),
+    }
+
     return {
-      html:this.createCID(f)+
-      this.createCType(f)+
-      this.createCCatipn(f)+
-      this.createCValue(f)+
-      this.createCPlaceholder(f)+
-      this.createCWidth(f)+
-      this.createCMaxLength(f)+
-      this.createCRequire(),
+      html:[
+        this.createCID(f),
+        this.createCType(f),
+        this.createCCatipn(f),
+        obj.createCValue,
+        this.createCPlaceholder(f),
+        this.createCWidth(f),
+        this.createCMaxLength(f),
+        this.createCRequire(),
+        obj
+      ],
+
+      //this.createCID(f)+
+      //this.createCType(f)+
+      //this.createCCatipn(f)+
+      //this.createCValue(f)+
+      //this.createCPlaceholder(f)+
+      //this.createCWidth(f)+
+      //this.createCMaxLength(f)+
+      //this.createCRequire(),
+
       subhtml:{
         createCID:this.createCID(f),
         createCType:this.createCType(f),
@@ -76,10 +101,11 @@ export default class attrTemplate{
            </div>`
   }
   createCValue(f){
-    return `<div class="feildAttr">
-            <lable>控 件 值：</lable>
-            <div id="fValue" class="mini-textbox"></div>
-           </div>`
+    //return `<div class="feildAttr">
+    //        <lable>控 件 值：</lable>
+    //        <div id="fValue" class="mini-textbox"></div>
+    //       </div>`
+    return $('<div class="feildAttr"> <lable>控 件 值：</lable> <div id="fValue" class="mini-textbox"></div> </div>')
   }
   createCPlaceholder(f){
     return `<div class="feildAttr">
@@ -90,12 +116,12 @@ export default class attrTemplate{
   createCWidth(f){
     return `<div class="feildAttr">
             <lable>控件宽度：</lable>
-            <div class="mini-textbox" > </div>
+            <div class="mini-textbox" value="${this.d.width}" > </div>
            </div>`
   }
   createCMaxLength(f){
     return `<div class="feildAttr">
-            <lable>控件宽度：</lable>
+            <lable>最大长度：</lable>
             <div class="mini-textbox" > </div>
            </div>`
   }

@@ -13,60 +13,35 @@ let controlId= G.controlId
 
 export default class fieldTemplate{
 
-  constructor(u){
-    this.type=$(u.item).attr("id");
-    this.miniC=mini.get(this.type)
+  constructor(u,type,fields,filedsWrap,fieldBtn,fieldData){
+    //this.type=$(u.item).attr("id");
+    //this.miniC=mini.get(this.type)
+    //
+    //this.filedsWrap=$("<li class='filed'></li>")
+    //this.fields=$(`<div class=${this.miniC.name} id=${this.miniC.name}${controlId+=1}> </div>`)
+    //
+    //this.fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
 
-    this.filedsWrap=$("<li class='filed'></li>")
-    this.fields=$(`<div class=${this.miniC.name} id=${this.miniC.name}${controlId+=1}> </div>`)
+    //dragInsert(this.filedsWrap)
+    //fieldTemplateEvent(u,this.filedsWrap,this.fields,this.fieldData)
 
-    this.fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
-
-
-    this.init()
-
-    var typeText={
-      text:"单行输入",
-      textArea:"多行输入",
-      radio:"单选框",
-      checkBox:"多选框",
-      select:"下拉框",
-      date:"日期",
-      file:"文件",
-      pp:"段落"
-    }
-
-    console.log(this.fields.attr("id"));
-
-
-    this.fieldData={
-      id:controlId+=1 ,
-      type:this.type,
-      lable:typeText[this.type],
-      className:"form-control",
-      placeholder:this.fields.attr("emptyText"),
-      width:""
-
-    }
-
-
-    formData.push(this.fieldData)
-
-
-    dragInsert(this.filedsWrap)
-    fieldTemplateEvent(u,this.filedsWrap,this.fields,this.fieldData)
-
-
+    this.type=type
+    this.fields=fields
+    this.filedsWrap=filedsWrap
+    this.fieldBtn=fieldBtn
+    this.fieldData=fieldData
 
   }
 
   init(){
-    switch(this.miniC.name){
+    console.log(this.fieldData)
+
+    switch(this.type){
       case "mini-textbox":
          return this.textbox()
         break;
       case "mini-textarea":
-        this.textarea()
+        return this.textarea()
         break;
       case "mini-radiobuttonlist":
         this.radiobuttonlist()
@@ -76,7 +51,7 @@ export default class fieldTemplate{
         //lable=$('<lable>单选框：</lable>')
         break;
       case "lineFeedBtn":
-        this.lineFeedBtn()
+        return this.lineFeedBtn()
         //fields=$(`<div class="brWrap"></div>`)
         //var br=$("<br />")
         //filedsWrap.addClass("lineFeed")
@@ -104,31 +79,45 @@ export default class fieldTemplate{
         alert(1)
         break;
     }
+
+
   }
 
+  returnWFT(){
+    return {
+      w:this.filedsWrap,
+      f:this.fields,
+      t:this.type,
+    }
+  }
 
   textbox(){
-    this.fields.attr("emptyText","请输入")
-    this.filedsWrap.append(this.createLable("单行输入框："),this.fieldBtn,this.fields)
+
+    this.fields.attr("emptyText",this.fieldData.placeholder)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fieldBtn,this.fields)
     this.filedsWrap.addClass("text")
-    return this.filedsWrap
+    return this.returnWFT()
   }
 
   textarea(){
-    this.filedsWrap.append(this.createLable("多行输入框："),this.fieldBtn,this.fields)
+    this.fields.attr("emptyText",this.fieldData.placeholder)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fieldBtn,this.fields)
     this.filedsWrap.addClass("textarea")
+    return this.returnWFT()
   }
 
   radiobuttonlist(){
     this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
     this.filedsWrap.append(this.createLable("单选框："),this.fieldBtn,this.fields)
     this.filedsWrap.addClass("radio")
+    return this.returnWFT()
   }
 
   lineFeedBtn(){
     this.fields=$(`<div class="brWrap"></div>`)
     this.filedsWrap.append(this.fieldBtn,this.fields,$("<br />"))
     this.filedsWrap.addClass("lineFeed")
+    return this.returnWFT()
   }
 
 
