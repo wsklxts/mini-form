@@ -14,6 +14,7 @@ let vv = ""
 
 let data = G.formData
 
+
 export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   var color=["red","orange","yellow","green","pink","blue","black","gray"]
   var buttonWrapS= G.buttonWrapS
@@ -71,9 +72,9 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
         formAttribute.empty()
       }
       filedsWrap.empty()
-      filedsWrap.removeClass("lineFeed").addClass("ball")
+      filedsWrap.removeClass("active").addClass("ball")
       show(filedsWrap,1);
-      //data.pop()/
+      data.pop()
     }
     if($(this).hasClass("buttonedit")){
       console.log(data);

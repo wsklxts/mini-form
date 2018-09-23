@@ -13,6 +13,7 @@
 import {G} from "./js/globle"
 import createCDom from "./js/createCDom"
 import sortable from "./js/sortable"
+import {show} from "./js/method"
 
 
 let data = G.formData
@@ -23,7 +24,15 @@ $(function(){
 
 
   var save = mini.get("onSave");
+  var delAll = mini.get("delAll");
+  delAll.on("click",function(){
+    $("#formBuild>li").each(function(i,e){
+      e=$(e)
+      e.addClass("ball")
+      show(e,1);
+    })
 
+  })
   save.on("click",function(){
     console.log(data);
   })

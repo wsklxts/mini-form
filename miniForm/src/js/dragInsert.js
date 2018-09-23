@@ -28,4 +28,6 @@ export default function dragInsert(filedsWrap){
   }
 
   mini.parse();
+
+
 }
