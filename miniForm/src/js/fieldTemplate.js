@@ -94,6 +94,7 @@ export default class fieldTemplate{
   textbox(){
 
     this.fields.attr("emptyText",this.fieldData.placeholder)
+    this.fields.val(this.fieldData.value)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fieldBtn,this.fields)
     this.filedsWrap.addClass("text")
     return this.returnWFT()

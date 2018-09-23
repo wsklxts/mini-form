@@ -3,8 +3,12 @@
  */
 
 import fieldTemplate from "./fieldTemplate"
+import attrTemplate from "./attrTemplate"
+import {fn} from "./attrTemplate"
 import dragInsert from "./dragInsert"
 import fieldTemplateEvent from "./fieldTemplateEvent"
+
+
 
 import {G} from "./globle"
 
@@ -47,11 +51,21 @@ export default function createCDom(u){
     lable:typeText[type].lable,
     className:"form-control",
     placeholder:typeText[type].placeholder,
+    value:""
   }
 
 
   var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldBtn,fieldData).init();
   dragInsert(filedsWrap)
+
+  b.w.find(".mini-textbox-input").on("input propertychange",function(e){
+   var v =  $(this).val();
+    fieldData.value=v
+    fn(fieldData.value)
+  })
+
+
+
 
 
   if(b.t!="lineFeedBtn"){
@@ -67,7 +81,9 @@ export default function createCDom(u){
 
   formData.push(fieldData)
 
-  fieldTemplateEvent(u,filedsWrap,fields,fieldData)
+  fieldTemplateEvent(u,filedsWrap,fields,fieldData,function(e){
+    b.w.find(".mini-textbox-input").val(e);
+  })
 
   console.log(formData);
 
