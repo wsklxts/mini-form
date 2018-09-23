@@ -15,15 +15,18 @@ import createCDom from "./js/createCDom"
 import sortable from "./js/sortable"
 
 
-
+let data = G.formData
 
 $(function(){
-
-
 
   sortable()
 
 
+  var save = mini.get("onSave");
+
+  save.on("click",function(){
+    console.log(data);
+  })
 
   //
   //var buttonWrapS= G.buttonWrapS

@@ -110,3 +110,7 @@
 .feildAttr > lable{
   display:block;
 }
+.tinyBall {
+  width: 20px;
+  height: 20px;
+}

@@ -16,7 +16,9 @@
       $(".formBuild").empty()
       $(".formAttribute").empty()
     }
-
+   $(function(){
+     mini.parse()
+   })
   </script>
 </head>
 <body>
@@ -56,6 +58,7 @@
             <a style="cursor:default;padding:2px;padding-left:5px;">控件容器</a>
             <span class="separator"></span>
             <a class="mini-button" iconCls="icon-remove" plain="true" onclick="delAll()">清空控件</a>
+            <a class="mini-button" iconCls="icon-add" plain="true" id="onSave">保存</a>
           </td>
 
           <td style="white-space:nowrap;">
@@ -103,5 +106,9 @@
 </div>
 
 </body>
+
+
+<script>
+</script>
 
 </html>

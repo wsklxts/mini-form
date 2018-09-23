@@ -14,10 +14,14 @@ import {G} from "./globle"
 
 let formData= G.formData
 let controlId= G.controlId
+let data= G.data
+let  fieldData={}
+
 
 export default function createCDom(u){
  var type=$(u.item).attr("id");
  var miniC=mini.get(type)
+
 
  var filedsWrap=$("<li class='filed'></li>")
  var fields=$(`<div class=${miniC.name} id=${miniC.name}${controlId+=1}> </div>`)
@@ -44,28 +48,18 @@ export default function createCDom(u){
     }
   }
 
-
-  var  fieldData={
+  fieldData={
     id:controlId ,
     type:type,
     lable:typeText[type].lable,
     className:"form-control",
     placeholder:typeText[type].placeholder,
-    value:""
+    values:""
   }
 
 
   var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldBtn,fieldData).init();
   dragInsert(filedsWrap)
-
-  b.w.find(".mini-textbox-input").on("input propertychange",function(e){
-   var v =  $(this).val();
-    fieldData.value=v
-    fn(fieldData.value)
-  })
-
-
-
 
 
   if(b.t!="lineFeedBtn"){
@@ -79,13 +73,34 @@ export default function createCDom(u){
 
   fieldData.placeholder=b.f.attr("emptyText")
 
-  formData.push(fieldData)
 
-  fieldTemplateEvent(u,filedsWrap,fields,fieldData,function(e){
-    b.w.find(".mini-textbox-input").val(e);
+
+  fieldTemplateEvent(u,filedsWrap,fields,fieldData,function(e,t){
+
+    if(t=="value"){
+      //fieldData.value=e.x
+      b.w.find(".mini-textbox-input").val(e);
+    }else if(t=="lable"){
+      b.w.find("lable").html(e);
+    } else if(t=="placeholder"){
+      //fieldData.lable=e
+      b.w.find(".mini-textbox-input").attr("placeholder",e);
+    } else if(t=="width"){
+      if(b.t!="lineFeedBtn"){
+        let CC=mini.get(b.f.attr("id"))
+        CC.set({
+          width: e
+        })
+        fieldData.width=parseInt(e)
+      }
+    }
+
   })
 
-  console.log(formData);
+
+
+
+  formData.push(fieldData)
 
   return b.w
 }

@@ -7,12 +7,15 @@ import attrTemplate from "./attrTemplate"
 import attrEvent from "./attrEvent"
 import createCDom from "./createCDom"
 import {G}  from "./globle"
+import {show}  from "./method.js"
 
 
+let vv = ""
 
+let data = G.formData
 
 export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
-
+  var color=["red","orange","yellow","green","pink","blue","black","gray"]
   var buttonWrapS= G.buttonWrapS
   let formAttribute = $(".formAttribute")
 
@@ -27,11 +30,12 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   })
 
   function exeTime(f,s){
-    var color=["red","pink","blue","black","gray"]
     timer=setInterval(function(){
       f.css(s,color[parseInt(Math.random()*(color.length-1))])
     },300)
   }
+
+
   filedsWrap.on("click",function(e){
     e.stopPropagation()
     if(filedsWrap.hasClass("lineFeed")){
@@ -56,23 +60,23 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
 
 
-  filedsWrap.on("click",".buttonadd, .buttonsub",function(e){
+  filedsWrap.on("click",".buttonadd, .buttonsub, .buttonedit",function(e){
     e.stopPropagation()
     if($(this).hasClass("buttonadd")){
       $(this).parent().parent("li").after(createCDom(u))
       mini.parse();
     }
     if($(this).hasClass("buttonsub")){
-      //clearFeildAttr(filedsWrap)
-      console.log(attrData);
       if(attrData.id==formAttribute.data("id")){
         formAttribute.empty()
       }
-      filedsWrap.remove()
+      filedsWrap.empty()
+      filedsWrap.removeClass("lineFeed").addClass("ball")
+      show(filedsWrap,1);
+      //data.pop()/
     }
     if($(this).hasClass("buttonedit")){
-
-
+      console.log(data);
     }
   })
 
@@ -80,28 +84,65 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
 
 
-  function makeFeildAttr(f,fields,data,fn){
+  function makeFeildAttr(f,fields,attrData,fn){
+
+
+
     if( formAttribute.children("div").size()){
       formAttribute.empty()
     }
 
-    let feildHTML=new attrTemplate(f,formAttribute,data).init()
+    let feildHTML=new attrTemplate(f,formAttribute,attrData,fields).init()
 
 
-    feildHTML.subhtml.createCValue.on("input propertychange",function(e){
-      var v=$(this).find(".mini-textbox-input").val();
-      data.value=v
-      fn(data.value)
-    })
+    if(feildHTML.evt){
+      feildHTML.subhtml.createCValue.on("input propertychange",function(e){
+        var v=$(this).find(".mini-textbox-input").val();
+        fn(v,"value")
+        attrData.values=v
+      })
+
+      feildHTML.subhtml.createCCatipn.on("input propertychange",function(e){
+        var v=$(this).find(".mini-textbox-input").val();
+        fn(v,"lable")
+        attrData.lable=v
+      })
+
+      feildHTML.subhtml.createCPlaceholder.on("input propertychange",function(e){
+        var v=$(this).find(".mini-textbox-input").val();
+        fn(v,"placeholder")
+        attrData.placeholder=v
+      })
+
+      feildHTML.subhtml.createCWidth.on("input propertychange",function(e){
+        var v=$(this).find(".mini-textbox-input").val();
+        fn(v,"width")
+        attrData.width=v
+      })
+    }else{
+      feildHTML.subhtml.createCCatipn.on("input propertychange",function(e){
+        var v=$(this).find(".mini-textbox-input").val();
+        fn(v,"lable")
+        attrData.lable=v
+      })
+      feildHTML.subhtml.createCWidth.on("input propertychange",function(e){
+        var v=$(this).find(".mini-textbox-input").val();
+        fn(v,"width")
+        attrData.width=v
+      })
+    }
+
+
 
     formAttribute.html(feildHTML.html)
+
+
+    console.log(attrData);
+
 
     formAttribute.data("id",data.id)
     mini.parse()
 
-    new attrEvent(f,feildHTML,function(v){
-
-    })
 
 
   }
