@@ -30,8 +30,8 @@ export function show(filedsWrap,direction){
     },vanish)
     //随机生成雪花下落 结束 时left的值，相当于结束时X轴的位置
     //var endLeft = Math.random() * 300;
-    var endLeft =parseInt(Math.random()*50+(-25))
-    var endTop =parseInt(Math.random()*50+(-25))
+    var endLeft =parseInt(Math.random()*100+(-50))
+    var endTop =parseInt(Math.random()*100+(-50))
 
     //随机生成雪花下落持续时间
     //var durationTime = 5000 * Math.random();
@@ -46,6 +46,24 @@ export function show(filedsWrap,direction){
     //3、克隆一个雪花模板,定义雪花的初始样式，拼接到页面中
 
     //console.log(filedsWrap.width()/2);
+    //flake=flake.clone()
+    console.log(endLeft);
+    //filedsWrap.append( flake.css({
+    //  //"left": direction==1 ? filedsWrap.width()/2 :endLeft,
+    //  "left": direction==1 ? filedsWrap.width()/2 :endLeft,
+    //  "opacity": startOpacity,
+    //  //"font-size": flakeSize,
+    //  "top": direction==1 ? filedsWrap.height()/2 :endTop,
+    //  "background":color[parseInt(Math.random()*color.length-1)]
+    //})
+    //flake.animate({ //执行动画
+    //  "left":direction==1 ? endLeft :filedsWrap.width()/2,
+    //  "opacity": endOpacity,
+    //  "top": direction==1 ? endTop :filedsWrap.height()/2,
+    //}, durationTime, function() {
+    //  $(this).remove();
+    //});
+
     flake.clone().appendTo(filedsWrap).css({
       //"left": direction==1 ? filedsWrap.width()/2 :endLeft,
       "left": direction==1 ? filedsWrap.width()/2 :endLeft,
