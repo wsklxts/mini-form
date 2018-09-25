@@ -1,4 +1,6 @@
-
+img{
+  width:100%
+}
 .brWrap{
   background: #afd6f3;
   width: 15px;
@@ -111,8 +113,12 @@
   display:block;
 }
 .tinyBall {
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
+  /*width: 10px;*/
+  /*height: 10px;*/
+  /*border-radius: 10px;*/
+  /*position: absolute;*/
+  width: 88px;
+  height: 88px;
+  /*border-radius: 10px;*/
   position: absolute;
 }

@@ -6,3 +6,7 @@
 .mini-toolbar{
   background: #deedf7 !important;
 }
+.mini-button .mini-button-icon-text {
+  padding-left: 24px;
+  width: 100% !important;
+}

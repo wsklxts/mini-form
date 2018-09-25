@@ -5,11 +5,11 @@
 import {G} from "./globle"
 
 
-let vv=""
-
-export function fn(e){
-  vv=e
-}
+//let vv=""
+//
+//export function fn(e){
+//  vv=e
+//}
 
 
 export default class attrTemplate{
@@ -18,15 +18,10 @@ export default class attrTemplate{
   constructor(f,formAttribute,data,fields) {
     this.f = f
     this.d = data
-    this.d.value=vv
-
     if( formAttribute.children("div").size()){
       formAttribute.empty()
     }
   }
-
-
-
 
   init(){
     var fieldType=this.f.attr("class").split(" ")[1]
@@ -40,6 +35,12 @@ export default class attrTemplate{
         break;
       case "radio":
         return this.radio(this.f)
+        break;
+      case "checkbox":
+        return this.checkbox(this.f)
+        break;
+      case "combobox":
+        return this.combobox(this.f)
         break;
     }
   }
@@ -86,15 +87,46 @@ export default class attrTemplate{
     }
   }
 
+  checkbox(f){
+    var html=[this.createCID(f),
+      this.createCType(f),
+      this.createCCatipn(f),
+      this.createCWidth(f)]
+    return {
+      evt:false,
+      html:html,
+      subhtml:{
+        createCID:html[0],
+        createCType:html[1],
+        createCCatipn:html[2],
+        createCWidth:html[3],
+      }
+    }
+  }
 
-
+  combobox(f){
+    var html=[this.createCID(f),
+      this.createCType(f),
+      this.createCCatipn(f),
+      this.createCWidth(f)]
+    return {
+      evt:false,
+      html:html,
+      subhtml:{
+        createCID:html[0],
+        createCType:html[1],
+        createCCatipn:html[2],
+        createCWidth:html[3],
+      }
+    }
+  }
 
 
 
   createCID(f){
     return `<div class="feildAttr">
             <lable>控件ID：</lable>
-            <div class="mini-textbox" value=${this.d.id} allowInput="false"> </div>
+            <div class="mini-textbox" value=${ this.f.data("data").id} allowInput="false"> </div>
            </div>`
   }
   createCType(f){
@@ -110,7 +142,8 @@ export default class attrTemplate{
     //        <div id="fcaption" class="mini-textbox" value="${this.d.lable}"></div>
     //       </div>`
 
-    return $('<div class="feildAttr fcaption"> <lable>控件标题：</lable> <div id="fcaption" class="mini-textbox" value= '+ this.f.find("lable").text()+'></div> </div>')
+
+    return $('<div class="feildAttr fcaption"> <lable>控件标题：</lable> <div id="fcaption" class="mini-textbox" value= '+ this.f.data("data").lable+'></div> </div>')
   }
 
 
@@ -121,11 +154,11 @@ export default class attrTemplate{
 
   }
   createCPlaceholder(f){
-    return $('<div class="feildAttr"> <lable>占  位  符：</lable> <div class="mini-textbox" value='+ this.f.find(".mini-textbox-input").attr("placeholder")+'></div> </div>')
+    return $('<div class="feildAttr"> <lable>占  位  符：</lable> <div class="mini-textbox" value='+ this.f.data("data").placeholder+'></div> </div>')
 
   }
   createCWidth(f){
-    return $('<div class="feildAttr"> <lable>控件宽度：</lable> <div class="mini-textbox" value='+this.d.width+' > </div> </div>')
+    return $('<div class="feildAttr"> <lable>控件宽度：</lable> <div class="mini-textbox" value='+this.f.data("data").width+' > </div> </div>')
 
   }
   createCMaxLength(f){

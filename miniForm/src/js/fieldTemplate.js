@@ -22,6 +22,7 @@ export default class fieldTemplate{
     this.fieldBtn=fieldBtn
     this.fieldData=fieldData
 
+    filedsWrap.data("data",fieldData)
   }
 
   init(){
@@ -40,11 +41,15 @@ export default class fieldTemplate{
 
         break;
       case "mini-checkboxlist":
-        fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-        filedsWrap.addClass("checkbox")
-        lable=$('<lable>多选框：</lable>')
+        return this.checkbox()
+
+        //fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
+        //filedsWrap.addClass("checkbox")
+        //lable=$('<lable>多选框：</lable>')
         break;
       case "mini-combobox":
+        return this.combobox()
+
         fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
         fields.attr("value",'2')
         filedsWrap.addClass("combobox")
@@ -75,7 +80,6 @@ export default class fieldTemplate{
   }
 
   textbox(){
-
     this.fields.attr("emptyText",this.fieldData.placeholder)
     this.fields.attr("allowInput",false)
     this.fields.val(this.fieldData.value)
@@ -91,13 +95,24 @@ export default class fieldTemplate{
     return this.returnWFT()
   }
 
-  radiobuttonlist(){
+  checkbox(){
     this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
     this.filedsWrap.append(this.createLable("单选框："),this.fieldBtn,this.fields)
+    this.filedsWrap.addClass("checkbox")
+    return this.returnWFT()
+  }
+  combobox(){
+    this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
+    this.filedsWrap.append(this.createLable("下拉框："),this.fieldBtn,this.fields)
+    this.filedsWrap.addClass("combobox")
+    return this.returnWFT()
+  }
+  radiobuttonlist(){
+    this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
+    this.filedsWrap.append(this.createLable("多选框："),this.fieldBtn,this.fields)
     this.filedsWrap.addClass("radio")
     return this.returnWFT()
   }
-
 
   lineFeedBtn(){
     this.fields=$(`<div class="brWrap"></div>`)

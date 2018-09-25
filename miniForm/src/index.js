@@ -22,7 +22,7 @@ $(function(){
 
   sortable()
 
-
+  console.log($("#text").width());
   var save = mini.get("onSave");
   var delAll = mini.get("delAll");
   delAll.on("click",function(){
@@ -33,8 +33,15 @@ $(function(){
     })
 
   })
+  var data=[]
   save.on("click",function(){
+    data=[]
+    $("#formBuild>li").each(function(i,e){
+      e=$(e)
+      data.push(e.data("data"))
+    })
     console.log(data);
+
   })
 
   //

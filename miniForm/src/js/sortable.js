@@ -57,6 +57,8 @@ export default function sortable(){
     distance: 3,
     update: function(event, ui) {
       if(ui.item.parent()[0] === formBuild.get(0)){
+        console.log(event);
+        console.log(ui.item);
         createCDom(ui)
         mini.parse();
       }
