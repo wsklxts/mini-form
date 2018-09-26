@@ -77,7 +77,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       var data=Object.assign({},current.data("data"))
       clone.data("data",data)
       console.log(controlId);
-      clone.data("data").id=controlId+=1
+      clone.data("data").id=controlId
       current.after(clone)
     }
     if($(this).hasClass("buttonsub")){

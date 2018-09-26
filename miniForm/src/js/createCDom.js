@@ -28,7 +28,8 @@ export default function createCDom(u,copy=false){
  var fields=$(`<div class=${miniC.name} id=${miniC.name}${controlId+=1}> </div>`)
 
  var fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
-
+  controlId+=1
+  console.log(controlId);
   var typeText={
     text:{
       lable:"单行输入框：",
