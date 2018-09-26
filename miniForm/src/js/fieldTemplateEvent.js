@@ -4,21 +4,23 @@
 
 var timer=null
 import attrTemplate from "./attrTemplate"
-import attrEvent from "./attrEvent"
 import createCDom from "./createCDom"
 import {G}  from "./globle"
 import {show}  from "./method.js"
 
 
 let data = G.formData
-let controlId= G.controlId
+let controlId= G
 
 export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   var color=["red","orange","yellow","green","pink","blue","black","gray"]
   var buttonWrapS= G.buttonWrapS
   let formAttribute = $(".formAttribute")
   let formBuild = $(".formBuild")
-
+  let cid=controlId.id
+  console.log(controlId.id);
+  let feildHTML=null
+  let allHtml =null
 
   filedsWrap.on("mouseover",function(e){
     if(!buttonWrapS){
@@ -48,7 +50,6 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       filedsWrap.addClass("active")
       exeTime(filedsWrap,"border-color")
       makeFeildAttr(filedsWrap,fields,attrData,fn)
-      console.log(filedsWrap.data("data"));
     }
   })
 
@@ -64,7 +65,10 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       emptyText:clone.find(".mini-textbox-input").attr("placeholder"),
       width:current.data("data").width
     })
-    clone.find(".mini-textbox-input").attr("emptyText","111111111111111111123")
+
+    //mini.get(allHtml.createCValue.children("span").attr("id")).set({
+    //  maxLength:filedsWrap.data("data").maxLength
+    //})
 
     return clone
   }
@@ -76,18 +80,18 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       var clone=cloneDom(current)
       var data=Object.assign({},current.data("data"))
       clone.data("data",data)
-      console.log(controlId);
-      clone.data("data").id=controlId
+
+      clone.data("data").id=controlId.id-1
+
       current.after(clone)
     }
     if($(this).hasClass("buttonsub")){
       if(filedsWrap.data("data").id==formAttribute.data("id")){
-        console.log(1);
         formAttribute.empty()
       }
-      filedsWrap.empty()
-      filedsWrap.removeClass("active").addClass("ball")
-      show(filedsWrap,1,u);
+      filedsWrap.remove()
+      //filedsWrap.removeClass("active").addClass("ball")
+      //show(filedsWrap,1,u);
     }
     if($(this).hasClass("buttonedit")){
       console.log($(this).parent().parent("li").data("data"));
@@ -105,46 +109,67 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     }
 
 
-    let feildHTML=new attrTemplate(w,formAttribute,attrData,f).init()
+
+    feildHTML=new attrTemplate(w,formAttribute,attrData,f).init()
+    allHtml =  feildHTML.subhtml
 
 
-    if(feildHTML.evt){
-      feildHTML.subhtml.createCValue.on("input propertychange",function(e){
-        var v=$(this).find(".mini-textbox-input").val();
-        fn(v,"value")
-        w.data("data").value=v
-      })
+    allHtml.createCValue &&
+    allHtml.createCValue.on("input propertychange",function(e){
+      var v=$(this).find(".mini-textbox-input").val();
+      fn(v,"value")
+      w.data("data").value=v
+    })
+    allHtml.createCCatipn &&
+    allHtml.createCCatipn.on("input propertychange",function(e){
+      var v=$(this).find(".mini-textbox-input").val();
+      fn(v,"lable")
+      w.data("data").lable=v
+    })
 
-      feildHTML.subhtml.createCCatipn.on("input propertychange",function(e){
-        var v=$(this).find(".mini-textbox-input").val();
-        fn(v,"lable")
-        w.data("data").lable=v
-      })
+    allHtml.createCPlaceholder&&
+    allHtml.createCPlaceholder.on("input propertychange",function(e){
+      var v=$(this).find(".mini-textbox-input").val();
+      fn(v,"placeholder")
+      w.data("data").placeholder=v
+    })
 
-      feildHTML.subhtml.createCPlaceholder.on("input propertychange",function(e){
-        var v=$(this).find(".mini-textbox-input").val();
-        fn(v,"placeholder")
-        w.data("data").placeholder=v
-      })
+    allHtml.createCWidth &&
+    allHtml.createCWidth.on("input propertychange",function(e){
+      var v=$(this).find(".mini-textbox-input").val();
+      fn(v,"width")
+      w.data("data").width=v
+    })
 
-      feildHTML.subhtml.createCWidth.on("input propertychange",function(e){
-        var v=$(this).find(".mini-textbox-input").val();
-        fn(v,"width")
-        w.data("data").width=v
+    allHtml.createCMaxLength &&
+    allHtml.createCMaxLength.on("input propertychange",function(e){
+      var v=$(this).find(".mini-textbox-input").val();
+      fn(v,"maxLength")
+      mini.get(allHtml.createCValue.children("span").attr("id")).set({
+        maxLength:v
       })
-    }else{
-      feildHTML.subhtml.createCCatipn.on("input propertychange",function(e){
-        var v=$(this).find(".mini-textbox-input").val();
-        fn(v,"lable")
-        attrData.lable=v
+      w.data("data").maxLength=v
+    })
+
+    allHtml.createCRequire &&
+    allHtml.createCRequire.on("click",function(e){
+      var id=$(this).children("span").attr("id");
+      let v= mini.get(id).checked;
+      //fn(v,"maxLength")
+      w.data("data").require=v
+    })
+
+
+    Object.keys(allHtml).forEach(function(key){
+      formAttribute.append(allHtml[key])
+    });
+
+
+    setTimeout(function(){
+      mini.get(allHtml.createCValue.children("span").attr("id")).set({
+        maxLength:filedsWrap.data("data").maxLength
       })
-      feildHTML.subhtml.createCWidth.on("input propertychange",function(e){
-        var v=$(this).find(".mini-textbox-input").val();
-        fn(v,"width")
-        attrData.width=v
-      })
-    }
-    formAttribute.html(feildHTML.html)
+    },24)
 
     formAttribute.data("id",w.data("data").id)
     mini.parse()
@@ -153,6 +178,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
   formBuild.on("click",function(){
     $(".formAttribute").empty()
+    filedsWrap.removeClass("active")
   })
 
 

@@ -14,7 +14,7 @@ import {show} from "./method"
 import {G} from "./globle"
 
 let formData= G.formData
-let controlId= G.controlId
+let controlId= G
 let data= G.data
 
 
@@ -24,12 +24,11 @@ export default function createCDom(u,copy=false){
  var miniC=mini.get(type)
 
 
- var filedsWrap=$("<li class='filed'></li>")
- var fields=$(`<div class=${miniC.name} id=${miniC.name}${controlId+=1}> </div>`)
+  var fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
+  var filedsWrap=$("<li class='filed'></li>").append(fieldBtn)
 
- var fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
-  controlId+=1
-  console.log(controlId);
+ var fields=$(`<div class=${miniC.name} id=${miniC.name}${controlId.id}> </div>`)
+
   var typeText={
     text:{
       lable:"单行输入框：",
@@ -39,10 +38,18 @@ export default function createCDom(u,copy=false){
       lable:"多行输入框：",
       placeholder:"请输入",
     },
-    radio:"单选框",
-    checkBox:"多选框",
-    select:"下拉框",
-    date:"日期",
+    radio:{
+      lable:"单选框"
+    },
+    checkBox:{
+      lable:"多选框"
+    },
+    combobox:{
+      lable:"下拉框"
+    },
+    date:{
+      lable:"日期"
+    },
     file:"文件",
     pp:"段落",
     lineFeedBtn:{
@@ -50,17 +57,21 @@ export default function createCDom(u,copy=false){
     }
   }
 
+  console.log(type);
+
   let  fieldData={
-    id:controlId ,
+    id:controlId.id ,
     type:type,
     lable:typeText[type].lable,
     className:"form-control",
     placeholder:typeText[type].placeholder,
-    value:""
+    value:"",
+    maxLength:""
   }
 
 
-    var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldBtn,fieldData).init();
+    var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldData).init();
+
     dragInsert(b.w,u)
 
 
@@ -86,8 +97,14 @@ export default function createCDom(u,copy=false){
         fieldData.width=parseInt(e)
       }
     }
+    else if(t=="maxLength"){
+      console.log(b.f);
+    }
   })
 
 
+
+  controlId.id+=1
+  b.w.data("data",fieldData)
   return b.w
 }

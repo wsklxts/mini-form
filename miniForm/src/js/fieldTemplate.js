@@ -13,16 +13,13 @@ import {G} from "./globle"
 
 export default class fieldTemplate{
 
-  constructor(u,type,fields,filedsWrap,fieldBtn,fieldData){
-
-
+  constructor(u,type,fields,filedsWrap,fieldData){
     this.type=type
     this.fields=fields
     this.filedsWrap=filedsWrap
-    this.fieldBtn=fieldBtn
     this.fieldData=fieldData
 
-    filedsWrap.data("data",fieldData)
+    //filedsWrap.data("data",fieldData)
   }
 
   init(){
@@ -42,24 +39,12 @@ export default class fieldTemplate{
         break;
       case "mini-checkboxlist":
         return this.checkbox()
-
-        //fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-        //filedsWrap.addClass("checkbox")
-        //lable=$('<lable>多选框：</lable>')
         break;
       case "mini-combobox":
         return this.combobox()
-
-        fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-        fields.attr("value",'2')
-        filedsWrap.addClass("combobox")
-        lable=$('<lable>下拉框：</lable>')
         break;
       case "mini-datepicker":
-        fields.attr("format",'yyyy-MM-dd H:mm:ss')
-        fields.attr("showTime",'true')
-        filedsWrap.addClass("datepicker")
-        lable=$('<lable>日期：</lable>')
+        return this.datepicker()
         break;
       case "mini-htmlfile":
         filedsWrap.addClass("fileupload")
@@ -80,43 +65,51 @@ export default class fieldTemplate{
   }
 
   textbox(){
+
     this.fields.attr("emptyText",this.fieldData.placeholder)
     this.fields.attr("allowInput",false)
     this.fields.val(this.fieldData.value)
-    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fieldBtn,this.fields)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("text")
     return this.returnWFT()
   }
 
   textarea(){
     this.fields.attr("emptyText",this.fieldData.placeholder)
-    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fieldBtn,this.fields)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("textarea")
     return this.returnWFT()
   }
 
   checkbox(){
     this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-    this.filedsWrap.append(this.createLable("单选框："),this.fieldBtn,this.fields)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("checkbox")
     return this.returnWFT()
   }
   combobox(){
     this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-    this.filedsWrap.append(this.createLable("下拉框："),this.fieldBtn,this.fields)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("combobox")
     return this.returnWFT()
   }
   radiobuttonlist(){
     this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
-    this.filedsWrap.append(this.createLable("多选框："),this.fieldBtn,this.fields)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("radio")
+    return this.returnWFT()
+  }
+
+  datepicker(){
+    this.fields.attr("format",'yyyy-MM-dd H:mm:ss').attr("showTime",'true')
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
+    this.filedsWrap.addClass("datepicker")
     return this.returnWFT()
   }
 
   lineFeedBtn(){
     this.fields=$(`<div class="brWrap"></div>`)
-    this.filedsWrap.append(this.fieldBtn,this.fields,$("<br />"))
+    this.filedsWrap.append(this.fields,$("<br />"))
     this.filedsWrap.addClass("lineFeed")
     return this.returnWFT()
   }

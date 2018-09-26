@@ -22,7 +22,6 @@ $(function(){
 
   sortable()
 
-  console.log($("#text").width());
   var save = mini.get("onSave");
   var delAll = mini.get("delAll");
   delAll.on("click",function(){

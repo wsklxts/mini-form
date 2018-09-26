@@ -21,11 +21,12 @@ export default class attrTemplate{
     if( formAttribute.children("div").size()){
       formAttribute.empty()
     }
+    this.maxL=this.f.data("data").maxLength
   }
 
   init(){
     var fieldType=this.f.attr("class").split(" ")[1]
-    this.feildHTML=""
+
     switch(fieldType){
       case "text":
         return this.cText(this.f)
@@ -42,86 +43,75 @@ export default class attrTemplate{
       case "combobox":
         return this.combobox(this.f)
         break;
+      case "datepicker":
+        return this.datepicker(this.f)
+        break;
     }
   }
 
   radio(f){
-    var html=[this.createCID(f),
-      this.createCType(f),
-      this.createCCatipn(f),
-      this.createCWidth(f)]
     return {
-      evt:false,
-      html:html,
+      evt:"radio",
       subhtml:{
-        createCID:html[0],
-        createCType:html[1],
-        createCCatipn:html[2],
-        createCWidth:html[3],
+        createCID:this.createCID(f),
+        createCType:this.createCType(f),
+        createCCatipn:this.createCCatipn(f),
+        createCWidth:this.createCWidth(f)
       }
     }
   }
 
   cText(f){
-    var html=[this.createCID(f),
-      this.createCType(f),
-      this.createCCatipn(f),
-      this.createCValue(f),
-      this.createCPlaceholder(f),
-      this.createCWidth(f),
-      this.createCMaxLength(f),
-      this.createCRequire(),]
     return {
-      evt:true,
-      html:html,
+      evt:"cText",
       subhtml:{
-        createCID:html[0],
-        createCType:html[1],
-        createCCatipn:html[2],
-        createCValue:html[3],
-        createCPlaceholder:html[4],
-        createCWidth:html[5],
-        createCMaxLength:html[6],
-        createCRequire:html[7],
+        createCID:this.createCID(),
+        createCType: this.createCType(),
+        createCCatipn: this.createCCatipn(),
+        createCValue:this.createCValue(),
+        createCPlaceholder: this.createCPlaceholder(),
+        createCWidth:this.createCWidth(),
+        createCMaxLength:this.createCMaxLength(),
+        createCRequire:this.createCRequire()
       }
     }
   }
 
   checkbox(f){
-    var html=[this.createCID(f),
-      this.createCType(f),
-      this.createCCatipn(f),
-      this.createCWidth(f)]
     return {
-      evt:false,
-      html:html,
+      evt:"checkbox",
       subhtml:{
-        createCID:html[0],
-        createCType:html[1],
-        createCCatipn:html[2],
-        createCWidth:html[3],
+        createCID:this.createCID(f),
+        createCType:this.createCType(f),
+        createCCatipn:this.createCCatipn(f),
+        createCWidth:this.createCWidth(f)
       }
     }
   }
 
   combobox(f){
-    var html=[this.createCID(f),
-      this.createCType(f),
-      this.createCCatipn(f),
-      this.createCWidth(f)]
     return {
-      evt:false,
-      html:html,
+      evt:"combobox",
       subhtml:{
-        createCID:html[0],
-        createCType:html[1],
-        createCCatipn:html[2],
-        createCWidth:html[3],
+        createCID:this.createCID(f),
+        createCType:this.createCType(f),
+        createCCatipn:this.createCCatipn(f),
+        createCWidth:this.createCWidth(f)
       }
     }
   }
 
-
+  datepicker(f){
+    return {
+      evt:"checkbox",
+      subhtml:{
+        createCID:this.createCID(f),
+        createCType:this.createCType(f),
+        createCCatipn:this.createCCatipn(f),
+        createCWidth:this.createCWidth(f)
+      }
+    }
+  }
 
   createCID(f){
     return `<div class="feildAttr">
@@ -137,21 +127,14 @@ export default class attrTemplate{
   }
 
   createCCatipn(f){
-    //return `<div class="feildAttr fcaption">
-    //        <lable>控件标题：</lable>
-    //        <div id="fcaption" class="mini-textbox" value="${this.d.lable}"></div>
-    //       </div>`
-
 
     return $('<div class="feildAttr fcaption"> <lable>控件标题：</lable> <div id="fcaption" class="mini-textbox" value= '+ this.f.data("data").lable+'></div> </div>')
   }
 
 
   createCValue(f){
-
-
     return $('<div class="feildAttr"> <lable>控 件 值：</lable> <div id="fValue" class="mini-textbox" value= '+ this.f.find(".mini-textbox-input").val()+'></div> </div>')
-
+    //return $('<div class="feildAttr"> <lable>控 件 值：</lable> <div id="fValue" maxLength='+ this.f.data("data").maxLength +' class="mini-textbox" value= '+ this.f.find(".mini-textbox-input").val()+'></div> </div>')
   }
   createCPlaceholder(f){
     return $('<div class="feildAttr"> <lable>占  位  符：</lable> <div class="mini-textbox" value='+ this.f.data("data").placeholder+'></div> </div>')
@@ -162,16 +145,14 @@ export default class attrTemplate{
 
   }
   createCMaxLength(f){
-    return `<div class="feildAttr">
-            <lable>最大长度：</lable>
-            <div class="mini-textbox" > </div>
-           </div>`
+
+    return $('<div class="feildAttr"> <lable>最大长度：</lable> <div class="mini-textbox" value='+this.f.data("data").maxLength+'> </div> </div>')
   }
+
+
   createCRequire(f){
-    return `<div class="feildAttr">
-            <lable></lable>
-            <div class="mini-checkbox" text="必须输入"</div>
-           </div>`
+    return $('<div class="feildAttr"> <lable></lable> <div class="mini-checkbox" id="checkbox" text="必须输入"</div> </div>')
+
   }
 
 
