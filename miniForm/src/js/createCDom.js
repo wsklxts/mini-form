@@ -57,8 +57,6 @@ export default function createCDom(u,copy=false){
     }
   }
 
-  console.log(type);
-
   let  fieldData={
     id:controlId.id ,
     type:type,
@@ -98,7 +96,13 @@ export default function createCDom(u,copy=false){
       }
     }
     else if(t=="maxLength"){
+      b.w.find(".mini-textbox-input").val("");
       console.log(b.f);
+    }
+    else if(t=="radioOptions"){
+      let oldValue=mini.get(b.f.attr("id")).getValue();
+      mini.get(b.f.attr("id")).setData(b.w.data("data").value)
+      mini.get(b.f.attr("id")).setValue(oldValue)
     }
   })
 

@@ -18,7 +18,6 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   let formAttribute = $(".formAttribute")
   let formBuild = $(".formBuild")
   let cid=controlId.id
-  console.log(controlId.id);
   let feildHTML=null
   let allHtml =null
 
@@ -50,6 +49,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       filedsWrap.addClass("active")
       exeTime(filedsWrap,"border-color")
       makeFeildAttr(filedsWrap,fields,attrData,fn)
+      //mini.getfields.attr("id")
     }
   })
 
@@ -59,11 +59,14 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   function cloneDom(current){
     var clone=createCDom(u)
     clone.children("lable").html(current.children("lable").text())
-    var id=clone.children("span").attr("id");
+    var id=clone.children().last().attr("id");
+
+    console.log(filedsWrap.data("data"));
     mini.get(id).set({
       value:current.find(".mini-textbox-input").val(),
       emptyText:clone.find(".mini-textbox-input").attr("placeholder"),
-      width:current.data("data").width
+      width:current.data("data").width,
+      data:filedsWrap.data("data").value
     })
 
     //mini.get(allHtml.createCValue.children("span").attr("id")).set({
@@ -108,11 +111,13 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       formAttribute.empty()
     }
 
-
+    let id = f.attr("id")
+    if(mini.get(id).data ){
+      w.data("data").value=mini.get(id).data //字段默认data给w
+    }
 
     feildHTML=new attrTemplate(w,formAttribute,attrData,f).init()
     allHtml =  feildHTML.subhtml
-
 
     allHtml.createCValue &&
     allHtml.createCValue.on("input propertychange",function(e){
@@ -120,6 +125,8 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       fn(v,"value")
       w.data("data").value=v
     })
+
+
     allHtml.createCCatipn &&
     allHtml.createCCatipn.on("input propertychange",function(e){
       var v=$(this).find(".mini-textbox-input").val();
@@ -146,8 +153,10 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       var v=$(this).find(".mini-textbox-input").val();
       fn(v,"maxLength")
       mini.get(allHtml.createCValue.children("span").attr("id")).set({
+        value:"",
         maxLength:v
       })
+      w.data("data").value=""
       w.data("data").maxLength=v
     })
 
@@ -158,6 +167,70 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       //fn(v,"maxLength")
       w.data("data").require=v
     })
+    allHtml.viewValue &&
+    allHtml.viewValue.on("click",function(e){
+      let id = f.attr("id")
+      console.log(mini.get(id).getData());
+      $(this).find(".mini-textbox-input").val("text:"+mini.get(id).o1oO1l.text+",id:"+mini.get(id).o1oO1l.id);
+      //mini.get(id).setData([{id:1,text:"ttt"}])
+    })
+
+
+    let defualtSize= w.data("data").value && w.data("data").value.length
+
+
+
+
+
+    if(allHtml.radioOptions){
+
+
+      allHtml.radioOptions.on("input propertychange",function(e){
+        console.log($(this));
+        let currentLi = $(e.target).parent().parent().parent();
+        currentLi.data("value").text=$(e.target).val()
+        fn("input","radioOptions")
+      })
+    }
+
+
+    allHtml.radioOptions &&
+    allHtml.radioOptions.on("click",".addOption, .subOption",function(e){
+
+      if($(this).hasClass("addOption")){
+        defualtSize+=1
+        let clone=$(this).parent().clone()
+        let oldData=Object.assign({},$(this).parent().data("value"))
+        clone.data("value",oldData)
+        clone.data("value").id=defualtSize
+        clone.attr("id","optionId-"+(defualtSize))
+        $(this).parent().after(clone)
+        let allLi=$(this).parent().parent().children("li")
+        clone.find(".mini-textbox-input").val("选项"+(defualtSize));
+        w.data("data").value=[]
+        allLi.each(function(i,v){
+          $(v).data("value").text=$(v).find(".mini-textbox-input").val()
+          w.data("data").value.push($(v).data("value"))
+        })
+        fn(1,"radioOptions")
+      }
+      if($(this).hasClass("subOption")){
+        let currentID=$(this).parent().attr("id").split("-")[1];
+        let data=w.data("data").value
+        if(data.length<=1){
+          return
+        }
+        $.each(data,function(i,v){
+          if(v.id==currentID){
+            data.splice(i,1)
+            return false
+          }
+        })
+        fn(0,"radioOptions")
+        $(this).parent().remove()
+
+      }
+    })
 
 
     Object.keys(allHtml).forEach(function(key){
@@ -165,9 +238,12 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     });
 
 
+    console.log(w.data("data").maxLength);
+
+    allHtml.createCValue &&
     setTimeout(function(){
       mini.get(allHtml.createCValue.children("span").attr("id")).set({
-        maxLength:filedsWrap.data("data").maxLength
+        maxLength:w.data("data").maxLength || 999999
       })
     },24)
 

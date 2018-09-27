@@ -56,7 +56,9 @@ export default class attrTemplate{
         createCID:this.createCID(f),
         createCType:this.createCType(f),
         createCCatipn:this.createCCatipn(f),
-        createCWidth:this.createCWidth(f)
+        createCWidth:this.createCWidth(f),
+        radioOptions:this.radioOptions(f),
+        viewValue:this.viewValue()
       }
     }
   }
@@ -127,13 +129,34 @@ export default class attrTemplate{
   }
 
   createCCatipn(f){
-
     return $('<div class="feildAttr fcaption"> <lable>控件标题：</lable> <div id="fcaption" class="mini-textbox" value= '+ this.f.data("data").lable+'></div> </div>')
   }
 
+  radioOptions(){
+
+    let html=[]
+    let data=this.f.data("data").value
+    for(var i=0;i<data.length;i++){
+      html.push($(`<li id="optionId-${data[i].id}" ><input type="text" class="mini-textbox" width="60" value=${data[i].text}> <a class="mini-button addOption" iconCls="icon-add" ></a> <a class="mini-button subOption" iconCls="icon-close" ></a></li>`).data("value",data[i]))
+    }
+
+    var ul=$("<ul></ul>")
+    for(var i=0;i<html.length;i++){
+      ul.append(html[i])
+    }
+
+    return $('<div class="feildAttr radioOptions"></div>').append("<lable>选项：</lable>")
+            .append(ul)
+  }
+
+
+  viewValue(){
+    return $('<div class="feildAttr viewValue"> <lable>查看值：</lable> <div id="viewValue" class="mini-textbox" value=""></div></div>')
+  }
 
   createCValue(f){
-    return $('<div class="feildAttr"> <lable>控 件 值：</lable> <div id="fValue" class="mini-textbox" value= '+ this.f.find(".mini-textbox-input").val()+'></div> </div>')
+    console.log(this.f.data("data"));
+    return $('<div class="feildAttr"> <lable>控 件 值：</lable> <div id="fValue" class="mini-textbox" value= '+ this.f.data("data").value+'></div> </div>')
     //return $('<div class="feildAttr"> <lable>控 件 值：</lable> <div id="fValue" maxLength='+ this.f.data("data").maxLength +' class="mini-textbox" value= '+ this.f.find(".mini-textbox-input").val()+'></div> </div>')
   }
   createCPlaceholder(f){
@@ -151,7 +174,7 @@ export default class attrTemplate{
 
 
   createCRequire(f){
-    return $('<div class="feildAttr"> <lable></lable> <div class="mini-checkbox" id="checkbox" text="必须输入"</div> </div>')
+    return $('<div class="feildAttr"> <lable></lable> <div class="mini-checkbox" id="checkbox" checked='+this.f.data("data").require +' text="必须输入"</div> </div>')
 
   }
 

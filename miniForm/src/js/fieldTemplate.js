@@ -19,7 +19,6 @@ export default class fieldTemplate{
     this.filedsWrap=filedsWrap
     this.fieldData=fieldData
 
-    //filedsWrap.data("data",fieldData)
   }
 
   init(){
