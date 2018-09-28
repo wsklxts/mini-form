@@ -136,6 +136,8 @@ export default class attrTemplate{
 
     let html=[]
     let data=this.f.data("data").value
+
+
     for(var i=0;i<data.length;i++){
       html.push($(`<li id="optionId-${data[i].id}" ><input type="text" class="mini-textbox" width="60" value=${data[i].text}> <a class="mini-button addOption" iconCls="icon-add" ></a> <a class="mini-button subOption" iconCls="icon-close" ></a></li>`).data("value",data[i]))
     }

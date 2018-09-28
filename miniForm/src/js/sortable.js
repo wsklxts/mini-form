@@ -57,6 +57,8 @@ export default function sortable(){
     distance: 3,
     update: function(event, ui) {
       if(ui.item.parent()[0] === formBuild.get(0)){
+        //$(".formBuild").removeClass(".tip")
+        $(".formBuild").removeClass("tip")
         createCDom(ui)
         mini.parse();
       }

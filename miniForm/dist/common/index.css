@@ -40,6 +40,7 @@ img{
   width: 64%;
   float: left;
   margin-left: 12%;
+  position: relative;
 }
 .formBuildWrap>span{
   padding: 10px;
@@ -94,6 +95,17 @@ img{
   min-height:588px !important
 }
 
+
+.tip:after{
+  content: "请从左边拖拽原件到此为止";
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  margin-top: -1em;
+
+}
 .formBuild li.lineFeed{
   display:inline !important;
 }
@@ -113,12 +125,12 @@ img{
   display:block;
 }
 .tinyBall {
-  /*width: 10px;*/
-  /*height: 10px;*/
-  /*border-radius: 10px;*/
-  /*position: absolute;*/
-  width: 88px;
-  height: 88px;
-  /*border-radius: 10px;*/
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
   position: absolute;
+  /*width: 88px;*/
+  /*height: 88px;*/
+  border-radius: 10px;
+  /*position: absolute;*/
 }

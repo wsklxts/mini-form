@@ -57,21 +57,34 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
 
   function cloneDom(current){
-    var clone=createCDom(u)
+    var clone=createCDom(u,true)
     clone.children("lable").html(current.children("lable").text())
     var id=clone.children().last().attr("id");
+    var cureentId=current.children().last().attr("id");
+    var newArr =  JSON.parse(JSON.stringify(current.data("data")));
+    clone.data("data",newArr)
+    clone.data("data").id=controlId.id-1
 
-    console.log(filedsWrap.data("data"));
+
+    let value
+    if(current.data("data").type=="radio"){
+      value=mini.get(cureentId).getValue()
+    }else if(current.data("data").type=="text"){
+      value=current.find(".mini-textbox-input").val()
+    }
+
     mini.get(id).set({
-      value:current.find(".mini-textbox-input").val(),
+      value:value,
       emptyText:clone.find(".mini-textbox-input").attr("placeholder"),
-      width:current.data("data").width,
-      data:filedsWrap.data("data").value
+      width:newArr.width,
+      data:newArr.value,
     })
 
-    //mini.get(allHtml.createCValue.children("span").attr("id")).set({
-    //  maxLength:filedsWrap.data("data").maxLength
-    //})
+    allHtml &&
+    allHtml.createCValue &&
+    mini.get(allHtml.createCValue.children("span").attr("id")).set({
+      maxLength:filedsWrap.data("data").maxLength
+    })
 
     return clone
   }
@@ -81,12 +94,11 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     if($(this).hasClass("buttonadd")){
       var current=$(this).parent().parent("li")
       var clone=cloneDom(current)
-      var data=Object.assign({},current.data("data"))
-      clone.data("data",data)
 
-      clone.data("data").id=controlId.id-1
 
       current.after(clone)
+
+      filedsWrap.trigger("click")
     }
     if($(this).hasClass("buttonsub")){
       if(filedsWrap.data("data").id==formAttribute.data("id")){
@@ -95,6 +107,9 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       filedsWrap.remove()
       //filedsWrap.removeClass("active").addClass("ball")
       //show(filedsWrap,1,u);
+      if(formBuild.children("li").size()<=0){
+        formBuild.addClass("tip")
+      }
     }
     if($(this).hasClass("buttonedit")){
       console.log($(this).parent().parent("li").data("data"));
@@ -205,6 +220,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
         clone.data("value").id=defualtSize
         clone.attr("id","optionId-"+(defualtSize))
         $(this).parent().after(clone)
+
         let allLi=$(this).parent().parent().children("li")
         clone.find(".mini-textbox-input").val("选项"+(defualtSize));
         w.data("data").value=[]
@@ -236,10 +252,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     Object.keys(allHtml).forEach(function(key){
       formAttribute.append(allHtml[key])
     });
-
-
-    console.log(w.data("data").maxLength);
-
+0
     allHtml.createCValue &&
     setTimeout(function(){
       mini.get(allHtml.createCValue.children("span").attr("id")).set({

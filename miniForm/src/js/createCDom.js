@@ -19,15 +19,16 @@ let data= G.data
 
 
 
-export default function createCDom(u,copy=false){
+export default function createCDom(u,current){
  var type=$(u.item).attr("id");
  var miniC=mini.get(type)
 
 
   var fieldBtn=$("<div class='buttonWrap'> <div class='mini-button buttonedit' iconCls='icon-edit'></div>  <div class='buttonadd mini-button' iconCls='icon-add'></div>  <div class='buttonsub mini-button' iconCls='icon-remove'></div> </div>")
   var filedsWrap=$("<li class='filed'></li>").append(fieldBtn)
+  var fields=$(`<div class=${miniC.name} id=${miniC.name}${controlId.id}> </div>`)
 
- var fields=$(`<div class=${miniC.name} id=${miniC.name}${controlId.id}> </div>`)
+
 
   var typeText={
     text:{
@@ -68,10 +69,29 @@ export default function createCDom(u,copy=false){
   }
 
 
-    var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldData).init();
-
+  var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldData).init();
+  b.w.data("data",fieldData)
+  //if(current){
     dragInsert(b.w,u)
+  //}
 
+
+
+
+  if(b.t == "mini-radiobuttonlist"){
+    b.w.data("data").value=mini.get(b.f.attr("id")).getData()
+
+    mini.get(b.f.attr("id")).on("valuechanged",function(e){
+      let cruuentId = this.getValue()
+      let data=this.getData()
+      $.each(data,function(i,v){
+        delete v.selected
+        if(v.id==cruuentId){
+          v.selected=true
+        }
+      })
+    })
+  }
 
 
   if(b.t!="lineFeedBtn"){
@@ -109,6 +129,6 @@ export default function createCDom(u,copy=false){
 
 
   controlId.id+=1
-  b.w.data("data",fieldData)
+
   return b.w
 }

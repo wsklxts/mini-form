@@ -27,10 +27,9 @@ $(function(){
   delAll.on("click",function(){
     $("#formBuild>li").each(function(i,e){
       e=$(e)
-      e.addClass("ball")
       show(e,1);
     })
-
+    $("#formBuild").addClass("tip")
   })
   var data=[]
   save.on("click",function(){
@@ -40,8 +39,11 @@ $(function(){
       data.push(e.data("data"))
     })
     console.log(data);
-
   })
+
+  //
+  //var tip = $(`<p>请从左边拖拽原件到此为止。</p>`)
+
 
   //
   //var buttonWrapS= G.buttonWrapS

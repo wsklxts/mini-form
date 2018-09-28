@@ -96,6 +96,21 @@ export default class fieldTemplate{
     this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("radio")
+
+
+    //mini.get(this.fields.attr("id")).on("valuechanged",function(e){
+    //  console.log(this.getValue());
+    //  let cruuentId = this.getValue()
+    //  let data=this.getData()
+    //  $.each(data,function(i,v){
+    //    delete v.selected
+    //    if(v.id==cruuentId){
+    //      v.selected=true
+    //    }
+    //  })
+    //  console.log(data);
+    //})
+
     return this.returnWFT()
   }
 

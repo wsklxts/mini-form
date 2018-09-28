@@ -24,7 +24,7 @@ export default function dragInsert(filedsWrap,u){
         .eq(G.placeholderIndex-2).after(filedsWrap)
     }
   }
-  //setTimeout(function(){show(filedsWrap,0,u)},24)
+  setTimeout(function(){show(filedsWrap,0,u)},24)
 
   mini.parse();
 
