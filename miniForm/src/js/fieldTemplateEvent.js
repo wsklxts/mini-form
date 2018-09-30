@@ -17,9 +17,16 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   var buttonWrapS= G.buttonWrapS
   let formAttribute = $(".formAttribute")
   let formBuild = $(".formBuild")
-  let cid=controlId.id
   let feildHTML=null
   let allHtml =null
+  let defualtSize
+
+  if($.inArray(attrData.type,["radio", "checkBox"]) !== -1){
+    //defualtSize = eval ("(" + attrData.data+ ")").length  //默认选项大小
+    let id = fields.attr("id")
+    defualtSize=mini.get(id).data.length
+
+  }
 
   filedsWrap.on("mouseover",function(e){
     if(!buttonWrapS){
@@ -44,12 +51,16 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       filedsWrap.parent().children("li").removeClass("active")
       exeTime(filedsWrap.children(".brWrap"),"background")
     }else{
+
+      let id = fields.attr("id")
+      if(mini.get(id).data ){
+        filedsWrap.data("data").value=mini.get(id).data //字段默认data给w
+      }
       clearInterval(timer)
       filedsWrap.parent().children(".active").removeClass("active")
       filedsWrap.addClass("active")
       exeTime(filedsWrap,"border-color")
       makeFeildAttr(filedsWrap,fields,attrData,fn)
-      //mini.getfields.attr("id")
     }
   })
 
@@ -124,10 +135,6 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       formAttribute.empty()
     }
 
-    let id = f.attr("id")
-    if(mini.get(id).data ){
-      w.data("data").value=mini.get(id).data //字段默认data给w
-    }
 
     feildHTML=new attrTemplate(w,formAttribute,attrData,f).init()
     allHtml =  feildHTML.subhtml
@@ -143,6 +150,9 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     allHtml.createCCatipn &&
     allHtml.createCCatipn.on("input propertychange",function(e){
       var v=$(this).find(".mini-textbox-input").val();
+      //function htmlEncodeJQ ( str ) {
+      //  return $('<p/>').text( str ).html();
+      //}
       fn(v,"lable")
       w.data("data").lable=v
     })
@@ -176,7 +186,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     allHtml.createCRequire &&
     allHtml.createCRequire.on("click",function(e){
       var id=$(this).children("span").attr("id");
-      let v= mini.get(id).checked;
+      var v= mini.get(id).checked;
       //fn(v,"maxLength")
       w.data("data").require=v
     })
@@ -189,7 +199,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     })
 
 
-    let defualtSize= w.data("data").value && w.data("data").value.length
+
 
 
 

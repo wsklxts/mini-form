@@ -65,16 +65,19 @@ export default function createCDom(u,current){
     id:controlId.id ,
     type:type,
     lable:typeText[type].lable,
-    className:"form-control",
+    miniClassName:miniC.name,
     placeholder:typeText[type].placeholder,
     value:"",
     maxLength:"",
-    data:typeText[type].data
+    data:typeText[type].data || ""
   }
 
 
   var b = new fieldTemplate(u,miniC.name,fields,filedsWrap,fieldData).init();
   b.w.data("data",fieldData)
+  dragInsert(b.w,u)
+
+
 
   fieldTemplateEvent(u,b.w,b.f,fieldData,function(e,t){
     if(t=="value"){
@@ -103,7 +106,7 @@ export default function createCDom(u,current){
     }
   })
 
-  dragInsert(b.w,u)
+
 
 
 
