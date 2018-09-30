@@ -92,13 +92,11 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   filedsWrap.on("click",".buttonadd, .buttonsub, .buttonedit",function(e){
     e.stopPropagation()
     if($(this).hasClass("buttonadd")){
+      filedsWrap.trigger("click")
       var current=$(this).parent().parent("li")
       var clone=cloneDom(current)
-
-
       current.after(clone)
 
-      filedsWrap.trigger("click")
     }
     if($(this).hasClass("buttonsub")){
       if(filedsWrap.data("data").id==formAttribute.data("id")){
@@ -196,63 +194,67 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
 
 
+    function eventInputHandler(e){
+      let currentLi = $(e.target).parent().parent().parent();
+      currentLi.data("value").text=$(e.target).val()
+      fn("input","radioOptions")
+    }
 
-    if(allHtml.radioOptions){
+    function eventClickHandler(e){
+        if($(this).hasClass("addOption")){
+          defualtSize+=1
+          let clone=$(this).parent().clone()
+          let oldData=Object.assign({},$(this).parent().data("value"))
+          oldData.selected && delete oldData.selected  //防止复制选中状态
+          clone.data("value",oldData)
+          clone.data("value").id=defualtSize
+          clone.attr("id","optionId-"+(defualtSize))
+          clone.find(".mini-textbox-input").val("选项"+(defualtSize));
+          $(this).parent().after(clone)
+          let allLi=$(this).parent().parent().children("li")
+          w.data("data").value=[]
+          allLi.each(function(i,v){
+            $(v).data("value").text=$(v).find(".mini-textbox-input").val()
+            w.data("data").value.push($(v).data("value"))
+          })
+          fn(1,"radioOptions")
+        }
+        if($(this).hasClass("subOption")){
+          let currentID=$(this).parent().attr("id").split("-")[1];
+          let data=w.data("data").value
+          if(data.length<=1){
+            return
+          }
+          $.each(data,function(i,v){
+            if(v.id==currentID){
+              data.splice(i,1)
+              return false
+            }
+          })
+          fn(0,"radioOptions")
+          $(this).parent().remove()
+        }
 
-
-      allHtml.radioOptions.on("input propertychange",function(e){
-        console.log($(this));
-        let currentLi = $(e.target).parent().parent().parent();
-        currentLi.data("value").text=$(e.target).val()
-        fn("input","radioOptions")
-      })
     }
 
 
-    allHtml.radioOptions &&
-    allHtml.radioOptions.on("click",".addOption, .subOption",function(e){
 
-      if($(this).hasClass("addOption")){
-        defualtSize+=1
-        let clone=$(this).parent().clone()
-        let oldData=Object.assign({},$(this).parent().data("value"))
-        clone.data("value",oldData)
-        clone.data("value").id=defualtSize
-        clone.attr("id","optionId-"+(defualtSize))
-        $(this).parent().after(clone)
+    if(allHtml.checkOptions){
+      allHtml.checkOptions.on("input propertychange",eventInputHandler)
+      allHtml.checkOptions.on("click",".addOption, .subOption",eventClickHandler)
+    }
 
-        let allLi=$(this).parent().parent().children("li")
-        clone.find(".mini-textbox-input").val("选项"+(defualtSize));
-        w.data("data").value=[]
-        allLi.each(function(i,v){
-          $(v).data("value").text=$(v).find(".mini-textbox-input").val()
-          w.data("data").value.push($(v).data("value"))
-        })
-        fn(1,"radioOptions")
-      }
-      if($(this).hasClass("subOption")){
-        let currentID=$(this).parent().attr("id").split("-")[1];
-        let data=w.data("data").value
-        if(data.length<=1){
-          return
-        }
-        $.each(data,function(i,v){
-          if(v.id==currentID){
-            data.splice(i,1)
-            return false
-          }
-        })
-        fn(0,"radioOptions")
-        $(this).parent().remove()
 
-      }
-    })
+    if(allHtml.radioOptions){
+      allHtml.radioOptions.on("input propertychange",eventInputHandler)
+      allHtml.radioOptions.on("click",".addOption, .subOption",eventClickHandler)
+    }
 
 
     Object.keys(allHtml).forEach(function(key){
       formAttribute.append(allHtml[key])
     });
-0
+
     allHtml.createCValue &&
     setTimeout(function(){
       mini.get(allHtml.createCValue.children("span").attr("id")).set({

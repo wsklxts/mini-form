@@ -33,7 +33,7 @@ export function show(filedsWrap,direction,u){
   .animate({ //执行动画
       "left":direction==1 ? endLeft+filedsWrap.offset().left+filedsWrap.width()/2 :filedsWrap.offset().left+filedsWrap.width()/2,
       //"left":direction==1 ? $(window).width()/2 :filedsWrap.offset().left+filedsWrap.width()/2,
-      "opacity": endOpacity,
+      //"opacity": endOpacity,
       "top": direction==1 ? endTop+filedsWrap.offset().top+filedsWrap.height()/2  :filedsWrap.offset().top+filedsWrap.height()/2,
       //"top": direction==1 ? $(window).height()/2  :filedsWrap.offset().top+filedsWrap.height()/2,
       }, durationTime, function() {

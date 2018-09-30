@@ -81,19 +81,19 @@ export default class fieldTemplate{
   }
 
   checkbox(){
-    this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
+    this.fields.attr("data",this.fieldData.data)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("checkbox")
     return this.returnWFT()
   }
   combobox(){
-    this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
+    this.fields.attr("data",this.fieldData.data)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("combobox")
     return this.returnWFT()
   }
   radiobuttonlist(){
-    this.fields.attr("data",'[{text:"选项1",id:1},{text:"选项2",id:2},{text:"选项3",id:3}]')
+    this.fields.attr("data",this.fieldData.data)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("radio")
 

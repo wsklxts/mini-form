@@ -13,6 +13,7 @@ export default function dragInsert(filedsWrap,u){
 
   var formBuild=$(".formBuild")
 
+
   if($('> li', formBuild).size() === 0){
     formBuild.append(filedsWrap)
   }else{

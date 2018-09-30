@@ -86,6 +86,7 @@ export default class attrTemplate{
         createCID:this.createCID(f),
         createCType:this.createCType(f),
         createCCatipn:this.createCCatipn(f),
+        checkOptions:this.checkOptions(f),
         createCWidth:this.createCWidth(f)
       }
     }
@@ -133,22 +134,30 @@ export default class attrTemplate{
   }
 
   radioOptions(){
-
     let html=[]
     let data=this.f.data("data").value
-
-
     for(var i=0;i<data.length;i++){
       html.push($(`<li id="optionId-${data[i].id}" ><input type="text" class="mini-textbox" width="60" value=${data[i].text}> <a class="mini-button addOption" iconCls="icon-add" ></a> <a class="mini-button subOption" iconCls="icon-close" ></a></li>`).data("value",data[i]))
     }
-
     var ul=$("<ul></ul>")
     for(var i=0;i<html.length;i++){
       ul.append(html[i])
     }
-
     return $('<div class="feildAttr radioOptions"></div>').append("<lable>选项：</lable>")
             .append(ul)
+  }
+  checkOptions(){
+    let html=[]
+    let data=this.f.data("data").value
+    for(var i=0;i<data.length;i++){
+      html.push($(`<li id="optionId-${data[i].id}" ><input type="text" class="mini-textbox" width="60" value=${data[i].text}> <a class="mini-button addOption" iconCls="icon-add" ></a> <a class="mini-button subOption" iconCls="icon-close" ></a></li>`).data("value",data[i]))
+    }
+    var ul=$("<ul></ul>")
+    for(var i=0;i<html.length;i++){
+      ul.append(html[i])
+    }
+    return $('<div class="feildAttr radioOptions"></div>').append("<lable>选项：</lable>")
+      .append(ul)
   }
 
 
