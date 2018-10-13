@@ -4,7 +4,7 @@
 
 import {G} from "./globle"
 
-import createCDom from "./createCDom"
+import formBuilder from "./formBuilder"
 
 
 export default function sortable(){
@@ -59,7 +59,7 @@ export default function sortable(){
       if(ui.item.parent()[0] === formBuild.get(0)){
         //$(".formBuild").removeClass(".tip")
         $(".formBuild").removeClass("tip")
-        createCDom(ui)
+        formBuilder(ui)
         mini.parse();
       }
     },

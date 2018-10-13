@@ -11,6 +11,7 @@ img{
 
 .container{
   padding:22px;
+  min-height: 688px;
 }
 
 .controls{
@@ -48,6 +49,8 @@ img{
 .formAttributeWrap{
   float: right;
   width: 22%;
+  position: fixed;
+    right: 0;
 }
 .formAttribute{
   border: 1px solid #aed0ea;
@@ -67,12 +70,12 @@ img{
   border:1px dashed #aed0ea;
   padding:3px;
 }
-.formBuild li{
+.formRender li,.formBuild li{
   display:inline-block;
   margin:10px;
   position:relative;
 }
-.formBuild li .buttonWrap{
+.buttonWrap{
   position: absolute;
   top: -32px;
   right: 0;
@@ -131,6 +134,18 @@ img{
   position: absolute;
   /*width: 88px;*/
   /*height: 88px;*/
-  border-radius: 10px;
   /*position: absolute;*/
+}
+.formRenderWrap{
+    min-height:720px;
+    float: left;
+    margin-left: 12%;
+    position: relative;
+    padding-top: 0;
+    width: 64%;
+}
+.formRenderWrap ul{
+    box-sizing: border-box;
+    border: 1px solid #aed0ea;
+    min-height: 588px;
 }

@@ -4,7 +4,7 @@
 
 var timer=null
 import attrTemplate from "./attrTemplate"
-import createCDom from "./createCDom"
+import formBuilder from "./formBuilder"
 import {G}  from "./globle"
 import {show}  from "./method.js"
 
@@ -13,6 +13,7 @@ let data = G.formData
 let controlId= G
 
 export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
+
   var color=["red","orange","yellow","green","pink","blue","black","gray"]
   var buttonWrapS= G.buttonWrapS
   let formAttribute = $(".formAttribute")
@@ -25,7 +26,6 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     //defualtSize = eval ("(" + attrData.data+ ")").length  //默认选项大小
     let id = fields.attr("id")
     defualtSize=mini.get(id).data.length
-
   }
 
   filedsWrap.on("mouseover",function(e){
@@ -68,7 +68,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
 
   function cloneDom(current){
-    var clone=createCDom(u,true)
+    var clone=formBuilder(u,true)
     clone.children("lable").html(current.children("lable").text())
     var id=clone.children().last().attr("id");
     var cureentId=current.children().last().attr("id");
@@ -221,6 +221,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
           clone.attr("id","optionId-"+(defualtSize))
           clone.find(".mini-textbox-input").val("选项"+(defualtSize));
           $(this).parent().after(clone)
+
           let allLi=$(this).parent().parent().children("li")
           w.data("data").value=[]
           allLi.each(function(i,v){

@@ -11,9 +11,10 @@
 //import fieldTemplateEvent from "./js/fieldTemplateEvent"
 //import dragInsert from "./js/dragInsert"
 import {G} from "./js/globle"
-import createCDom from "./js/createCDom"
+import createCDom from "./js/formBuilder"
 import sortable from "./js/sortable"
 import {show} from "./js/method"
+import FormRender from "./js/FormRender"
 
 
 let data = G.formData
@@ -22,15 +23,28 @@ $(function(){
 
   sortable()
 
+  var formBuild = $("#formBuild")
+  var formAttribute = $(".formAttribute ")
+
+
   var save = mini.get("onSave");
   var delAll = mini.get("delAll");
+  var delAll2 = mini.get("delAll2");
   delAll.on("click",function(){
     $("#formBuild>li").each(function(i,e){
       e=$(e)
       show(e,1);
     })
-    $("#formBuild").addClass("tip")
+    formBuild.addClass("tip")
   })
+  delAll2.on("click",function(){
+    $(".formRender>li").each(function(i,e){
+      e=$(e)
+      show(e,1);
+    })
+  })
+
+
   var data=[]
   save.on("click",function(){
     data=[]
@@ -39,6 +53,9 @@ $(function(){
       data.push(e.data("data"))
     })
     console.log(data);
+
+    new FormRender(data)
+
   })
 
   //

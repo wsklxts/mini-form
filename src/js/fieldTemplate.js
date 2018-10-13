@@ -13,12 +13,12 @@ import {G} from "./globle"
 
 export default class fieldTemplate{
 
-  constructor(u,type,fields,filedsWrap,fieldData){
-    this.type=type
-    this.fields=fields
-    this.filedsWrap=filedsWrap
-    this.fieldData=fieldData
-
+  constructor(option){
+    this.type=option.type
+    this.fields=option.fields
+    this.filedsWrap=option.filedsWrap
+    this.fieldData=option.fieldData
+    this.setAttr()
   }
 
   init(){
@@ -34,7 +34,6 @@ export default class fieldTemplate{
         break;
       case "lineFeedBtn":
         return this.lineFeedBtn()
-
         break;
       case "mini-checkboxlist":
         return this.checkbox()
@@ -63,18 +62,21 @@ export default class fieldTemplate{
     }
   }
 
-  textbox(){
-
+  setAttr(){
     this.fields.attr("emptyText",this.fieldData.placeholder)
     this.fields.attr("allowInput",false)
+    this.fields.attr("width",this.fieldData.width)
+    this.fields.attr("maxLength",this.fieldData.maxLength)
     this.fields.val(this.fieldData.value)
+  }
+
+  textbox(){
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("text")
     return this.returnWFT()
   }
 
   textarea(){
-    this.fields.attr("emptyText",this.fieldData.placeholder)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("textarea")
     return this.returnWFT()
@@ -96,21 +98,6 @@ export default class fieldTemplate{
     this.fields.attr("data",this.fieldData.data)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("radio")
-
-
-    //mini.get(this.fields.attr("id")).on("valuechanged",function(e){
-    //  console.log(this.getValue());
-    //  let cruuentId = this.getValue()
-    //  let data=this.getData()
-    //  $.each(data,function(i,v){
-    //    delete v.selected
-    //    if(v.id==cruuentId){
-    //      v.selected=true
-    //    }
-    //  })
-    //  console.log(data);
-    //})
-
     return this.returnWFT()
   }
 
