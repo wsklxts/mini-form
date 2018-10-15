@@ -45,9 +45,10 @@ export default class fieldTemplate{
         return this.datepicker()
         break;
       case "mini-htmlfile":
-        filedsWrap.addClass("fileupload")
-        lable=$('<lable>文件上传：</lable>')
-        alert(1)
+        return this.htmlfile()
+        break;
+      case "mini-pp":
+        return this.pp()
         break;
     }
 
@@ -67,7 +68,9 @@ export default class fieldTemplate{
     this.fields.attr("allowInput",false)
     this.fields.attr("width",this.fieldData.width)
     this.fields.attr("maxLength",this.fieldData.maxLength)
+    this.fields.attr("data",this.fieldData.data)
     this.fields.val(this.fieldData.value)
+    return this.returnWFT()
   }
 
   textbox(){
@@ -90,6 +93,8 @@ export default class fieldTemplate{
   }
   combobox(){
     this.fields.attr("data",this.fieldData.data)
+    if(this.fieldData.data) var text=eval ("(" + this.fieldData.data+ ")")[0].text
+    this.fields.attr("value",text)
     this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
     this.filedsWrap.addClass("combobox")
     return this.returnWFT()
@@ -107,7 +112,18 @@ export default class fieldTemplate{
     this.filedsWrap.addClass("datepicker")
     return this.returnWFT()
   }
-
+  htmlfile(){
+    this.fields.attr("data",this.fieldData.data)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
+    this.filedsWrap.addClass("file")
+    return this.returnWFT()
+  }
+  pp(){
+    this.fields.attr("data",this.fieldData.data)
+    this.filedsWrap.append(this.createLable(this.fieldData.lable),this.fields)
+    this.filedsWrap.addClass("pp")
+    return this.returnWFT()
+  }
   lineFeedBtn(){
     this.fields=$(`<div class="brWrap"></div>`)
     this.filedsWrap.append(this.fields,$("<br />"))

@@ -49,6 +49,43 @@ export default class FormRender {
         this.wrap.append(b.w)
         mini.parse()
 
+        obj.fieldTemplateEvent=true
+        fieldTemplateEvent({
+            //obj, b.w, b.f, obj
+            ui:obj,
+            w:b.w,
+            f:b.f,
+            fieldData:obj
+        }, function (e, t) {
+            if (t == "value") {
+                b.w.find(".mini-textbox-input").val(e);
+            } else if (t == "lable") {
+                b.w.find("lable").html(e);
+            } else if (t == "placeholder") {
+                b.w.find(".mini-textbox-input").attr("placeholder", e);
+            } else if (t == "width") {
+                if (b.t != "lineFeedBtn" && b.t!="mini-pp" ) {
+                    let CC = mini.get(b.f.attr("id"))
+                    CC.set({
+                        width: e
+                    })
+                    fieldData.width = parseInt(e)
+                }
+            }
+            else if (t == "maxLength") {
+                b.w.find(".mini-textbox-input").val("");
+            }else if (t == "fontSize") {
+                b.w.find("lable").css("fontSize",parseInt(e))
+            }else if (t == "radioOptions") {
+                let oldValue = mini.get(b.f.attr("id")).getValue();
+                mini.get(b.f.attr("id")).setData(b.w.data("data").value)
+                mini.get(b.f.attr("id")).setValue(oldValue)
+            }
+        })
+
+
+
+
         if($.isArray(obj.value)){
             var arr=[]
             $.each(obj.value,function(i,v){

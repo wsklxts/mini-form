@@ -45,6 +45,11 @@ export default class attrTemplate{
         break;
       case "datepicker":
         return this.datepicker(this.f)
+      case "file":
+        return this.file(this.f)
+        break;
+      case "pp":
+        return this.pp(this.f)
         break;
     }
   }
@@ -74,7 +79,8 @@ export default class attrTemplate{
         createCPlaceholder: this.createCPlaceholder(),
         createCWidth:this.createCWidth(),
         createCMaxLength:this.createCMaxLength(),
-        createCRequire:this.createCRequire()
+        createCRequire:this.createCRequire(),
+
       }
     }
   }
@@ -99,6 +105,7 @@ export default class attrTemplate{
         createCID:this.createCID(f),
         createCType:this.createCType(f),
         createCCatipn:this.createCCatipn(f),
+        radioOptions:this.radioOptions(f),
         createCWidth:this.createCWidth(f)
       }
     }
@@ -106,7 +113,7 @@ export default class attrTemplate{
 
   datepicker(f){
     return {
-      evt:"checkbox",
+      evt:"datepicker",
       subhtml:{
         createCID:this.createCID(f),
         createCType:this.createCType(f),
@@ -116,6 +123,35 @@ export default class attrTemplate{
     }
   }
 
+  file(f){
+    return {
+      evt:"file",
+      subhtml:{
+        createCID:this.createCID(f),
+        createCType:this.createCType(f),
+        createCCatipn:this.createCCatipn(f),
+        createCWidth:this.createCWidth(f)
+      }
+    }
+  }
+  pp(f){
+    return {
+      evt:"pp",
+      subhtml:{
+        createCID:this.createCID(f),
+        createCType:this.createCType(f),
+        createCCatipn:this.createCCatipn(f),
+        fontSize:this.fontSize(f),
+      }
+    }
+  }
+
+  fontSize(){
+    return $(`<div class="feildAttr"> <lable>字体大小：</lable> <div class="mini-textbox"  value=${ this.f.data("data").fontSize} > </div> </div>`)
+  }
+  fontColor(f){
+    return $('<div class="feildAttr"> <lable>字体颜色：</lable> <div class="mini-textbox"  > </div> </div>')
+  }
   createCID(f){
     return `<div class="feildAttr">
             <lable>控件ID：</lable>

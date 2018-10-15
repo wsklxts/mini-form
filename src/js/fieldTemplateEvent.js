@@ -12,7 +12,13 @@ import {show}  from "./method.js"
 let data = G.formData
 let controlId= G
 
-export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
+export default function fieldTemplateEvent(options,fn){
+  var u=options.ui
+  var filedsWrap=options.w
+  var fields=options.f
+  var attrData=options.fieldData
+
+
 
   var color=["red","orange","yellow","green","pink","blue","black","gray"]
   var buttonWrapS= G.buttonWrapS
@@ -22,7 +28,7 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
   let allHtml =null
   let defualtSize
 
-  if($.inArray(attrData.type,["radio", "checkBox"]) !== -1){
+  if($.inArray(attrData.type,["radio", "checkBox","combobox"]) !== -1){
     //defualtSize = eval ("(" + attrData.data+ ")").length  //默认选项大小
     let id = fields.attr("id")
     defualtSize=mini.get(id).data.length
@@ -50,6 +56,12 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       clearInterval(timer)
       filedsWrap.parent().children("li").removeClass("active")
       exeTime(filedsWrap.children(".brWrap"),"background")
+    }else if(filedsWrap.hasClass("pp")){
+      clearInterval(timer)
+      filedsWrap.parent().children(".active").removeClass("active")
+      filedsWrap.addClass("active")
+      exeTime(filedsWrap,"border-color")
+      makeFeildAttr(filedsWrap,fields,attrData,fn)
     }else{
 
       let id = fields.attr("id")
@@ -78,15 +90,16 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
 
 
     let value
-    if(current.data("data").type=="radio"){
+    if($.inArray(current.data("data").type,["radio","checkBox","combobox"]) !== -1){
       value=mini.get(cureentId).getValue()
     }else if(current.data("data").type=="text"){
       value=current.find(".mini-textbox-input").val()
     }
 
+    mini.get(id) &&
     mini.get(id).set({
       value:value,
-      emptyText:clone.find(".mini-textbox-input").attr("placeholder"),
+      emptyText:clone.find(".mini-textbox-input").attr("placeholder") || "",
       width:newArr.width,
       data:newArr.value,
     })
@@ -136,8 +149,16 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     }
 
 
-    feildHTML=new attrTemplate(w,formAttribute,attrData,f).init()
+    feildHTML = new attrTemplate(w,formAttribute,attrData,f).init()
     allHtml =  feildHTML.subhtml
+
+    allHtml.fontSize &&
+    allHtml.fontSize.on("input propertychange",function(e){
+      var v=$(this).find(".mini-textbox-input").val();
+      $(this).find(".mini-textbox-input").val(v.replace(/[^0-9]/g,''))
+      fn(v,"fontSize")
+      w.data("data").fontSize=v
+    })
 
     allHtml.createCValue &&
     allHtml.createCValue.on("input propertychange",function(e){
@@ -213,14 +234,17 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
     function eventClickHandler(e){
         if($(this).hasClass("addOption")){
           defualtSize+=1
-          let clone=$(this).parent().clone()
+          //let clone=$(this).parent().clone()
+          let clone=$(`<li><input type="text" class="mini-textbox" width="60" value=${"选项"+(defualtSize)}> <a class="mini-button addOption" iconCls="icon-add" ></a> <a class="mini-button subOption" iconCls="icon-close" ></a></li>`)
           let oldData=Object.assign({},$(this).parent().data("value"))
           oldData.selected && delete oldData.selected  //防止复制选中状态
           clone.data("value",oldData)
           clone.data("value").id=defualtSize
           clone.attr("id","optionId-"+(defualtSize))
-          clone.find(".mini-textbox-input").val("选项"+(defualtSize));
           $(this).parent().after(clone)
+          //clone.find(".mini-textbox-input").val("选项"+(defualtSize));
+          mini.parse()
+
 
           let allLi=$(this).parent().parent().children("li")
           w.data("data").value=[]
@@ -260,6 +284,11 @@ export default function fieldTemplateEvent(u,filedsWrap,fields,attrData,fn){
       allHtml.radioOptions.on("input propertychange",eventInputHandler)
       allHtml.radioOptions.on("click",".addOption, .subOption",eventClickHandler)
     }
+
+    //if(allHtml.combobox){
+    //  allHtml.combobox.on("input propertychange",eventInputHandler)
+    //  allHtml.combobox.on("click",".addOption, .subOption",eventClickHandler)
+    //}
 
 
     Object.keys(allHtml).forEach(function(key){
