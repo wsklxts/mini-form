@@ -120,7 +120,6 @@ export default function fieldTemplateEvent(options,fn){
       var current=$(this).parent().parent("li")
       var clone=cloneDom(current)
       current.after(clone)
-
     }
     if($(this).hasClass("buttonsub")){
       if(filedsWrap.data("data").id==formAttribute.data("id")){

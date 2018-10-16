@@ -20,8 +20,9 @@ export default function formBuilder(u, current) {
     var type = $(u.item).attr("id");
     var miniC = mini.get(type)
     var className=null
+    console.log(u);
     if(u.fieldTemplateEvent){
-        className=u.className
+        className=u.miniClassName
         type=u.type
     }else{
         className=miniC.name
@@ -72,7 +73,7 @@ export default function formBuilder(u, current) {
         id: controlId.id,
         type: type,
         lable: typeText[type].lable,
-        miniClassName: miniC.name,
+        miniClassName:className,
         placeholder: typeText[type].placeholder || "",
         value: "",
         maxLength: "",
@@ -83,7 +84,7 @@ export default function formBuilder(u, current) {
 
 
     var b = new fieldTemplate({
-        type:miniC.name,
+        type:className,
         fields:fields,
         filedsWrap,filedsWrap,
         fieldData:fieldData

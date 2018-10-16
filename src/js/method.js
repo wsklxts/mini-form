@@ -24,12 +24,21 @@ export function show(filedsWrap,direction,u){
 
     //3、克隆一个雪花模板,定义雪花的初始样式，拼接到页面中
 
-  flake.clone().appendTo($("body")).css({
-      "left": direction==1 ? filedsWrap.offset().left+filedsWrap.width()/2 :u.originalPosition.left+u.item.width()/2,
-      "top": direction==1 ? filedsWrap.offset().top+filedsWrap.height()/2 :u.originalPosition.top+u.item.height()/2,
+  flake = flake.clone().appendTo($("body"))
+  let left
+  let top
+  try{
+     left = direction==1 ? filedsWrap.offset().left+filedsWrap.width()/2 :(u.originalPosition.left+u.item.width()/2) || 0
+     top = direction==1 ? filedsWrap.offset().top+filedsWrap.height()/2 :(u.originalPosition.top+u.item.height()/2) || 0
+  }catch(err){
+    left=0
+    top=0
+  }
+  flake.css({
+      "left": left,
+      "top": top,
       "background":color[parseInt(Math.random()*color.length-1)]
-    })
-
+  })
   .animate({ //执行动画
       "left":direction==1 ? endLeft+filedsWrap.offset().left+filedsWrap.width()/2 :filedsWrap.offset().left+filedsWrap.width()/2,
       //"left":direction==1 ? $(window).width()/2 :filedsWrap.offset().left+filedsWrap.width()/2,
