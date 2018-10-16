@@ -1,4 +1,4 @@
-# mini-form jquery-mini-formBuild
+# mini-form jquery-mini-formBuilder
 基于jquery mini-ui 做的自定义拖拽表单
 
 
