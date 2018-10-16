@@ -7,9 +7,6 @@ import {G} from "./globle"
 import fieldTemplate from "./fieldTemplate"
 import fieldTemplateEvent from "./fieldTemplateEvent"
 
-let controlId = G
-
-
 
 export default class FormRender {
     constructor(data,wrap) {
@@ -49,7 +46,7 @@ export default class FormRender {
         this.wrap.append(b.w)
         mini.parse()
 
-        obj.fieldTemplateEvent=true
+        obj.isRender=true
         fieldTemplateEvent({
             //obj, b.w, b.f, obj
             ui:obj,

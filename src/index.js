@@ -3,22 +3,12 @@
  */
 
 
-
-//import DB from "./js/dataBind.js"
-////import attrTemplate from "./js/attrTemplate"
-//import attrEvent from "./js/attrEvent"
-//import fieldTemplate from "./js/fieldTemplate"
-//import fieldTemplateEvent from "./js/fieldTemplateEvent"
-//import dragInsert from "./js/dragInsert"
-import {G} from "./js/globle"
 import createCDom from "./js/formBuilder"
 import sortable from "./js/sortable"
 import {show} from "./js/method"
 import FormRender from "./js/FormRender"
 import formRenderEvent from "./js/formRenderEvent"
 
-
-let data = G.formData
 
 $(function(){
 

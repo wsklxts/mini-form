@@ -6,9 +6,6 @@
 import fieldTemplateEvent from "./fieldTemplateEvent"
 import dragInsert from "./dragInsert"
 import {G} from "./globle"
-//
-//let formData= G.formData
-//let controlId= G.controlId
 
 
 export default class fieldTemplate{

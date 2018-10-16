@@ -7,9 +7,6 @@ import {G} from "./globle"
 import fieldTemplate from "./fieldTemplate"
 import fieldTemplateEvent from "./fieldTemplateEvent"
 
-let controlId = G
-
-
 
 export default class FormRender {
     constructor(data,wrap) {

@@ -5,13 +5,6 @@
 import {G} from "./globle"
 
 
-//let vv=""
-//
-//export function fn(e){
-//  vv=e
-//}
-
-
 export default class attrTemplate{
 
 

@@ -4,7 +4,6 @@
 
 import fieldTemplate from "./fieldTemplate"
 import attrTemplate from "./attrTemplate"
-//import {fn} from "./attrTemplate"
 import dragInsert from "./dragInsert"
 import fieldTemplateEvent from "./fieldTemplateEvent"
 import {show} from "./method"
@@ -20,8 +19,7 @@ export default function formBuilder(u, current) {
     var type = $(u.item).attr("id");
     var miniC = mini.get(type)
     var className=null
-    console.log(u);
-    if(u.fieldTemplateEvent){
+    if(u.isRender){
         className=u.miniClassName
         type=u.type
     }else{
@@ -135,9 +133,9 @@ export default function formBuilder(u, current) {
                 v.selected = true
             }
         }
-        if(type=="mini-checkboxlist"){
+        if(type==typeArr[1]){
             fn = function(v,cruuentId){
-                if(cruuentId.indexOf(v.id) !== -1){
+                if($.inArray(String(v.id),cruuentId) !== -1){
                     v.selected = true
                 }
             }
@@ -146,6 +144,7 @@ export default function formBuilder(u, current) {
         mini.get(b.f.attr("id")).on("valuechanged", function (e) {
             let cruuentId = this.getValue()
             let data = this.getData()
+            cruuentId=cruuentId.split(",")
             $.each(data, function (i, v) {
                 delete v.selected
                 fn(v,cruuentId)

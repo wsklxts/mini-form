@@ -9,7 +9,6 @@ import {G}  from "./globle"
 import {show}  from "./method.js"
 
 
-let data = G.formData
 let controlId= G
 
 export default function fieldTemplateEvent(options,fn){
@@ -63,7 +62,6 @@ export default function fieldTemplateEvent(options,fn){
       exeTime(filedsWrap,"border-color")
       makeFeildAttr(filedsWrap,fields,attrData,fn)
     }else{
-
       let id = fields.attr("id")
       if(mini.get(id).data ){
         filedsWrap.data("data").value=mini.get(id).data //字段默认data给w
@@ -142,12 +140,13 @@ export default function fieldTemplateEvent(options,fn){
 
 
   function makeFeildAttr(w,f,attrData,fn){
-
-    if( formAttribute.children("div").size()){
+    let isEmpty=formAttribute.children("div").size()
+    if(formAttribute.data("id") == w.data("data").id && isEmpty){
+      return
+    }
+    if(isEmpty){
       formAttribute.empty()
     }
-
-
     feildHTML = new attrTemplate(w,formAttribute,attrData,f).init()
     allHtml =  feildHTML.subhtml
 
