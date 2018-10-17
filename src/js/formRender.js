@@ -3,9 +3,9 @@
  */
 
 
-import {G} from "./globle"
-import fieldTemplate from "./fieldTemplate"
-import fieldTemplateEvent from "./fieldTemplateEvent"
+import {G} from "./config"
+import fieldss from "./fields"
+import fieldsEvent from "./fieldsEvent"
 
 
 export default class FormRender {
@@ -28,7 +28,7 @@ export default class FormRender {
         var filedsWrap = $("<li class='filed'></li>").append(fieldBtn)
         var fields = $(`<div class=${obj.miniClassName} id="render${obj.id}"> </div>`).appendTo(filedsWrap)
 
-        let b=new fieldTemplate({
+        let b=new fieldss({
             type:obj.miniClassName,
             fields:fields,
             filedsWrap,filedsWrap,

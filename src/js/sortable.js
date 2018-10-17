@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/9/20.
  */
 
-import {G} from "./globle"
+import {G} from "./config"
 
 import formBuilder from "./formBuilder"
 
@@ -57,10 +57,8 @@ export default function sortable(){
     distance: 3,
     update: function(event, ui) {
       if(ui.item.parent()[0] === formBuild.get(0)){
-        //$(".formBuild").removeClass(".tip")
         $(".formBuild").removeClass("tip")
         formBuilder(ui)
-        mini.parse();
       }
     },
     over:function(e,u){

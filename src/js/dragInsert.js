@@ -3,7 +3,7 @@
  */
 
 
-import {G} from "./globle"
+import {G} from "./config"
 import {show} from "./method"
 
 
@@ -25,8 +25,10 @@ export default function dragInsert(filedsWrap,u){
         .eq(G.placeholderIndex-2).after(filedsWrap)
     }
   }
+  mini.parse();
+
   setTimeout(function(){show(filedsWrap,0,u)},24)
 
-  mini.parse();
+
 
 }

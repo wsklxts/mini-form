@@ -1,6 +1,4 @@
-/**
- * Created by Administrator on 2018/9/5.
- */
+
 
 
 import createCDom from "./js/formBuilder"
