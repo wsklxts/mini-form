@@ -1,6 +1,9 @@
 
 
 
+
+
+
 export default class fieldAttrEvent {
     constructor(allHtml,options) {
         this.allHtml=allHtml
@@ -21,6 +24,7 @@ export default class fieldAttrEvent {
         if($.inArray(attrData.type,["radio", "checkBox","combobox"]) !== -1){
             let id = this.fields.attr("id")
             var defualtSize=mini.get(id).data.length
+            console.log(defualtSize);
         }
 
         allHtml.fontSize &&
@@ -105,12 +109,19 @@ export default class fieldAttrEvent {
         function eventInputHandler(e) {
             let currentLi = $(e.target).parent().parent().parent();
             currentLi.data("value").text = $(e.target).val()
-            fn("input", "radioOptions")
+            //fn("input", "radioOptions")
+            let oldValue = mini.get(f.attr("id")).getValue();
+            mini.get(f.attr("id")).setData(w.data("data").value)
+            mini.get(f.attr("id")).setValue(oldValue)
         }
 
         function eventClickHandler(e) {
             if ($(this).hasClass("addOption")) {
-                defualtSize += 1
+                if(f.GdefualtSize){
+                    defualtSize=f.GdefualtSize +=1
+                }else{
+                    defualtSize += 1
+                }
                 let clone = $(`<li><input type="text" class="mini-textbox" width="60" value=${"选项" + (defualtSize)}> <a class="mini-button addOption" iconCls="icon-add" ></a> <a class="mini-button subOption" iconCls="icon-close" ></a></li>`)
                 let oldData = Object.assign({}, $(this).parent().data("value"))
                 oldData.selected && delete oldData.selected  //防止复制选中状态
@@ -126,6 +137,7 @@ export default class fieldAttrEvent {
                     $(v).data("value").text = $(v).find(".mini-textbox-input").val()
                     w.data("data").value.push($(v).data("value"))
                 })
+                f.GdefualtSize=defualtSize
             }
             if ($(this).hasClass("subOption")) {
                 let currentID = $(this).parent().attr("id").split("-")[1];

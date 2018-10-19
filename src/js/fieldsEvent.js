@@ -67,6 +67,7 @@ export default function fieldsEvent(options) {
             filedsWrap.remove()
             if (formBuild.children("li").size() <= 0) {
                 formBuild.addClass("tip")
+                formAttribute.empty()
             }
         }
         if ($(this).hasClass("buttonedit")) {

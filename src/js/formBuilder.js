@@ -4,10 +4,10 @@ import fieldsEvent from "./fieldsEvent"
 import controls from "./controls"
 
 
-export default function formBuilder(u, current) {
+export default function formBuilder(u) {
 
     var obj = controls(u)
-    var b = obj.fieldTemplate()  //渲染控件
+    var b = obj.fieldTemplate()  //生成控件
 
     dragInsert(b.w, u)          //插入控件
 

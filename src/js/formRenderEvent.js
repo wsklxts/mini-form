@@ -60,7 +60,7 @@ export default class FormRender {
             $.each(obj.value, function (i, v) {
                 if (v.selected) {
                     arr.push(v.id)
-                    id = arr.join(",")
+                    var id = arr.join(",")
                     mini.get(b.f.attr("id")).set({
                         value: id
                     })
