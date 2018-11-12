@@ -2,7 +2,7 @@
  * Created by Administrator on 2018/9/20.
  */
 
-var timer = null
+
 import attrTemplate from "./fieldAttr"
 import fieldAttrEvent from "./fieldAttrEvent"
 import formBuilder from "./formBuilder"

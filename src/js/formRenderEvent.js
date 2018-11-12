@@ -1,6 +1,4 @@
-/**
- * Created by Administrator on 2018/10/12.
- */
+
 
 
 import {G} from "./config"
@@ -35,9 +33,6 @@ export default class FormRender {
             fieldData: obj
         }).fieldTemplate()
 
-
-
-
         b.w.data("data", obj)
         if (b.w.hasClass("lineFeed")) {
             b.w = $("<br />")
@@ -45,16 +40,10 @@ export default class FormRender {
         b.f.attr("allowInput", true)
         b.f.attr("data", JSON.stringify(obj.value))
         b.w.find("lable").css("fontSize", parseInt(obj.fontSize))
-
-
         this.wrap.append(b.w)
         mini.parse()
-
-
         obj.isRender = true
-
         fieldsEvent({u: obj, b})
-
         if ($.isArray(obj.value)) {
             var arr = []
             $.each(obj.value, function (i, v) {
