@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../src/libs/scripts/boot.js"></script>
+    <style>
+        .render2{
+            margin:40px;
+        }
+    </style>
+</head>
+<body>
+
+<input type="button" value="复制控件" class="btn1">
+<input type="button" value="添加控件" class="btn2">
+
+<div class="render1" >
+    <div class="btn">
+        <a class="mini-button addOption" iconCls="icon-add"  id="r1" ></a>
+        <input class="mini-textbox" id="input1"  value="aaaaa"/>
+    </div>
+</div>
+先复制控件，然后在添加新控件就会有问题
+<div class="render2">
+
+</div>
+<script>
+    $(function(){
+//        先复制控件，然后在添加新控件就会有问题
+
+
+        $(".btn1").click(function(){
+            var clone=$("#input1").parent().clone()
+            $("#input1").parent().after(clone)
+        })
+
+
+        $(".btn2").click(function(){
+            var c=$('<a class="mini-button addOption" iconCls="icon-add"  id="r1">')
+            var input=$('<input class="mini-textbox" />')
+            $(".render2").append(c,input)
+            mini.parse()
+        })
+    })
+</script>
+
+</body>
+</html>
