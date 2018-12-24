@@ -164,7 +164,7 @@ img{
   color:white;
   overflow-y: scroll;
   display: none;
-  z-index: 10;
+  z-index: 20;
 }
 .form-builder-dialog{
   position: fixed;
@@ -176,5 +176,5 @@ img{
   bottom: 0;
   background-color: rgba(0,0,0,.5);
   display:none;
-  z-index: 20;
+  z-index: 10;
 }
