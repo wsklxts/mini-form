@@ -25,6 +25,7 @@ $(function(){
       show(e,1);
     })
     formBuild.addClass("tip")
+    formAttribute.empty()
   })
 
   delAll2.on("click",function(){
