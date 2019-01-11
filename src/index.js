@@ -38,7 +38,7 @@ $(function(){
 
 
   var data=[]
-  //var api = "http://127.0.0.1:8999/api/form/1/"
+  var api = "http://jilalahk/api/vueappCustomControl/"
   var showJson = $(".data-dialog")
   var showJsonWarp = $(".form-builder-dialog")
   save.on("click",function(){
@@ -56,9 +56,58 @@ $(function(){
     })
     console.log(data);
 
+    $.ajax({
+      url:api,
+      type:"get",
+      success:function(getData){
+        console.log(getData);
+        if(!getData){
+          console.log("post");
+          $.ajax({
+            url:api,
+            data:{
+              data: (JSON.stringify(data))
+            },
+            type:"post",
+            success:function(d){
+              d = JSON.parse(d)
+              console.log(d);
+            },
+          })
+        }else{
+          console.log("put");
+          $.ajax({
+            url:api,
+            data:{
+              data: (JSON.stringify(data)),
+              id:getData.id
+            },
+            type:"put",
+            success:function(d){
+              if(d){
+                mini.showTips({
+                  content: "<b>成功</b> <br/>数据保存成功",
+                  state: "default",
+                  timeout: 3000
+                });
+              }
+            },
+          })
+        }
+      },
+      error:function(err){
+        console.log(err);
+        mini.showTips({
+            content: "<b>错误</b> <br/>服务器出错",
+            state: "warning",
+            timeout: 3000
+        });
+      }
+    })
+
     //$.ajax({
     //  url:api,
-    //  type:"put",
+    //  type:"post",
     //  data:{
     //    data:(JSON.stringify(data))
     //  },
