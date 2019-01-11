@@ -7,7 +7,7 @@
 #### 后台接口采用django drf 点击保存将数据保存到数据库，然后前端获取接口进行渲染
 
 
-# mini-form jquery-mini-formBuilder
+
 
 ## Build Setup
 
