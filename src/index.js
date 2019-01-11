@@ -38,7 +38,7 @@ $(function(){
 
 
   var data=[]
-  var api = "http://jilalahk.com/api/vueappCustomControl/"
+  var api = "http://jilalahk.com/api/vueappCustomControl/?_=154719423569123123"
   var showJson = $(".data-dialog")
   var showJsonWarp = $(".form-builder-dialog")
   save.on("click",function(){
