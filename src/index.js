@@ -38,7 +38,9 @@ $(function(){
 
 
   var data=[]
-  var api = "http://jilalahk.com/api/vueappCustomControl/?_=154719423569123123"
+  // var api = "http://jilalahk.com/api/vueappCustomControl/?_=154719423569123123"
+  // var api = "http://okohk.com/api/vueappCustomControl"
+  var api = "/api/vueappCustomControl"
   var showJson = $(".data-dialog")
   var showJsonWarp = $(".form-builder-dialog")
   save.on("click",function(){
