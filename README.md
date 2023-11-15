@@ -2,11 +2,14 @@
 
 
 ### miniform(基于jquery mini-ui做的表单设计器):
-### demo：https://xdamao.com/miniform <br /> 
+
 ### 与 vueapp https://github.com/wsklxts/vueapp 配合使用
-### 设计完点保存 https://xdamao.com/vueapp 查看渲染结果 <br /> 
+
 #### 后台接口采用django drf 点击保存将数据保存到数据库，然后前端获取接口进行渲染
 
+![image](https://github.com/wsklxts/mini-form/assets/17591784/5fde826a-a19e-4475-a8c2-4c5cbbc88d22)
+![image](https://github.com/wsklxts/mini-form/assets/17591784/90013a99-e918-4388-8235-5a7b16c7daf8)
+![image](https://github.com/wsklxts/mini-form/assets/17591784/f6860974-c3e2-4f0b-866d-76343762f7e0)
 
 
 
